@@ -71,8 +71,8 @@ export default function AboutPage() {
        {/* BIG HEADING */}
        <h1 className="
          reveal
-         text-[3rem] sm:text-[4rem] lg:text-[5.5rem]
-         leading-[1.05]
+         text-[4rem] sm:text-[3rem] lg:text-[3.5rem]
+         leading-[1.50]
          font-extrabold
          text-[#0A2540]
          tracking-tight

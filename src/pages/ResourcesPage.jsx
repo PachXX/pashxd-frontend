@@ -86,7 +86,7 @@ export default function ResourcesPage() {
           Resources
         </p>
 
-        <h1 className="reveal text-[3rem] sm:text-[4rem] lg:text-[5.2rem] leading-[1.05] font-extrabold text-[#0A2540] tracking-tight max-w-5xl mx-auto">
+        <h1 className="reveal text-[3rem] sm:text-[4rem] lg:text-[3.2rem] leading-[1.05] font-extrabold text-[#0A2540] tracking-tight max-w-5xl mx-auto">
           Insights & Best Practices
         </h1>
 

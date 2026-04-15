@@ -28,6 +28,7 @@ export default function CoreFeatures() {
     <section className="py-28 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-6">
 
+
         {/* HEADER */}
         <div className="text-center mb-16">
           <p className="text-xs tracking-[0.2em] text-green-600 font-semibold mb-4">

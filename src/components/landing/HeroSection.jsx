@@ -7,12 +7,12 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative pt-36 pb-28 bg-white overflow-hidden"
+      className="relative pt-36 pb-28 bg-white overflow-hidden scale-[0.85] sm:scale-90 md:scale-95 lg:scale-100 origin-top"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-green-50/40" />
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-20 items-center">
 
           {/* LEFT */}
@@ -43,11 +43,8 @@ export default function HeroSection() {
             {/* Buttons */}
             <div className="reveal reveal-delay-2 flex flex-wrap gap-5 mb-12">
 
-              {/* ✅ FIXED — Calendly */}
-              <a
-                href="https://calendly.com/shahil-talenlio-letstalk/letstalk"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/contact"
                 className="
                   bg-[#15803D] hover:bg-[#166534]
                   text-white
@@ -60,9 +57,8 @@ export default function HeroSection() {
                 "
               >
                 Book a Demo →
-              </a>
+              </Link>
 
-              {/* KEEP THIS */}
               <Link
                 to="/product"
                 className="
