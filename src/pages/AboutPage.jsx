@@ -2,7 +2,7 @@ import { Target, Users, Globe, ArrowRight } from "lucide-react";
 import { useScrollReveal } from "../hooks/useScrollReveal";
 
 // ✅ IMPORT FOUNDER IMAGE
-import shahil from "../assets/team/shahil.jpg";
+import shahil from "../assets/logos/shahil.jpg";
 
 const values = [
   {

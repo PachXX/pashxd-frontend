@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
-import logo from "../../../assets/logos/pashxd-logo2.jpg";
+import logo from "../../assets/logos/pashxd-logo2.jpg";
 
 export default function Footer() {
   return (
@@ -14,13 +14,13 @@ export default function Footer() {
           {/* LEFT */}
           <div className="md:col-span-4">
 
-            <Link to="/" className="flex items-center gap-4 mb-6">
+            <Link to="/" className="flex items-center gap-3 mb-6">
               <img
                 src={logo}
                 alt="PashxD"
-                className="h-14 w-14 rounded-2xl object-cover shadow-md"
+                className="h-10 w-10 rounded-xl object-cover"
               />
-              <span className="text-2xl font-semibold text-[#0A2540]">
+              <span className="text-xl font-semibold text-[#0A2540]">
                 Pash<span className="text-green-600">xD</span>
               </span>
             </Link>
