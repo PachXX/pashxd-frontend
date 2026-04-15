@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 
-import logo from "../../assets/logos/pashxd-logo2.jpg";
+import logo from "../../../assets/logos/pashxd-logo2.jpg";
 
 export default function Footer() {
   return (
