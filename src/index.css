@@ -1,284 +1,252 @@
- @import "tw-animate-css";
- @import "shadcn/tailwind.css";
- @import "@fontsource-variable/geist";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
 
- @tailwind base;
- @tailwind components;
- @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
- /* --------------------------------
-    ROOT THEME (CLEAN + NO CONFLICT)
- --------------------------------- */
- @layer base {
-   :root {
-     --background: oklch(1 0 0);
-     --foreground: oklch(0.145 0 0);
+/* ================================================================
+   ROOT THEME
+   ================================================================ */
+@layer base {
+  :root {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
 
-     --card: oklch(1 0 0);
-     --card-foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
 
-     --popover: oklch(1 0 0);
-     --popover-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
 
-     --primary: oklch(0.205 0 0);
-     --primary-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
 
-     --secondary: oklch(0.97 0 0);
-     --secondary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
 
-     --muted: oklch(0.97 0 0);
-     --muted-foreground: oklch(0.556 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
 
-     --accent: oklch(0.97 0 0);
-     --accent-foreground: oklch(0.205 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
 
-     --destructive: oklch(0.577 0.245 27.325);
-     --destructive-foreground: 0 0% 98%;
+    --destructive: oklch(0.577 0.245 27.325);
+    --destructive-foreground: 0 0% 98%;
 
-     --border: oklch(0.922 0 0);
-     --input: oklch(0.922 0 0);
-     --ring: oklch(0.708 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
 
-     --radius: 0.625rem;
-   }
+    --radius: 0.625rem;
 
-   /* DARK MODE */
-   .dark {
-     --background: oklch(0.145 0 0);
-     --foreground: oklch(0.985 0 0);
+    /* PashxD Brand Tokens */
+    --brand-green: #15803D;
+    --brand-green-hover: #166534;
+    --brand-green-light: #22C55E;
+    --brand-navy: #0A2540;
+  }
 
-     --card: oklch(0.205 0 0);
-     --card-foreground: oklch(0.985 0 0);
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
 
-     --popover: oklch(0.205 0 0);
-     --popover-foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
 
-     --primary: oklch(0.922 0 0);
-     --primary-foreground: oklch(0.205 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
 
-     --secondary: oklch(0.269 0 0);
-     --secondary-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
 
-     --muted: oklch(0.269 0 0);
-     --muted-foreground: oklch(0.708 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
 
-     --accent: oklch(0.269 0 0);
-     --accent-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
 
-     --destructive: oklch(0.704 0.191 22.216);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
 
-     --border: oklch(1 0 0 / 10%);
-     --input: oklch(1 0 0 / 15%);
-     --ring: oklch(0.556 0 0);
-   }
+    --destructive: oklch(0.704 0.191 22.216);
 
-   /* GLOBAL BASE */
-   * {
-     @apply border-border outline-ring/50;
-   }
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+  }
 
-   body {
-     @apply bg-background text-foreground antialiased;
-     font-family: 'Geist Variable', sans-serif;
-   }
+  /* ============ GLOBAL BASE ============ */
+  * {
+    @apply border-border outline-ring/50;
+  }
 
-   html {
-     @apply font-sans;
-   }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Geist Variable', sans-serif;
+  }
 
-   h1, h2, h3, h4, h5, h6 {
-     font-family: 'Cabinet Grotesk', sans-serif;
-   }
- }
+  html {
+    @apply font-sans;
+    scroll-behavior: smooth;
+  }
 
- /* --------------------------------
-    UTILITIES
- --------------------------------- */
+  /* Headings use Geist (matches body). If you want Cabinet Grotesk later,
+     import it first via @fontsource or <link> tag in index.html, then swap below. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Geist Variable', sans-serif;
+    letter-spacing: -0.01em;
+  }
 
- .font-mono-data {
-   font-family: 'JetBrains Mono', monospace;
- }
+  iframe {
+    border-radius: 12px;
+  }
+}
 
- .text-gradient-blue {
-   background: linear-gradient(135deg, #2563EB, #3B82F6);
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
- }
+/* ================================================================
+   UTILITIES
+   ================================================================ */
 
- /* --------------------------------
-    REVEAL ANIMATION (FIXED BUG)
- --------------------------------- */
+.font-mono-data {
+  font-family: 'JetBrains Mono', monospace;
+}
 
- .reveal {
-   opacity: 0;
-   transform: translateY(30px);
-   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
- }
+.text-gradient-brand {
+  background: linear-gradient(135deg, #15803D, #22C55E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
- .reveal.active {
-   opacity: 1;
-   transform: translateY(0);
- }
+.text-gradient-blue {
+  background: linear-gradient(135deg, #2563EB, #3B82F6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
- .reveal-delay-1 { transition-delay: 0.1s; }
- .reveal-delay-2 { transition-delay: 0.2s; }
- .reveal-delay-3 { transition-delay: 0.3s; }
- .reveal-delay-4 { transition-delay: 0.4s; }
+/* ================================================================
+   REUSABLE COMPONENT CLASSES
+   ================================================================ */
 
- /* --------------------------------
-    ANIMATIONS
- --------------------------------- */
+.btn-primary {
+  @apply bg-[#15803D] hover:bg-[#166534] text-white px-6 py-3 rounded-full font-semibold shadow-lg shadow-green-600/20 transition-all duration-300 hover:-translate-y-[2px];
+}
 
- .fade-in {
-   animation: fadeIn 0.6s ease forwards;
- }
+.card-base {
+  @apply bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300;
+}
 
- @keyframes fadeIn {
-   from {
-     opacity: 0;
-     transform: translateY(20px);
-   }
-   to {
-     opacity: 1;
-     transform: translateY(0);
-   }
- }
+/* ================================================================
+   SCROLL REVEAL ANIMATION
+   Single source of truth — supports both `.active` and `.visible`
+   so old components don't break while you migrate.
+   ================================================================ */
 
- /* --------------------------------
-    REUSABLE COMPONENT STYLES
- --------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
 
- .btn-primary {
-   @apply bg-[#16A34A] hover:bg-[#15803D] text-white px-6 py-3 rounded-full font-semibold shadow-lg transition-all duration-300 hover:-translate-y-[2px];
- }
+.reveal.active,
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
- .card {
-   @apply bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300;
- }
- @keyframes float {
-   0% {
-     transform: translateY(0px);
-   }
-   50% {
-     transform: translateY(-12px);
-   }
-   100% {
-     transform: translateY(0px);
-   }
- }
+/* Slide-in variant (from left) */
+.reveal-slide {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
- .animate-float {
-   animation: float 6s ease-in-out infinite;
- }
- .reveal {
-   opacity: 0;
-   transform: translateY(40px);
-   transition: all 0.8s ease;
- }
+.reveal-slide.active,
+.reveal-slide.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
 
- .reveal.active {
-   opacity: 1;
-   transform: translateY(0);
- }
+/* Staggered delays */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
 
- .reveal-delay-1 { transition-delay: 0.1s; }
- .reveal-delay-2 { transition-delay: 0.2s; }
- .reveal-delay-3 { transition-delay: 0.3s; }
- .reveal-delay-4 { transition-delay: 0.4s; }
- /* SCROLL REVEAL BASE */
- .reveal {
-   opacity: 0;
-   transform: translateY(30px);
-   transition: all 0.7s ease;
-   will-change: opacity, transform;
- }
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
 
- .reveal.visible {
-   opacity: 1;
-   transform: translateY(0);
- }
+/* Generic fade-in (for initial page loads) */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
 
- /* PREMIUM STAGGER */
- .reveal-delay-1 { transition-delay: 0.1s; }
- .reveal-delay-2 { transition-delay: 0.2s; }
- .reveal-delay-3 { transition-delay: 0.3s; }
- .reveal-delay-4 { transition-delay: 0.4s; }
- /* SLIDE REVEAL */
- .reveal {
-   opacity: 0;
-   transform: translateY(30px);
-   transition: all 0.7s ease;
- }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
- .reveal.visible {
-   opacity: 1;
-   transform: translateY(0);
- }
+/* Floating dashboard effect (used in Hero) */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
+}
 
- /* SLIDE FROM LEFT (for logos) */
- .reveal-slide {
-   opacity: 0;
-   transform: translateX(-40px);
-   transition: all 0.7s ease;
- }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
 
- .reveal-slide.visible {
-   opacity: 1;
-   transform: translateX(0);
- }
+/* ================================================================
+   MARQUEE SCROLL (TrustStrip)
+   ================================================================ */
 
- /* DELAYS */
- .reveal-delay-1 { transition-delay: 0.1s; }
- .reveal-delay-2 { transition-delay: 0.2s; }
- .reveal-delay-3 { transition-delay: 0.3s; }
- .reveal-delay-4 { transition-delay: 0.4s; }
- .reveal-delay-5 { transition-delay: 0.5s; }
- .reveal-delay-6 { transition-delay: 0.6s; }
- /* MARQUEE SCROLL */
- @keyframes scroll-marquee {
-   0% {
-     transform: translateX(0);
-   }
-   100% {
-     transform: translateX(-50%);
-   }
- }
+@keyframes scroll-marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
- .marquee {
-   overflow: hidden;
-   position: relative;
- }
+.marquee {
+  overflow: hidden;
+  position: relative;
+}
 
- .marquee-track {
-   display: flex;
-   width: max-content;
-   animation: scroll-marquee 25s linear infinite;
- }
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-marquee 25s linear infinite;
+}
 
- .marquee:hover .marquee-track {
-   animation-play-state: paused;
- }
- .reveal {
-   opacity: 0;
-   transform: translateY(30px);
-   transition: all 0.7s ease;
- }
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
 
- .reveal.visible {
-   opacity: 1;
-   transform: translateY(0);
- }
+/* ================================================================
+   ACCESSIBILITY — Respect user's motion preference
+   ================================================================ */
 
- /* FLOATING DASHBOARD */
- @keyframes float {
-   0% { transform: translateY(0px); }
-   50% { transform: translateY(-12px); }
-   100% { transform: translateY(0px); }
- }
-
- .animate-float {
-   animation: float 6s ease-in-out infinite;
- }
- iframe {
-   border-radius: 12px;
- }
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-slide,
+  .animate-float,
+  .marquee-track,
+  .fade-in {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

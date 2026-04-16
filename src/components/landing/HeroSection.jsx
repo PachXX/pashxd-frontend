@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
+import Container from "../layout/Container";
 
 export default function HeroSection() {
   const ref = useScrollReveal();
@@ -7,27 +8,27 @@ export default function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative pt-36 pb-28 bg-white overflow-hidden scale-[0.85] sm:scale-90 md:scale-95 lg:scale-100 origin-top"
+      className="relative pt-28 md:pt-36 pb-20 md:pb-28 bg-white overflow-hidden"
     >
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-green-50/40" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-        <div className="grid lg:grid-cols-2 gap-20 items-center">
+      <Container className="relative">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
           {/* LEFT */}
           <div>
 
             {/* Badge */}
-            <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 border border-green-100 mb-8">
+            <div className="reveal inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 border border-green-100 mb-6 md:mb-8">
               <div className="w-2 h-2 rounded-full bg-[#15803D] animate-pulse" />
-              <span className="text-[12px] font-semibold uppercase tracking-widest text-[#15803D]">
+              <span className="text-[11px] md:text-[12px] font-semibold uppercase tracking-widest text-[#15803D]">
                 AI-Powered Operations
               </span>
             </div>
 
             {/* Heading */}
-            <h1 className="reveal text-[3.6rem] sm:text-[4.8rem] leading-[1.02] font-extrabold text-[#0A2540] mb-8">
+            <h1 className="reveal text-[2.25rem] sm:text-[3rem] md:text-[3.6rem] lg:text-[4.8rem] leading-[1.05] font-extrabold text-[#0A2540] mb-6 md:mb-8">
               The Operating System for{" "}
               <span className="text-[#15803D]">
                 Physical Operations
@@ -35,22 +36,22 @@ export default function HeroSection() {
             </h1>
 
             {/* Subtext */}
-            <p className="reveal reveal-delay-1 text-xl text-slate-500 leading-relaxed mb-10 max-w-xl">
+            <p className="reveal reveal-delay-1 text-base md:text-xl text-slate-500 leading-relaxed mb-8 md:mb-10 max-w-xl">
               Unify procurement, project execution, and AI-driven decision-making
               in one platform. Stop managing operations across disconnected tools.
             </p>
 
             {/* Buttons */}
-            <div className="reveal reveal-delay-2 flex flex-wrap gap-5 mb-12">
+            <div className="reveal reveal-delay-2 flex flex-wrap gap-4 md:gap-5 mb-10 md:mb-12">
 
               <Link
                 to="/contact"
                 className="
                   bg-[#15803D] hover:bg-[#166534]
                   text-white
-                  px-8 py-4
+                  px-6 md:px-8 py-3 md:py-4
                   rounded-full
-                  text-base font-semibold
+                  text-sm md:text-base font-semibold
                   transition-all duration-300
                   shadow-lg shadow-green-600/20
                   hover:-translate-y-[2px]
@@ -63,9 +64,9 @@ export default function HeroSection() {
                 to="/product"
                 className="
                   border border-slate-200
-                  px-8 py-4
+                  px-6 md:px-8 py-3 md:py-4
                   rounded-full
-                  text-base font-semibold
+                  text-sm md:text-base font-semibold
                   text-slate-600
                   hover:bg-slate-50
                   transition-all duration-300
@@ -77,20 +78,20 @@ export default function HeroSection() {
             </div>
 
             {/* KPI */}
-            <div className="reveal reveal-delay-3 flex gap-16 text-sm">
+            <div className="reveal reveal-delay-3 flex flex-wrap gap-8 md:gap-16 text-sm">
 
               <div>
-                <div className="text-3xl font-bold text-[#15803D]">50%</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#15803D]">50%</div>
                 <div className="text-slate-400 mt-1">Faster Procurement</div>
               </div>
 
               <div>
-                <div className="text-3xl font-bold text-[#15803D]">3x</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#15803D]">3x</div>
                 <div className="text-slate-400 mt-1">Cost Visibility</div>
               </div>
 
               <div>
-                <div className="text-3xl font-bold text-[#15803D]">90%</div>
+                <div className="text-2xl md:text-3xl font-bold text-[#15803D]">90%</div>
                 <div className="text-slate-400 mt-1">Automation Rate</div>
               </div>
 
@@ -102,57 +103,57 @@ export default function HeroSection() {
           <div className="relative flex justify-center lg:justify-end">
 
             {/* Glow */}
-            <div className="absolute w-[600px] h-[600px] bg-green-300/30 blur-[140px] rounded-full" />
+            <div className="absolute w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-green-300/30 blur-[140px] rounded-full" />
 
             {/* Dashboard */}
-            <div className="reveal reveal-delay-2 relative animate-float bg-[#0B0F14] rounded-2xl p-8 w-full max-w-[860px] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
+            <div className="reveal reveal-delay-2 relative animate-float bg-[#0B0F14] rounded-2xl p-5 md:p-8 w-full max-w-[860px] border border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.5)]">
 
               {/* Top bar */}
-              <div className="flex items-center gap-2 mb-6">
+              <div className="flex items-center gap-2 mb-5 md:mb-6">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-400" />
                   <div className="w-3 h-3 rounded-full bg-yellow-400" />
                   <div className="w-3 h-3 rounded-full bg-green-400" />
                 </div>
-                <span className="text-sm text-slate-400 ml-2">
+                <span className="text-xs md:text-sm text-slate-400 ml-2">
                   PashxD Dashboard
                 </span>
               </div>
 
               {/* KPI */}
-              <div className="grid grid-cols-2 gap-5 mb-6 text-white">
+              <div className="grid grid-cols-2 gap-3 md:gap-5 mb-5 md:mb-6 text-white">
 
-                <div className="bg-white/5 rounded-xl p-5">
-                  <p className="text-sm text-slate-400">ACTIVE ORDERS</p>
-                  <h3 className="text-3xl font-bold text-green-400 mt-2">2,847</h3>
-                  <p className="text-sm text-slate-500">+12.5% vs last month</p>
+                <div className="bg-white/5 rounded-xl p-3 md:p-5">
+                  <p className="text-xs md:text-sm text-slate-400">ACTIVE ORDERS</p>
+                  <h3 className="text-xl md:text-3xl font-bold text-green-400 mt-2">2,847</h3>
+                  <p className="text-xs md:text-sm text-slate-500">+12.5% vs last month</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-5">
-                  <p className="text-sm text-slate-400">PROJECTS</p>
-                  <h3 className="text-3xl font-bold mt-2">156</h3>
-                  <p className="text-sm text-green-400">18 at risk</p>
+                <div className="bg-white/5 rounded-xl p-3 md:p-5">
+                  <p className="text-xs md:text-sm text-slate-400">PROJECTS</p>
+                  <h3 className="text-xl md:text-3xl font-bold mt-2">156</h3>
+                  <p className="text-xs md:text-sm text-green-400">18 at risk</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-5">
-                  <p className="text-sm text-slate-400">COST SAVINGS</p>
-                  <h3 className="text-3xl font-bold text-green-400 mt-2">$1.2M</h3>
-                  <p className="text-sm text-slate-500">This quarter</p>
+                <div className="bg-white/5 rounded-xl p-3 md:p-5">
+                  <p className="text-xs md:text-sm text-slate-400">COST SAVINGS</p>
+                  <h3 className="text-xl md:text-3xl font-bold text-green-400 mt-2">$1.2M</h3>
+                  <p className="text-xs md:text-sm text-slate-500">This quarter</p>
                 </div>
 
-                <div className="bg-white/5 rounded-xl p-5">
-                  <p className="text-sm text-slate-400">AI ALERTS</p>
-                  <h3 className="text-3xl font-bold text-yellow-400 mt-2">23</h3>
-                  <p className="text-sm text-green-400">5 critical</p>
+                <div className="bg-white/5 rounded-xl p-3 md:p-5">
+                  <p className="text-xs md:text-sm text-slate-400">AI ALERTS</p>
+                  <h3 className="text-xl md:text-3xl font-bold text-yellow-400 mt-2">23</h3>
+                  <p className="text-xs md:text-sm text-green-400">5 critical</p>
                 </div>
 
               </div>
 
               {/* Table */}
-              <div className="bg-white/5 rounded-xl p-5 text-sm text-white">
-                <p className="text-slate-400 mb-4">RECENT ORDERS</p>
+              <div className="bg-white/5 rounded-xl p-3 md:p-5 text-xs md:text-sm text-white">
+                <p className="text-slate-400 mb-3 md:mb-4">RECENT ORDERS</p>
 
-                <div className="space-y-3">
+                <div className="space-y-2 md:space-y-3">
                   <div className="grid grid-cols-4">
                     <span className="text-green-400">PO-4821</span>
                     <span className="text-slate-400">Steel Corp</span>
@@ -177,12 +178,12 @@ export default function HeroSection() {
               </div>
 
               {/* Floating AI Alert */}
-              <div className="absolute -bottom-8 left-8 bg-white rounded-xl px-5 py-4 shadow-xl border border-slate-200 w-[320px] animate-float">
+              <div className="absolute -bottom-6 md:-bottom-8 left-4 md:left-8 bg-white rounded-xl px-4 md:px-5 py-3 md:py-4 shadow-xl border border-slate-200 w-[260px] md:w-[320px] animate-float">
                 <div className="flex items-start gap-3">
                   <div className="w-3 h-3 rounded-full bg-green-500 mt-1" />
                   <div>
-                    <p className="text-base font-semibold text-slate-800">AI Alert</p>
-                    <p className="text-sm text-slate-500">
+                    <p className="text-sm md:text-base font-semibold text-slate-800">AI Alert</p>
+                    <p className="text-xs md:text-sm text-slate-500">
                       Delay predicted: Project #47 — cement delivery 3 days late
                     </p>
                   </div>
@@ -194,7 +195,7 @@ export default function HeroSection() {
           </div>
 
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import Container from "../components/layout/Container";
 
 const plans = [
   {
@@ -81,70 +82,85 @@ export default function PricingPage() {
   const ref = useScrollReveal();
 
   return (
-    <div data-testid="pricing-page" ref={ref} className="pt-20">
+    <div data-testid="pricing-page" ref={ref} className="pt-20 md:pt-24">
+
       {/* Hero */}
-      <section className="py-24 bg-white relative">
-        <div className="absolute inset-0 opacity-30" style={{
-          backgroundImage: `radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 50%)`,
+      <section className="py-16 md:py-24 bg-white relative">
+        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
+          backgroundImage: `radial-gradient(circle at 50% 30%, rgba(21, 128, 61, 0.08) 0%, transparent 50%)`,
         }} />
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <span className="reveal text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Pricing</span>
-          <h1 className="reveal text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black mt-4 mb-6 text-gray-900" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>
-            Plans That Scale With You
+        <Container className="relative max-w-4xl text-center">
+          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+            Pricing
+          </span>
+          <h1 className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight font-extrabold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-[1.1]">
+            Plans That{" "}
+            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+              Scale With You
+            </span>
           </h1>
-          <p className="reveal reveal-delay-1 text-lg text-gray-500 leading-relaxed max-w-2xl mx-auto">
+          <p className="reveal reveal-delay-1 text-base md:text-lg text-slate-500 leading-relaxed max-w-2xl mx-auto">
             Choose a base license, add the modules you need. Transparent pricing that grows with your operations.
           </p>
-        </div>
+        </Container>
       </section>
 
       {/* Plans */}
-      <section className="py-16 section-alt">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-6">
+      <section className="py-12 md:py-16 bg-slate-50">
+        <Container>
+          <div className="reveal grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
             {plans.map((plan) => (
               <div
                 key={plan.name}
                 data-testid={`pricing-plan-${plan.name.toLowerCase()}`}
-                className={`relative bg-white rounded-2xl p-8 border transition-all duration-300 card-glow shadow-sm ${
-                  plan.popular ? "border-emerald-300 shadow-lg shadow-emerald-100" : "border-gray-100"
+                className={`relative bg-white rounded-2xl p-6 md:p-8 border transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                  plan.popular
+                    ? "border-green-300 shadow-lg shadow-green-100"
+                    : "border-slate-200"
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-wider rounded-full">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#15803D] text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-md">
                     Most Popular
                   </div>
                 )}
 
-                <div className="mb-6">
-                  <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>{plan.name}</h3>
-                  <p className="text-xs text-gray-400 mt-1">{plan.tagline}</p>
+                <div className="mb-5 md:mb-6">
+                  <h3 className="text-xl font-bold text-[#0A2540]">
+                    {plan.name}
+                  </h3>
+                  <p className="text-xs text-slate-400 mt-1">{plan.tagline}</p>
                 </div>
 
-                <div className="mb-6">
-                  <span className="text-4xl font-black text-gray-900 font-mono-data">{plan.price}</span>
-                  {plan.period && <span className="text-sm text-gray-400">{plan.period}</span>}
+                <div className="mb-5 md:mb-6">
+                  <span className="text-4xl font-black text-[#0A2540] font-mono-data">
+                    {plan.price}
+                  </span>
+                  {plan.period && (
+                    <span className="text-sm text-slate-400 ml-1">{plan.period}</span>
+                  )}
                 </div>
 
-                <Link to="/contact">
+                <Link to="/book-demo">
                   <Button
                     data-testid={`pricing-cta-${plan.name.toLowerCase()}`}
-                    className={`w-full rounded-full h-10 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
+                    className={`w-full rounded-full h-11 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
                       plan.popular
-                        ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20"
-                        : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+                        ? "bg-[#15803D] hover:bg-[#166534] text-white shadow-md shadow-green-600/20"
+                        : "bg-slate-100 hover:bg-slate-200 text-slate-700"
                     }`}
                   >
-                    {plan.price === "Custom" ? "Contact Sales" : "Get Started"} <ArrowRight className="ml-2 h-4 w-4" />
+                    {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
 
-                <div className="mt-6 pt-6 border-t border-gray-100">
+                <div className="mt-6 pt-6 border-t border-slate-100">
                   <div className="space-y-2 mb-4">
                     {plan.limits.map((l) => (
                       <div key={l} className="flex items-center gap-2 text-sm">
-                        <Zap className="h-3.5 w-3.5 text-emerald-600" />
-                        <span className="text-gray-700 font-medium">{l}</span>
+                        <Zap className="h-3.5 w-3.5 text-[#15803D] flex-shrink-0" />
+                        <span className="text-slate-700 font-medium">{l}</span>
                       </div>
                     ))}
                   </div>
@@ -152,11 +168,13 @@ export default function PricingPage() {
                     {plan.features.map((f) => (
                       <div key={f.label} className="flex items-center gap-2 text-sm">
                         {f.included ? (
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-[#15803D] flex-shrink-0" />
                         ) : (
-                          <X className="h-3.5 w-3.5 text-gray-300" />
+                          <X className="h-3.5 w-3.5 text-slate-300 flex-shrink-0" />
                         )}
-                        <span className={f.included ? "text-gray-600" : "text-gray-300"}>{f.label}</span>
+                        <span className={f.included ? "text-slate-600" : "text-slate-300"}>
+                          {f.label}
+                        </span>
                       </div>
                     ))}
                   </div>
@@ -164,28 +182,42 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* Add-on Modules */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="reveal text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">Modules</span>
-            <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 text-gray-900" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>
+      <section className="py-20 md:py-24 bg-white">
+        <Container>
+          <div className="reveal text-center max-w-2xl mx-auto mb-12 md:mb-16">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+              Modules
+            </span>
+            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-[#0A2540]">
               Add-On Modules
             </h2>
-            <p className="text-gray-500 mt-4">Pick the modules that match your workflow. Add more as you scale.</p>
+            <p className="text-slate-500 mt-4 text-base md:text-lg">
+              Pick the modules that match your workflow. Add more as you scale.
+            </p>
           </div>
 
-          <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {addons.map((addon) => (
-              <div key={addon.name} className="bg-white border border-gray-100 rounded-xl p-6 shadow-sm card-glow transition-all duration-300">
-                <h4 className="text-sm font-semibold text-gray-900 mb-2" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>{addon.name}</h4>
-                <p className="text-xs text-gray-500 leading-relaxed mb-4">{addon.desc}</p>
+              <div
+                key={addon.name}
+                className="bg-white border border-slate-200 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
+              >
+                <h4 className="text-sm font-semibold text-[#0A2540] mb-2">
+                  {addon.name}
+                </h4>
+                <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                  {addon.desc}
+                </p>
                 <div className="flex flex-wrap gap-1">
                   {addon.included.map((plan) => (
-                    <span key={plan} className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 text-[9px] font-medium border border-emerald-100">
+                    <span
+                      key={plan}
+                      className="px-2 py-0.5 rounded-full bg-green-50 text-[#15803D] text-[9px] font-medium border border-green-100"
+                    >
                       {plan}
                     </span>
                   ))}
@@ -193,51 +225,67 @@ export default function PricingPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {/* FAQ */}
-      <section className="py-24 section-alt">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="reveal text-center mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600">FAQ</span>
-            <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 text-gray-900" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>
+      <section className="py-20 md:py-24 bg-slate-50">
+        <Container className="max-w-3xl">
+          <div className="reveal text-center mb-10 md:mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+              FAQ
+            </span>
+            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-[#0A2540]">
               Frequently Asked Questions
             </h2>
           </div>
 
           <Accordion type="single" collapsible className="reveal space-y-2">
             {faqs.map((faq, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="bg-white border border-gray-100 rounded-xl px-6 shadow-sm" data-testid={`faq-item-${i}`}>
-                <AccordionTrigger className="text-sm font-semibold text-gray-900 hover:text-emerald-600 py-4">
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="bg-white border border-slate-200 rounded-xl px-5 md:px-6 shadow-sm"
+                data-testid={`faq-item-${i}`}
+              >
+                <AccordionTrigger className="text-sm font-semibold text-[#0A2540] hover:text-[#15803D] py-4 text-left">
                   {faq.q}
                 </AccordionTrigger>
-                <AccordionContent className="text-sm text-gray-500 leading-relaxed pb-4">
+                <AccordionContent className="text-sm text-slate-500 leading-relaxed pb-4">
                   {faq.a}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
-        </div>
+        </Container>
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <div className="reveal bg-gradient-to-br from-emerald-600 to-emerald-700 rounded-2xl p-12 shadow-xl shadow-emerald-600/20">
-            <h2 className="text-3xl font-bold text-white mb-4" style={{ fontFamily: "'Cabinet Grotesk', sans-serif" }}>
-              Ready to Get Started?
-            </h2>
-            <p className="text-emerald-100 mb-8 max-w-lg mx-auto text-sm">
-              Get a custom quote based on your team size, modules, and integration needs. Our team responds within 2 hours.
-            </p>
-            <Link to="/contact">
-              <Button data-testid="pricing-bottom-cta" className="bg-white hover:bg-gray-50 text-emerald-700 h-12 px-8 rounded-full text-sm font-semibold shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                Get Custom Pricing <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+      <section className="py-20 md:py-24 bg-white">
+        <Container className="max-w-4xl">
+          <div className="reveal relative bg-gradient-to-br from-[#15803D] to-[#166534] rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] overflow-hidden">
+
+            {/* Ambient glow */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 blur-[100px] rounded-full pointer-events-none" />
+
+            <div className="relative">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
+                Ready to Get Started?
+              </h2>
+              <p className="text-green-100 mb-8 max-w-lg mx-auto text-sm md:text-base">
+                Get a custom quote based on your team size, modules, and integration needs. Our team responds within 2 hours.
+              </p>
+              <Link to="/book-demo">
+                <Button
+                  data-testid="pricing-bottom-cta"
+                  className="bg-white hover:bg-slate-50 text-[#15803D] h-12 px-7 md:px-8 rounded-full text-sm md:text-base font-semibold shadow-lg hover:-translate-y-[2px] transition-all duration-300"
+                >
+                  Get Custom Pricing <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
-        </div>
+        </Container>
       </section>
     </div>
   );

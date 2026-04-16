@@ -7,8 +7,10 @@ import ProductPage from "./pages/ProductPage";
 import PricingPage from "./pages/PricingPage";
 import IndustriesPage from "./pages/IndustriesPage";
 import AboutPage from "./pages/AboutPage";
-import ResourcesPage from "./pages/ResourcesPage"; // ✅ ADD THIS
+import ResourcesPage from "./pages/ResourcesPage";
 import ContactPage from "./pages/ContactPage";
+import BookDemoPage from "./pages/BookDemoPage";
+import LoginPage from "./pages/LoginPage";
 
 // Components
 import Navbar from "./components/layout/Navbar";
@@ -48,10 +50,12 @@ export default function App() {
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/industries" element={<IndustriesPage />} />
             <Route path="/about" element={<AboutPage />} />
-
-            {/* ✅ NEW: Resources */}
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/contact" element={<ContactPage />} />
+
+            {/* Conversion & Auth */}
+            <Route path="/book-demo" element={<BookDemoPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
           </Routes>
         </main>

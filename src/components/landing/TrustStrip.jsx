@@ -1,3 +1,5 @@
+import Container from "../layout/Container";
+
 import sap from "../../assets/logos/sap.png";
 import zoho from "../../assets/logos/zoho.png";
 import oracle from "../../assets/logos/oracle.png";
@@ -19,18 +21,19 @@ export default function TrustStrip() {
   const extendedLogos = [...logos, ...logos];
 
   return (
-    <section className="py-24 bg-white border-y border-slate-100">
+    <section className="py-16 md:py-24 bg-white border-y border-slate-100">
 
-      <div className="max-w-7xl mx-auto px-6 text-center mb-14">
-        <p className="text-base tracking-[0.35em] uppercase text-slate-400">
+      {/* Header — wrapped in Container for consistent alignment */}
+      <Container className="text-center mb-10 md:mb-14">
+        <p className="text-xs md:text-base tracking-[0.35em] uppercase text-slate-400">
           TRUSTED BY TEAMS USING
         </p>
-      </div>
+      </Container>
 
-      {/* MARQUEE */}
+      {/* MARQUEE — intentionally outside Container so it bleeds edge-to-edge */}
       <div className="marquee">
 
-        <div className="marquee-track gap-24 items-center">
+        <div className="marquee-track gap-12 md:gap-24 items-center">
 
           {extendedLogos.map((logo, i) => (
             <div
@@ -45,7 +48,7 @@ export default function TrustStrip() {
               <img
                 src={logo.src}
                 alt={logo.name}
-                className="h-20 md:h-24 lg:h-28 object-contain"
+                className="h-12 md:h-20 lg:h-24 object-contain"
               />
             </div>
           ))}

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
+import Container from "../layout/Container";
 
 export default function CTASection() {
   const ref = useScrollReveal();
@@ -8,9 +9,9 @@ export default function CTASection() {
   return (
     <section
       ref={ref}
-      className="py-32 bg-gradient-to-b from-white to-slate-50"
+      className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50"
     >
-      <div className="max-w-5xl mx-auto px-6">
+      <Container className="max-w-5xl">
 
         <div
           className="
@@ -18,7 +19,7 @@ export default function CTASection() {
             relative
             bg-[#0A2540]
             rounded-3xl
-            p-14 md:p-20
+            p-8 sm:p-14 md:p-20
             text-center
             overflow-hidden
             shadow-[0_25px_80px_rgba(0,0,0,0.25)]
@@ -35,18 +36,18 @@ export default function CTASection() {
           <div className="relative">
 
             {/* HEADING */}
-            <h2 className="reveal text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
+            <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
               Stop Managing Operations Across{" "}
               <span className="text-green-400">10 Tools</span>
             </h2>
 
             {/* SUBTEXT */}
-            <p className="reveal reveal-delay-1 text-slate-300 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+            <p className="reveal reveal-delay-1 text-slate-300 text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed">
               Unify procurement, execution, and AI decision-making in one platform — and scale faster with complete visibility.
             </p>
 
             {/* BUTTONS */}
-            <div className="reveal reveal-delay-2 flex flex-wrap gap-5 justify-center">
+            <div className="reveal reveal-delay-2 flex flex-wrap gap-4 md:gap-5 justify-center">
 
               {/* ✅ PRIMARY — CALENDLY */}
               <a
@@ -58,24 +59,24 @@ export default function CTASection() {
                   bg-gradient-to-r from-[#16A34A] to-[#22C55E]
                   hover:scale-[1.03]
                   text-white
-                  px-10 py-4
+                  px-6 md:px-10 py-3 md:py-4
                   rounded-full
-                  text-base font-semibold
+                  text-sm md:text-base font-semibold
                   shadow-[0_10px_30px_rgba(34,197,94,0.4)]
                   transition-all duration-300
                 "
               >
                 Book a Demo
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
               </a>
 
               {/* SECONDARY */}
               <Link
                 to="/product"
                 className="
-                  px-10 py-4
+                  px-6 md:px-10 py-3 md:py-4
                   rounded-full
-                  text-base font-semibold
+                  text-sm md:text-base font-semibold
                   border border-white/20
                   text-white
                   hover:bg-white/10
@@ -89,7 +90,7 @@ export default function CTASection() {
 
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

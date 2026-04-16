@@ -10,3 +10,6 @@ export default defineConfig({
     },
   },
 });
+css: {
+  transformer: 'postcss'
+}

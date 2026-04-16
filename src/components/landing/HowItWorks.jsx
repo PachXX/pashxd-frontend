@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 
 import { useScrollReveal } from "../../hooks/useScrollReveal";
+import Container from "../layout/Container";
 
 const steps = [
   { icon: ClipboardList, title: "Project", desc: "Define scope & budget" },
@@ -24,20 +25,20 @@ export default function HowItWorks() {
   return (
     <section
       ref={ref}
-      className="py-28 bg-gradient-to-b from-white to-slate-50/60"
+      className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50/60"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <Container>
 
         {/* HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-20">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#0A2540] mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-20">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A2540] mb-4">
             From Project to Insights{" "}
             <span className="bg-gradient-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
               in One Flow
             </span>
           </h2>
 
-          <p className="text-slate-500">
+          <p className="text-sm md:text-base text-slate-500">
             A connected workflow eliminating gaps between procurement,
             delivery, and execution.
           </p>
@@ -49,7 +50,7 @@ export default function HowItWorks() {
           {/* Animated gradient line */}
           <div className="hidden md:block absolute top-10 left-[5%] right-[5%] h-[3px] rounded-full bg-gradient-to-r from-green-200 via-green-400 to-green-200 opacity-40" />
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 md:gap-8">
 
             {steps.map((step, i) => (
               <div
@@ -64,7 +65,7 @@ export default function HowItWorks() {
                 <div
                   className="
                     relative z-10
-                    w-16 h-16
+                    w-14 h-14 md:w-16 md:h-16
                     rounded-2xl
                     bg-white
                     border border-slate-200
@@ -76,11 +77,11 @@ export default function HowItWorks() {
                     group-hover:border-green-400/40
                   "
                 >
-                  <step.icon className="h-6 w-6 text-[#16A34A]" />
+                  <step.icon className="h-5 w-5 md:h-6 md:w-6 text-[#16A34A]" />
                 </div>
 
                 {/* TEXT */}
-                <div className="mt-4 font-semibold text-[#0A2540] text-sm">
+                <div className="mt-3 md:mt-4 font-semibold text-[#0A2540] text-sm">
                   {step.title}
                 </div>
 
@@ -96,7 +97,7 @@ export default function HowItWorks() {
 
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

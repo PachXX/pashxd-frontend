@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { useState } from "react";
+import Container from "../layout/Container";
 
 const tabs = [
   { id: "procurement", label: "Procurement OS" },
@@ -25,34 +26,36 @@ export default function CoreFeatures() {
   const [active, setActive] = useState("procurement");
 
   return (
-    <section className="py-28 bg-[#F8FAFC]">
-      <div className="max-w-7xl mx-auto px-6">
-
+    <section className="py-20 md:py-28 bg-[#F8FAFC]">
+      <Container>
 
         {/* HEADER */}
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.2em] text-green-600 font-semibold mb-4">
+        <div className="text-center mb-12 md:mb-16">
+          <p className="text-xs tracking-[0.25em] text-[#15803D] font-semibold mb-4">
             CORE PLATFORM
           </p>
 
-          <h2 className="text-[40px] font-bold text-[#0A2540] mb-4">
-            Three Pillars, One Platform
+          <h2 className="text-3xl md:text-[40px] font-bold text-[#0A2540] mb-4 leading-tight">
+            Three Pillars,{" "}
+            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+              One Platform
+            </span>
           </h2>
 
-          <p className="text-slate-500 max-w-2xl mx-auto text-lg">
+          <p className="text-slate-500 max-w-2xl mx-auto text-base md:text-lg">
             PashxD combines procurement, execution, and AI intelligence into a seamless operational engine.
           </p>
         </div>
 
-        {/* TABS */}
-        <div className="flex justify-center gap-10 border-b border-slate-200 mb-16">
+        {/* TABS — scrollable on mobile */}
+        <div className="flex justify-start md:justify-center gap-6 md:gap-10 border-b border-slate-200 mb-10 md:mb-16 overflow-x-auto scrollbar-hide">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActive(tab.id)}
-              className={`pb-4 text-sm font-medium transition ${
+              className={`pb-4 text-sm font-medium transition whitespace-nowrap ${
                 active === tab.id
-                  ? "text-green-600 border-b-2 border-green-600"
+                  ? "text-[#15803D] border-b-2 border-[#15803D]"
                   : "text-slate-400 hover:text-[#0A2540]"
               }`}
             >
@@ -61,17 +64,17 @@ export default function CoreFeatures() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
           {/* LEFT */}
           <div>
-            <p className="text-slate-400 mb-8 text-sm">
+            <p className="text-slate-400 mb-6 md:mb-8 text-sm">
               {active === "procurement" && "From order to invoice — automated"}
               {active === "execution" && "Projects delivered — on time, on budget"}
               {active === "ai" && "Decisions powered by data, not guesswork"}
             </p>
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {active === "procurement" && (
                 <>
                   <Card icon={ShoppingCart} title="Order Management" desc="Create, approve, and track purchase orders with configurable workflows." />
@@ -109,23 +112,25 @@ export default function CoreFeatures() {
           </div>
 
         </div>
-      </div>
+      </Container>
     </section>
   );
 }
 
-/* CARD */
+/* ============ CARD ============ */
+
 function Card({ icon: Icon, title, desc }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition hover:-translate-y-1">
-      <Icon className="w-5 h-5 text-green-600 mb-4" />
-      <h4 className="font-semibold text-[#0A2540] mb-2">{title}</h4>
-      <p className="text-sm text-slate-500">{desc}</p>
+    <div className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 hover:shadow-lg hover:border-green-200 transition-all duration-300 hover:-translate-y-1">
+      <Icon className="w-5 h-5 text-[#15803D] mb-3 md:mb-4" />
+      <h4 className="font-semibold text-[#0A2540] mb-2 text-sm md:text-base">{title}</h4>
+      <p className="text-xs md:text-sm text-slate-500 leading-relaxed">{desc}</p>
     </div>
   );
 }
 
-/* PROCUREMENT DASHBOARD */
+/* ============ DASHBOARDS ============ */
+
 function ProcurementDashboard() {
   return (
     <DashboardWrapper title="Procurement Dashboard">
@@ -148,7 +153,6 @@ function ProcurementDashboard() {
   );
 }
 
-/* EXECUTION DASHBOARD — FULL FIX */
 function ExecutionDashboard() {
   return (
     <DashboardWrapper title="Execution Dashboard">
@@ -161,7 +165,7 @@ function ExecutionDashboard() {
       />
 
       <div className="bg-white/5 rounded-xl mt-4 overflow-hidden">
-        <div className="grid grid-cols-4 text-xs text-slate-500 px-4 py-3 border-b border-white/10">
+        <div className="grid grid-cols-4 text-[10px] md:text-xs text-slate-500 px-3 md:px-4 py-3 border-b border-white/10">
           <span>PROJECT</span>
           <span>PHASE</span>
           <span>PROGRESS</span>
@@ -174,11 +178,11 @@ function ExecutionDashboard() {
           ["Warehouse Exp.", "Structure", "88%", "Ahead", "green"],
           ["Solar Farm P2", "Electrical", "31%", "On Track", "green"],
         ].map((row, i) => (
-          <div key={i} className="grid grid-cols-4 px-4 py-3 text-sm border-b border-white/5 last:border-0">
-            <span className="text-white">{row[0]}</span>
-            <span className="text-slate-400">{row[1]}</span>
+          <div key={i} className="grid grid-cols-4 px-3 md:px-4 py-3 text-[11px] md:text-sm border-b border-white/5 last:border-0">
+            <span className="text-white truncate">{row[0]}</span>
+            <span className="text-slate-400 truncate">{row[1]}</span>
             <span className="text-white">{row[2]}</span>
-            <span className={statusColor(row[4])}>{row[3]}</span>
+            <span className={`truncate ${statusColor(row[4])}`}>{row[3]}</span>
           </div>
         ))}
       </div>
@@ -186,7 +190,6 @@ function ExecutionDashboard() {
   );
 }
 
-/* AI DASHBOARD — FULL FIX */
 function AIDashboard() {
   return (
     <DashboardWrapper title="AI Intelligence Panel">
@@ -198,7 +201,7 @@ function AIDashboard() {
         ]}
       />
 
-      <div className="mt-4 space-y-3">
+      <div className="mt-4 space-y-2 md:space-y-3">
         <Alert color="red" text="Project #47: Cement delivery 3 days late — reroute recommended" />
         <Alert color="yellow" text="Vendor XYZ: Invoice mismatch $4,200 — auto-escalated" />
         <Alert color="green" text="Project #31: On track to complete 5 days early" />
@@ -207,11 +210,11 @@ function AIDashboard() {
   );
 }
 
-/* SHARED COMPONENTS */
+/* ============ SHARED ============ */
 
 function DashboardWrapper({ title, children }) {
   return (
-    <div className="bg-[#0B0F14] rounded-2xl p-6 w-[580px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/5">
+    <div className="bg-[#0B0F14] rounded-2xl p-4 md:p-6 w-full max-w-[580px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/5">
       <div className="text-slate-400 text-xs mb-4">{title}</div>
       {children}
     </div>
@@ -220,14 +223,14 @@ function DashboardWrapper({ title, children }) {
 
 function KPIGrid({ items }) {
   return (
-    <div className="grid grid-cols-3 gap-4 text-white">
+    <div className="grid grid-cols-3 gap-2 md:gap-4 text-white">
       {items.map((item, i) => (
-        <div key={i} className="bg-white/5 rounded-xl p-4">
-          <p className="text-xs text-slate-400">{item.label}</p>
-          <h3 className={`text-xl font-bold mt-1 ${item.color === "yellow" ? "text-yellow-400" : "text-green-400"}`}>
+        <div key={i} className="bg-white/5 rounded-xl p-3 md:p-4">
+          <p className="text-[9px] md:text-xs text-slate-400 uppercase tracking-wider">{item.label}</p>
+          <h3 className={`text-base md:text-xl font-bold mt-1 ${item.color === "yellow" ? "text-yellow-400" : "text-green-400"}`}>
             {item.value}
           </h3>
-          {item.sub && <p className="text-xs text-slate-500 mt-1">{item.sub}</p>}
+          {item.sub && <p className="text-[9px] md:text-xs text-slate-500 mt-1">{item.sub}</p>}
         </div>
       ))}
     </div>
@@ -236,13 +239,13 @@ function KPIGrid({ items }) {
 
 function Table({ rows }) {
   return (
-    <div className="bg-white/5 rounded-xl mt-4 p-4 text-xs">
+    <div className="bg-white/5 rounded-xl mt-4 p-3 md:p-4 text-[11px] md:text-xs">
       {rows.map((r, i) => (
-        <div key={i} className="grid grid-cols-4 py-2 border-b border-white/10 last:border-0">
-          <span className="text-green-400">{r[0]}</span>
-          <span className="text-slate-400">{r[1]}</span>
+        <div key={i} className="grid grid-cols-4 py-2 border-b border-white/10 last:border-0 gap-1">
+          <span className="text-green-400 truncate">{r[0]}</span>
+          <span className="text-slate-400 truncate">{r[1]}</span>
           <span className="text-white">{r[2]}</span>
-          <span className={statusColor(r[4])}>{r[3]}</span>
+          <span className={`truncate ${statusColor(r[4])}`}>{r[3]}</span>
         </div>
       ))}
     </div>
@@ -251,28 +254,30 @@ function Table({ rows }) {
 
 function Alert({ color, text }) {
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border ${alertBorder(color)} bg-white/5`}>
-      <div className={`w-2 h-2 rounded-full ${alertDot(color)}`} />
-      <span className="text-sm text-slate-300">{text}</span>
+    <div className={`flex items-start gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-xl border ${alertBorder(color)} bg-white/5`}>
+      <div className={`w-2 h-2 rounded-full mt-1 flex-shrink-0 ${alertDot(color)}`} />
+      <span className="text-[11px] md:text-sm text-slate-300 leading-snug">{text}</span>
     </div>
   );
 }
 
-/* COLORS */
+/* ============ COLOR HELPERS ============ */
+
 function statusColor(c) {
-  if (c === "green") return "text-emerald-400";
+  if (c === "green") return "text-green-400";
   if (c === "yellow") return "text-yellow-400";
+  if (c === "blue") return "text-blue-400";
   return "text-slate-400";
 }
 
 function alertDot(c) {
   if (c === "red") return "bg-red-500";
   if (c === "yellow") return "bg-yellow-400";
-  return "bg-emerald-400";
+  return "bg-green-400";
 }
 
 function alertBorder(c) {
   if (c === "red") return "border-red-500/20";
   if (c === "yellow") return "border-yellow-500/20";
-  return "border-emerald-500/20";
+  return "border-green-500/20";
 }

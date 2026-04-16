@@ -1,5 +1,6 @@
 import { FileSpreadsheet, Unlink, Users, Eye } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
+import Container from "../layout/Container";
 
 const problems = [
   {
@@ -30,34 +31,34 @@ export default function ProblemSection() {
   return (
     <section
       ref={ref}
-      className="py-24 bg-slate-50 min-h-[60vh]"
+      className="py-20 md:py-24 bg-slate-50 min-h-[60vh]"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <Container>
 
         {/* Heading */}
-        <div className="reveal max-w-2xl mx-auto text-center mb-20">
-          <h2 className="text-[32px] sm:text-[40px] font-extrabold text-[#0A2540] mb-5 leading-[1.1] tracking-tight">
+        <div className="reveal max-w-2xl mx-auto text-center mb-14 md:mb-20">
+          <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-[#0A2540] mb-5 leading-[1.1] tracking-tight">
             Too Many Tools.{" "}
             <span className="bg-gradient-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
               No Real Control.
             </span>
           </h2>
 
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-slate-500 text-base md:text-lg leading-relaxed">
             Enterprises lose millions every year because operations are fragmented
             across disconnected systems.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
 
           {problems.map((p, i) => (
             <div
               key={p.title}
               className={`
                 reveal reveal-delay-${(i % 4) + 1}
-                group relative rounded-2xl p-6
+                group relative rounded-2xl p-5 md:p-6
                 bg-white/70 backdrop-blur
                 border border-slate-200/60
                 shadow-sm transition-all duration-300
@@ -70,7 +71,7 @@ export default function ProblemSection() {
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#16A34A]/0 to-[#22C55E]/0 group-hover:from-[#16A34A]/10 group-hover:to-[#22C55E]/10 transition duration-300 pointer-events-none" />
 
               {/* Icon */}
-              <div className="relative w-11 h-11 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-5 group-hover:scale-110 transition">
+              <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition">
                 <p.icon className="h-5 w-5 text-red-500" />
               </div>
 
@@ -89,7 +90,7 @@ export default function ProblemSection() {
 
         </div>
 
-      </div>
+      </Container>
     </section>
   );
 }
