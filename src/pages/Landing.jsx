@@ -7,6 +7,7 @@ import HowItWorks from "../components/landing/HowItWorks.jsx";
 import ROICalculator from "../components/landing/ROICalculator.jsx";
 import IndustriesPreview from "../components/landing/IndustriesPreview.jsx";
 import IntegrationsSection from "../components/landing/IntegrationsSection.jsx";
+import MarketplacePreview from "../components/landing/MarketplacePreview.jsx";
 import SocialProof from "../components/landing/SocialProof.jsx";
 import CTASection from "../components/landing/CTASection.jsx";
 
@@ -25,6 +26,9 @@ export default function Landing() {
 
       {/* SOLUTION */}
       <SolutionSection />
+
+      {/* MARKETPLACE PREVIEW */}
+      <MarketplacePreview />
 
       {/* CORE FEATURES */}
       <CoreFeatures />
