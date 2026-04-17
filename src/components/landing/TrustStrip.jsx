@@ -14,7 +14,7 @@ import greyline from "../../assets/logos/greyline.png";
 import hammernail from "../../assets/logos/hammer&nail.png";
 import ilmtec from "../../assets/logos/ilmtec.png";
 import mab from "../../assets/logos/mab.png";
-
+import empact from "../../assets/logos/empact.png";
 export default function TrustStrip() {
   const integrationLogos = [
     { name: "SAP", src: sap },
@@ -31,6 +31,7 @@ export default function TrustStrip() {
     { name: "Hammer & Nail", src: hammernail },
     { name: "ILMTEC", src: ilmtec },
     { name: "MAB", src: mab },
+    { name: "Empact", src: empact },
   ];
 
   // 🔁 duplicate logos for seamless loop
