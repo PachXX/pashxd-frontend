@@ -9,10 +9,11 @@ import quickbooks from "../../assets/logos/quickbooks.png";
 import tally from "../../assets/logos/tally.png";
 
 // Partner Logos
+import bharath from "../../assets/logos/bharath.png";
 import greyline from "../../assets/logos/greyline.png";
-import hammernail from "../../assets/logos/hammer&nail.jpg";
+import hammernail from "../../assets/logos/hammer&nail.png";
 import ilmtec from "../../assets/logos/ilmtec.png";
-import mab from "../../assets/logos/mab.jpg";
+import mab from "../../assets/logos/mab.png";
 
 export default function TrustStrip() {
   const integrationLogos = [
@@ -25,6 +26,7 @@ export default function TrustStrip() {
   ];
 
   const partnerLogos = [
+    { name: "Bharath", src: bharath },
     { name: "Greyline", src: greyline },
     { name: "Hammer & Nail", src: hammernail },
     { name: "ILMTEC", src: ilmtec },
