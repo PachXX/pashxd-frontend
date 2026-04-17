@@ -219,19 +219,47 @@
   100% { transform: translateX(-50%); }
 }
 
+@keyframes scroll-marquee-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 .marquee {
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: scroll-marquee 25s linear infinite;
+  animation: scroll-marquee 30s linear infinite;
 }
 
-.marquee:hover .marquee-track {
-  animation-play-state: paused;
+/* Mobile: faster animation for better visibility on smaller screens */
+@media (max-width: 768px) {
+  .marquee-track {
+    animation-duration: 20s;
+  }
+}
+
+/* Hover to pause (desktop only) */
+@media (min-width: 769px) {
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Reverse direction using opposite animation */
+.marquee-reverse .marquee-track {
+  animation-name: scroll-marquee-reverse;
+  animation-duration: 30s;
+}
+
+@media (max-width: 768px) {
+  .marquee-reverse .marquee-track {
+    animation-duration: 20s;
+  }
 }
 
 /* ================================================================
