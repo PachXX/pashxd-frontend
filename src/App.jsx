@@ -12,6 +12,9 @@ import ContactPage from "./pages/ContactPage";
 import BookDemoPage from "./pages/BookDemoPage";
 import LoginPage from "./pages/LoginPage";
 import MarketplacePage from "./pages/MarketplacePage";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+
 
 // Components
 import Navbar from "./components/layout/Navbar";
@@ -57,6 +60,9 @@ export default function App() {
             {/* Conversion & Auth */}
             <Route path="/book-demo" element={<BookDemoPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/privacy" element={<Privacy />} />
+
 
           </Routes>
         </main>

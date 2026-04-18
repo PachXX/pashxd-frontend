@@ -27,8 +27,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
-              The operating system for building and scaling physical operations —
-              procurement, execution, and AI-driven decisions in one platform.
+              AI-Powered Industrial OS & Construction Management ERP with B2B Marketplace for Procurement.
             </p>
 
             {/* SOCIAL */}
@@ -74,6 +73,7 @@ export default function Footer() {
               <li><Link to="/product#procurement" className="hover:text-green-600 transition">Procurement OS</Link></li>
               <li><Link to="/product#execution" className="hover:text-green-600 transition">Execution Layer</Link></li>
               <li><Link to="/product#ai" className="hover:text-green-600 transition">AI Intelligence</Link></li>
+              <li><Link to="/marketplace" className="hover:text-green-600 transition">Marketplace</Link></li>
               <li><Link to="/pricing" className="hover:text-green-600 transition">Pricing</Link></li>
             </ul>
           </div>
@@ -136,7 +136,7 @@ export default function Footer() {
             © {new Date().getFullYear()} PashxD. All rights reserved.
           </p>
 
-          <div className="flex gap-5 md:gap-6 text-sm text-slate-400">
+          <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-slate-400">
             <Link to="/privacy" className="hover:text-green-600 transition">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-green-600 transition">Terms of Service</Link>
           </div>
