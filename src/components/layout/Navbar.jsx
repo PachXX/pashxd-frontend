@@ -121,17 +121,12 @@ export default function Navbar() {
           <div className="flex items-center gap-2 md:gap-3 z-10">
 
             {/* LOGIN — desktop only */}
-            <Link
-              to="/login"
-              className={`
-                hidden md:inline-block
-                text-slate-600 hover:text-[#0A2540]
-                font-medium transition-all duration-300
-                ${scrolled ? "text-sm" : "text-sm"}
-              `}
+            <a
+              href="http://localhost:5174/login"
+              className="hidden md:inline-block text-slate-600 hover:text-[#0A2540] font-medium transition-all duration-300 text-sm"
             >
               Log in
-            </Link>
+            </a>
 
             {/* BOOK A DEMO — hidden on very small screens */}
             <Link
@@ -220,13 +215,12 @@ export default function Navbar() {
         {/* Drawer footer — Login + CTA */}
         <div className="p-6 border-t border-slate-100 space-y-3">
 
-          <Link
-            to="/login"
-            onClick={() => setMobileOpen(false)}
-            className="block w-full text-center border border-slate-200 hover:bg-slate-50 text-[#0A2540] rounded-full font-semibold py-3 text-sm transition"
+          <a
+            href="http://localhost:5174/login"
+            className="hidden md:inline-block text-slate-600 hover:text-[#0A2540] font-medium transition-all duration-300 text-sm"
           >
             Log in
-          </Link>
+          </a>
 
           <Link
             to="/book-demo"

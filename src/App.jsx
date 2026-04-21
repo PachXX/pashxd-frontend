@@ -14,7 +14,7 @@ import LoginPage from "./pages/LoginPage";
 import MarketplacePage from "./pages/MarketplacePage";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-
+import AdminLeadsPage from "./pages/AdminLeadsPage";
 
 // Components
 import Navbar from "./components/layout/Navbar";
@@ -31,46 +31,46 @@ function ScrollToTop() {
   return null;
 }
 
+/* ================= LAYOUT ================= */
+function Layout({ children }) {
+  return (
+    <div className="min-h-screen bg-white text-[#0A2540] flex flex-col">
+      <Navbar />
+      <main className="flex-grow">{children}</main>
+      <Footer />
+    </div>
+  );
+}
+
 /* ================= APP ================= */
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
 
-      <div className="min-h-screen bg-white text-[#0A2540] flex flex-col">
+      <Routes>
 
-        {/* Navbar */}
-        <Navbar />
+        {/* Public pages WITH layout */}
+        <Route path="/" element={<Layout><Landing /></Layout>} />
+        <Route path="/product" element={<Layout><ProductPage /></Layout>} />
+        <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
+        <Route path="/industries" element={<Layout><IndustriesPage /></Layout>} />
+        <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+        <Route path="/resources" element={<Layout><ResourcesPage /></Layout>} />
+        <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+        <Route path="/marketplace" element={<Layout><MarketplacePage /></Layout>} />
+        <Route path="/book-demo" element={<Layout><BookDemoPage /></Layout>} />
+        <Route path="/terms" element={<Layout><Terms /></Layout>} />
+        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
 
-        {/* Main Content */}
-        <main className="flex-grow">
-          <Routes>
+        {/* Auth pages WITHOUT layout */}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin/login" element={<LoginPage />} />
 
-            {/* Landing */}
-            <Route path="/" element={<Landing />} />
+        {/* Admin */}
+        <Route path="/admin/leads" element={<AdminLeadsPage />} />
 
-            {/* Core Pages */}
-            <Route path="/product" element={<ProductPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/industries" element={<IndustriesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/resources" element={<ResourcesPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/marketplace" element={<MarketplacePage />} />
-            {/* Conversion & Auth */}
-            <Route path="/book-demo" element={<BookDemoPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
-
-
-          </Routes>
-        </main>
-
-        {/* Footer */}
-        <Footer />
-
-      </div>
+      </Routes>
     </BrowserRouter>
   );
 }

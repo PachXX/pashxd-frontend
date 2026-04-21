@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Container from "../components/layout/Container";
-
+const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 const companySizes = [
   "1-10 employees",
   "11-50 employees",
@@ -45,36 +45,53 @@ export default function BookDemoPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setSubmitting(true);
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   setError("");
 
-    try {
-      // =========================================================
-      // TODO: Replace this with your actual CRM API endpoint
-      // Example:
-      // const response = await fetch("/api/demo-requests", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData),
-      // });
-      // if (!response.ok) throw new Error("Submission failed");
-      // =========================================================
+   // ✅ Basic validation (added)
+   if (!formData.name || !formData.email || !formData.company) {
+     setError("Please fill all required fields");
+     return;
+   }
 
-      console.log("[BookDemo] Submitting to CRM:", formData);
+   setSubmitting(true);
 
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 800));
+   try {
+     const payload = {
+       name: formData.name,
+       email: formData.email,
+       company: formData.company,
+       role: formData.companySize || "",
+       industry: formData.industry || "",
+       message: formData.message || "",
+       phone: formData.phone || "", // ✅ added
+     };
 
-      setSubmitted(true);
-    } catch (err) {
-      console.error(err);
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+     const response = await fetch(`${API}/api/demo-requests`, {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(payload),
+     });
+
+     if (!response.ok) {
+       throw new Error("Submission failed");
+     }
+
+     const data = await response.json();
+     console.log("[BookDemo] Submitted:", data);
+
+     setSubmitted(true);
+
+   } catch (err) {
+     console.error(err);
+     setError("Something went wrong. Please try again.");
+   } finally {
+     setSubmitting(false);
+   }
+ };
 
   // ============ SUCCESS SCREEN ============
   if (submitted) {
