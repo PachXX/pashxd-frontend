@@ -2,11 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import Container from "../components/layout/Container";
+import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logos/pashxd-logo2.jpg";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const API = import.meta.env.VITE_API_URL;
+  const { setUser } = useAuth();
+
+  // ✅ HARDCODED BACKEND (to avoid env issues for now)
+  const BASE_URL = "https://pashxd-backend.onrender.com";
 
   const [formData, setFormData] = useState({
     email: "",
@@ -28,36 +32,54 @@ export default function LoginPage() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
+      console.log("🚀 Sending login request...");
+
+      const res = await fetch(`${BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
+        body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error("Invalid server response");
+      }
+
+      console.log("✅ Response:", data);
 
       if (!res.ok) {
-        throw new Error(data.detail || "Login failed");
+        throw new Error(data?.detail || "Login failed");
       }
 
       // ✅ Save token
-      localStorage.setItem("token", data.access_token);
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+      }
+
+      // ✅ Save user
+      if (data.user) {
+        setUser(data.user);
+      }
 
       // ✅ Redirect
-      navigate("/admin/leads");
+      if (data?.user?.role === "admin") {
+        navigate("/admin/leads", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
 
     } catch (err) {
-      console.error(err);
+      console.error("❌ Login error:", err);
       setError(err.message || "Invalid email or password.");
     } finally {
       setSubmitting(false);
     }
   };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-green-50/40">
 
@@ -142,7 +164,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="mt-6 w-full bg-green-700 text-white py-3 rounded-full"
+              className="mt-6 w-full bg-green-700 hover:bg-green-800 text-white py-3 rounded-full transition"
             >
               {submitting ? "Signing in..." : "Sign in"}
             </button>

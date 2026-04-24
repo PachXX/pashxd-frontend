@@ -9,6 +9,11 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Determine admin URL based on environment
+  const ADMIN_URL = import.meta.env.MODE === 'production'
+    ? 'https://admin.pashx.com'
+    : 'http://localhost:5174';
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
@@ -18,12 +23,10 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close menu when route changes
   useEffect(() => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
@@ -41,7 +44,7 @@ export default function Navbar() {
     { name: "Industries", path: "/industries" },
     { name: "Resources", path: "/resources" },
     { name: "About", path: "/about" },
-    { name: "Marketplace", path: "/marketplace"  }
+    { name: "Marketplace", path: "/marketplace" }
   ];
 
   return (
@@ -65,7 +68,6 @@ export default function Navbar() {
             ${scrolled ? "h-[72px] md:h-[88px]" : "h-[80px] md:h-[140px]"}
           `}
         >
-
           {/* LOGO */}
           <Link to="/" className="flex items-center z-10">
             <img
@@ -80,7 +82,6 @@ export default function Navbar() {
 
           {/* CENTER NAV — DESKTOP ONLY */}
           <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8 lg:gap-12 text-[15px] font-medium text-slate-500">
-
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
 
@@ -89,46 +90,34 @@ export default function Navbar() {
                   <span
                     className={`
                       transition-all duration-200
-                      ${
-                        isActive
-                          ? "text-[#0A2540]"
-                          : "hover:text-[#0A2540]"
-                      }
+                      ${isActive ? "text-[#0A2540]" : "hover:text-[#0A2540]"}
                     `}
                   >
                     {item.name}
                   </span>
-
-                  {/* Underline animation */}
                   <span
                     className={`
                       absolute left-0 -bottom-1 h-[2px] bg-[#15803D]
                       transition-all duration-300
-                      ${
-                        isActive
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
-                      }
+                      ${isActive ? "w-full" : "w-0 group-hover:w-full"}
                     `}
                   />
                 </Link>
               );
             })}
-
           </nav>
 
           {/* RIGHT — Login + Book a Demo + Hamburger */}
           <div className="flex items-center gap-2 md:gap-3 z-10">
-
             {/* LOGIN — desktop only */}
             <a
-              href="http://localhost:5174/login"
+              href={ADMIN_URL}
               className="hidden md:inline-block text-slate-600 hover:text-[#0A2540] font-medium transition-all duration-300 text-sm"
             >
               Log in
             </a>
 
-            {/* BOOK A DEMO — hidden on very small screens */}
+            {/* BOOK A DEMO */}
             <Link
               to="/book-demo"
               className={`
@@ -151,15 +140,11 @@ export default function Navbar() {
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
-
           </div>
-
         </div>
       </header>
 
-      {/* ===== MOBILE NAV DRAWER ===== */}
-
-      {/* Backdrop */}
+      {/* MOBILE NAV DRAWER */}
       <div
         className={`
           md:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm
@@ -169,7 +154,6 @@ export default function Navbar() {
         onClick={() => setMobileOpen(false)}
       />
 
-      {/* Drawer */}
       <aside
         className={`
           md:hidden fixed top-0 right-0 bottom-0 z-40 w-[80%] max-w-[340px]
@@ -179,13 +163,10 @@ export default function Navbar() {
           ${mobileOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >
-
-        {/* Drawer header spacer */}
         <div className="h-[80px] border-b border-slate-100 flex items-center px-6">
           <img src={logo} alt="PashxD" className="h-10 object-contain" />
         </div>
 
-        {/* Nav links */}
         <nav className="flex-1 overflow-y-auto px-6 py-8">
           <ul className="space-y-1">
             {navItems.map((item) => {
@@ -212,12 +193,10 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        {/* Drawer footer — Login + CTA */}
         <div className="p-6 border-t border-slate-100 space-y-3">
-
           <a
-            href="http://localhost:5174/login"
-            className="hidden md:inline-block text-slate-600 hover:text-[#0A2540] font-medium transition-all duration-300 text-sm"
+            href={ADMIN_URL}
+            className="block w-full text-center text-slate-600 hover:text-[#0A2540] font-medium py-2 transition-all duration-300 text-sm"
           >
             Log in
           </a>
@@ -234,7 +213,6 @@ export default function Navbar() {
             © {new Date().getFullYear()} PashxD
           </p>
         </div>
-
       </aside>
     </>
   );
