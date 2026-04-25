@@ -63,7 +63,7 @@ export default function App() {
         <Route path="/book-demo" element={<Layout><BookDemoPage /></Layout>} />
         <Route path="/terms" element={<Layout><Terms /></Layout>} />
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
+         <Route path="/blog/:slug" element={<BlogPostPage />} />
         {/* Auth pages WITHOUT layout */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin/login" element={<LoginPage />} />
