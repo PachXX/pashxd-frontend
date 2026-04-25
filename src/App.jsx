@@ -15,6 +15,7 @@ import MarketplacePage from "./pages/MarketplacePage";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import AdminLeadsPage from "./pages/AdminLeadsPage";
+import BlogPostPage from './pages/BlogPostPage';
 
 // Components
 import Navbar from "./components/layout/Navbar";
@@ -62,7 +63,7 @@ export default function App() {
         <Route path="/book-demo" element={<Layout><BookDemoPage /></Layout>} />
         <Route path="/terms" element={<Layout><Terms /></Layout>} />
         <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
-
+        <Route path="/blog/:slug" element={<BlogPostPage />} />
         {/* Auth pages WITHOUT layout */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/admin/login" element={<LoginPage />} />
