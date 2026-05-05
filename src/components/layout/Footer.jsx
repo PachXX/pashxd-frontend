@@ -17,7 +17,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
-              AI-Powered Industrial OS & Construction Management ERP with B2B Marketplace for Procurement.
+              AI-Powered Industrial OS for real world operations with B2B Marketplace for Procurement.
             </p>
             <div className="flex gap-3 md:gap-4 mt-6 md:mt-8">
               <a href="https://www.linkedin.com/company/pashx-ai" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-green-600 hover:border-green-200 transition" aria-label="LinkedIn">

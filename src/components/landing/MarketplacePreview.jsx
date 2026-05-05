@@ -109,11 +109,11 @@ export default function MarketplacePreview() {
               — All in One Place
             </h2>
 
-            {/* Description */}
+            {/* Description - UPDATED */}
             <p className="text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8 max-w-lg">
               PashxD Marketplace connects you with verified vendors across
-              10 countries. Compare prices, check quality certifications,
-              order instantly — and track delivery to your site within 48 hours.
+              10 countries. Submit one RFQ and receive 3-5 competitive quotes
+              within 48 hours — compare pricing, quality, and delivery in one place.
             </p>
 
             {/* CTA Buttons */}
@@ -235,7 +235,7 @@ export default function MarketplacePreview() {
                 ))}
               </div>
 
-              {/* Bottom stats bar */}
+              {/* Bottom stats bar - UPDATED */}
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 <div className="bg-white/[0.04] rounded-md sm:rounded-lg p-2 sm:p-3 text-center border border-white/[0.05]">
                   <div className="text-green-400 text-base sm:text-lg font-bold">
@@ -256,7 +256,7 @@ export default function MarketplacePreview() {
                 <div className="bg-white/[0.04] rounded-md sm:rounded-lg p-2 sm:p-3 text-center border border-white/[0.05]">
                   <div className="text-green-400 text-base sm:text-lg font-bold">48h</div>
                   <div className="text-slate-500 text-[9px] sm:text-[10px] uppercase tracking-wider">
-                    Delivery
+                    Quote Time
                   </div>
                 </div>
               </div>
@@ -265,6 +265,7 @@ export default function MarketplacePreview() {
         </div>
 
         {/* ══════════════ BOTTOM — VALUE PROPS ══════════════ */}
+        {/* UPDATED third card */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
           {[
             {
@@ -285,8 +286,8 @@ export default function MarketplacePreview() {
             },
             {
               icon: Truck,
-              title: "48h Delivery",
-              desc: "From order to site in 48 hours across 10 countries with live tracking",
+              title: "48h Multi-Quote",
+              desc: "Submit one RFQ, get 3-5 competitive quotes from verified vendors within 48 hours",
               color: "text-amber-400",
               bg: "bg-amber-500/10",
               border: "border-amber-500/15",
@@ -321,7 +322,7 @@ export default function MarketplacePreview() {
 
         {/* ══════════════ VENDOR / BUYER CTA STRIP ══════════════ */}
         <div className="mt-12 sm:mt-16 md:mt-20 grid md:grid-cols-2 gap-3 sm:gap-4">
-          {/* Buyer Card */}
+          {/* Buyer Card - UPDATED */}
           <div className="group relative bg-gradient-to-br from-green-500/10 to-green-500/5 border border-green-500/15 rounded-xl sm:rounded-2xl p-6 sm:p-8 hover:border-green-500/30 transition-all duration-300">
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
               <div className="w-9 h-9 sm:w-10 sm:h-10 bg-green-500/15 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -336,9 +337,9 @@ export default function MarketplacePreview() {
             </p>
             <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
               {[
-                "Instant pricing — no more waiting for quotes",
-                "AI-matched materials to your project BOQ",
-                "Full delivery tracking to your site",
+                "Submit one RFQ — receive 3-5 quotes in 48 hours",
+                "Compare prices, quality, and delivery side-by-side",
+                "Direct vendor contact after quote acceptance",
               ].map((item) => (
                 <li
                   key={item}

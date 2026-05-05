@@ -19,6 +19,7 @@ import {
   Timer,
   Globe,
   BadgeCheck,
+  FileText,
 } from "lucide-react";
 
 /* ────────────────────────────────────────
@@ -37,15 +38,15 @@ const CATEGORIES = [
 ];
 
 const PRODUCTS = [
-  { name: "OPC 53 Grade Cement", brand: "UltraTech", price: "€6.20", unit: "/bag", rating: 4.8, reviews: 342, delivery: "48 hrs", tag: "Bestseller", img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop" },
-  { name: "TMT Steel Rebar 12mm", brand: "Tata Steel", price: "€48.50", unit: "/bundle", rating: 4.9, reviews: 218, delivery: "48 hrs", tag: "Top Rated", img: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=400&fit=crop" },
-  { name: "PVC Conduit Pipe 25mm", brand: "Finolex", price: "€3.40", unit: "/meter", rating: 4.6, reviews: 189, delivery: "48 hrs", tag: "Fast Delivery", img: "https://images.unsplash.com/photo-1635424710928-0544e8512eae?w=400&h=400&fit=crop" },
-  { name: "Vitrified Floor Tiles", brand: "Kajaria", price: "€12.80", unit: "/sqm", rating: 4.7, reviews: 156, delivery: "24 hrs", tag: "New Arrival", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=400&fit=crop" },
-  { name: "Exterior Emulsion Paint", brand: "Asian Paints", price: "€85.00", unit: "/drum", rating: 4.8, reviews: 124, delivery: "24 hrs", tag: "Popular", img: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=400&fit=crop" },
-  { name: "Plywood Sheet 18mm", brand: "Century Ply", price: "€42.00", unit: "/sheet", rating: 4.5, reviews: 98, delivery: "48 hrs", tag: "Quality", img: "https://images.unsplash.com/photo-1614964237818-ded9b5d48173?w=400&h=400&fit=crop" },
-  { name: "Brass Gate Valve 25mm", brand: "Jaquar", price: "€18.50", unit: "/piece", rating: 4.7, reviews: 87, delivery: "24 hrs", tag: "Certified", img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=400&fit=crop" },
-  { name: "LED Tube Light 20W", brand: "Philips", price: "€8.90", unit: "/piece", rating: 4.9, reviews: 203, delivery: "24 hrs", tag: "Bestseller", img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=400&h=400&fit=crop" },
-  { name: "Safety Helmet Hard Hat", brand: "3M", price: "€15.20", unit: "/piece", rating: 4.6, reviews: 145, delivery: "48 hrs", tag: "Safety First", img: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=400&h=400&fit=crop" },
+  { name: "OPC 53 Grade Cement", brand: "UltraTech", price: "€6.20", unit: "/bag", rating: 4.8, reviews: 342, quotes: "3-5", tag: "Bestseller", img: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=400&h=400&fit=crop" },
+  { name: "TMT Steel Rebar 12mm", brand: "Tata Steel", price: "€48.50", unit: "/bundle", rating: 4.9, reviews: 218, quotes: "4-6", tag: "Top Rated", img: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=400&h=400&fit=crop" },
+  { name: "PVC Conduit Pipe 25mm", brand: "Finolex", price: "€3.40", unit: "/meter", rating: 4.6, reviews: 189, quotes: "3-5", tag: "Fast Quote", img: "https://images.unsplash.com/photo-1635424710928-0544e8512eae?w=400&h=400&fit=crop" },
+  { name: "Vitrified Floor Tiles", brand: "Kajaria", price: "€12.80", unit: "/sqm", rating: 4.7, reviews: 156, quotes: "2-4", tag: "New Arrival", img: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=400&fit=crop" },
+  { name: "Exterior Emulsion Paint", brand: "Asian Paints", price: "€85.00", unit: "/drum", rating: 4.8, reviews: 124, quotes: "3-5", tag: "Popular", img: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=400&fit=crop" },
+  { name: "Plywood Sheet 18mm", brand: "Century Ply", price: "€42.00", unit: "/sheet", rating: 4.5, reviews: 98, quotes: "2-4", tag: "Quality", img: "https://images.unsplash.com/photo-1614964237818-ded9b5d48173?w=400&h=400&fit=crop" },
+  { name: "Brass Gate Valve 25mm", brand: "Jaquar", price: "€18.50", unit: "/piece", rating: 4.7, reviews: 87, quotes: "3-4", tag: "Certified", img: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?w=400&h=400&fit=crop" },
+  { name: "LED Tube Light 20W", brand: "Philips", price: "€8.90", unit: "/piece", rating: 4.9, reviews: 203, quotes: "2-3", tag: "Bestseller", img: "https://images.unsplash.com/photo-1550985616-10810253b84d?w=400&h=400&fit=crop" },
+  { name: "Safety Helmet Hard Hat", brand: "3M", price: "€15.20", unit: "/piece", rating: 4.6, reviews: 145, quotes: "2-4", tag: "Safety First", img: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=400&h=400&fit=crop" },
 ];
 
 const SELLER_TYPES = [
@@ -57,7 +58,7 @@ const SELLER_TYPES = [
 const HOW_STEPS = [
   { num: "01", title: "Search or scan BOQ", desc: "Find materials by name, spec, or upload your BOQ to auto-populate a smart cart.", icon: Search },
   { num: "02", title: "Compare & choose", desc: "AI ranks vendors by price, distance, rating, and delivery speed.", icon: BarChart3 },
-  { num: "03", title: "Buy or RFQ", desc: "Standard items: instant checkout. Custom specs or bulk: send RFQ.", icon: ShoppingCart },
+  { num: "03", title: "Send RFQ", desc: "Submit RFQ to multiple vendors. Get competitive quotes within 48 hours.", icon: FileText },
   { num: "04", title: "Track to site", desc: "Real-time GPS tracking, photo proof at delivery, digital GRN.", icon: Truck },
   { num: "05", title: "Pay on terms", desc: "Net 30/60/90 credit lines. Escrow protection. Auto-matched invoices.", icon: CreditCard },
 ];
@@ -65,7 +66,7 @@ const HOW_STEPS = [
 const STATS = [
   { value: "25+", label: "Verified Vendors" },
   { value: "1,000+", label: "Products Listed" },
-  { value: "48 hrs", label: "Avg. Delivery" },
+  { value: "48 hrs", label: "Quote Response" },
   { value: "99.2%", label: "Order Accuracy" },
 ];
 
@@ -150,7 +151,7 @@ export default function MarketplacePage() {
 
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10">
                 25+ verified vendors and growing. 1,000+ products. AI-powered pricing.
-                Delivery to your site within 48 hours. Built into PashxD.
+                Get competitive quotes within 48 hours. Built into PashxD.
               </p>
             </div>
           </Reveal>
@@ -254,8 +255,8 @@ export default function MarketplacePage() {
                         <span className="text-xs text-slate-500">{p.unit}</span>
                       </div>
                       <div className="flex items-center gap-1 text-[10px] sm:text-xs text-[#15803D] font-semibold">
-                        <Clock className="w-3 h-3" />
-                        {p.delivery}
+                        <FileText className="w-3 h-3" />
+                        {p.quotes} quotes
                       </div>
                     </div>
                   </div>
@@ -325,7 +326,7 @@ export default function MarketplacePage() {
         </div>
       </section>
 
-      {/* ═══════════════ FROM SOURCING TO DELIVERY ═══════════════ */}
+      {/* ═══════════════ FROM SOURCING TO QUOTES ═══════════════ */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
@@ -334,23 +335,23 @@ export default function MarketplacePage() {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg mb-5 sm:mb-6">
                   <Timer className="w-3.5 h-3.5 text-amber-700" />
-                  <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Delivered within 48 hours</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Quotes within 48 hours</span>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-5 leading-tight">
-                  From Sourcing to{" "}
-                  <span className="text-[#15803D]">Delivery</span>
+                  From RFQ to{" "}
+                  <span className="text-[#15803D]">Multiple Quotes</span>
                 </h2>
 
                 <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed mb-6 sm:mb-8">
-                  PashxD connects you to verified vendors across Europe and delivers materials
-                  directly to your site. Browse, compare, order, and track — all in one place,
-                  with delivery guaranteed within 48 hours.
+                  PashxD connects you to verified vendors across Europe. Submit RFQs and receive
+                  competitive quotes from multiple suppliers within 48 hours. Compare, negotiate,
+                  and choose the best offer — all in one place.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {[
-                    { icon: Zap, text: "48-hour delivery guarantee" },
+                    { icon: FileText, text: "Multi-vendor RFQ system" },
                     { icon: MapPin, text: "Available in 10 countries" },
                     { icon: Package, text: "1,000+ products in catalog" },
                     { icon: Truck, text: "End-to-end shipment tracking" },
@@ -376,16 +377,16 @@ export default function MarketplacePage() {
                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
                     <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
                   </div>
-                  <span className="text-[10px] sm:text-xs text-slate-600 ml-2">Order Fulfillment — Live View</span>
+                  <span className="text-[10px] sm:text-xs text-slate-600 ml-2">RFQ Dashboard — Live View</span>
                 </div>
 
                 {/* Stats grid */}
                 <div className="grid grid-cols-2 gap-2 sm:gap-3 mb-3 sm:mb-4">
                   {[
-                    { l: "Items in Stock", v: "842", c: "text-green-400" },
-                    { l: "Orders Today", v: "127", c: "text-green-400" },
-                    { l: "Avg Dispatch", v: "14 min", c: "text-yellow-400" },
-                    { l: "Active Drivers", v: "18", c: "text-green-400" },
+                    { l: "Active RFQs", v: "84", c: "text-green-400" },
+                    { l: "Quotes Today", v: "127", c: "text-green-400" },
+                    { l: "Avg Response", v: "14 hrs", c: "text-yellow-400" },
+                    { l: "Active Vendors", v: "25", c: "text-green-400" },
                   ].map((k) => (
                     <div key={k.l} className="bg-white/[0.04] rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
                       <div className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider">{k.l}</div>
@@ -394,13 +395,13 @@ export default function MarketplacePage() {
                   ))}
                 </div>
 
-                {/* Live dispatches */}
+                {/* Live RFQs */}
                 <div className="bg-white/[0.04] rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
-                  <div className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider mb-2 sm:mb-3">Live dispatches</div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider mb-2 sm:mb-3">Recent RFQs</div>
                   {[
-                    { id: "ORD-4821", item: "OPC Cement × 50", status: "En Route", time: "12 min ago", color: "text-green-400" },
-                    { id: "ORD-4820", item: "TMT Rebar × 20", status: "Picked", time: "8 min ago", color: "text-yellow-400" },
-                    { id: "ORD-4819", item: "PVC Pipes × 100", status: "Delivered", time: "23 min ago", color: "text-slate-500" },
+                    { id: "RFQ-4821", item: "OPC Cement × 500", status: "5 Quotes", time: "12 hrs ago", color: "text-green-400" },
+                    { id: "RFQ-4820", item: "TMT Rebar × 200", status: "3 Quotes", time: "8 hrs ago", color: "text-yellow-400" },
+                    { id: "RFQ-4819", item: "PVC Pipes × 1000", status: "Closed", time: "1 day ago", color: "text-slate-500" },
                   ].map((o) => (
                     <div key={o.id} className="grid grid-cols-4 py-1.5 sm:py-2 border-b border-white/[0.04] last:border-0 text-[10px] sm:text-xs items-center">
                       <span className="text-green-400 font-mono">{o.id}</span>
