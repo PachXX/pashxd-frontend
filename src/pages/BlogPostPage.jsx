@@ -129,7 +129,7 @@ export default function BlogPostPage() {
           </div>
         )}
 
-        {/* Content */}
+        {/* Content - ✅ FIXED: Support both Markdown and HTML */}
         <article className="prose prose-lg prose-slate max-w-none
           prose-headings:text-[#0A2540] prose-headings:font-bold
           prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
@@ -139,9 +139,22 @@ export default function BlogPostPage() {
           prose-pre:bg-slate-900 prose-pre:text-slate-100
           prose-img:rounded-xl prose-img:shadow-lg
         ">
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>
-            {post.content}
-          </ReactMarkdown>
+          {/* Render Markdown */}
+          {post.content_type === 'markdown' || !post.content_type ? (
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {post.content}
+            </ReactMarkdown>
+          ) : null}
+
+          {/* Render HTML */}
+          {post.content_type === 'html' && post.custom_html ? (
+            <>
+              {post.custom_css && (
+                <style dangerouslySetInnerHTML={{__html: post.custom_css}} />
+              )}
+              <div dangerouslySetInnerHTML={{__html: post.custom_html}} />
+            </>
+          ) : null}
         </article>
 
         {/* Tags */}
