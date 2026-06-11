@@ -16,7 +16,7 @@ export default function Landing() {
   return (
     <div className="bg-white w-full overflow-x-hidden">
       <SEOHead
-        title="PashxD — AI-Powered Industrial OS for Real World Operations"
+        title="PashxD -- AI-Powered Industrial OS for Real World Operations"
         description="Streamline industrial workflows, reduce operational costs, and optimize processes with PashxD's AI-powered platform. Built for real-world operations teams."
         path="/"
       />

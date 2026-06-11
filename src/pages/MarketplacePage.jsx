@@ -123,7 +123,7 @@ export default function MarketplacePage() {
   return (
     <div className="bg-white text-[#0A2540] overflow-x-hidden">
       <SEOHead
-        title="PashxD Marketplace — AI Modules & Integrations"
+        title="PashxD Marketplace -- AI Modules & Integrations"
         description="Browse PashxD's marketplace of AI modules, workflow integrations, and add-ons for industrial operations. Extend your platform with pre-built solutions."
         path="/marketplace"
       />

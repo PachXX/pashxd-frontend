@@ -17,7 +17,7 @@ const values = [
   {
     icon: Users,
     title: "Built for Teams",
-    desc: "PashxD is designed for the people who actually do the work — site teams, procurement managers, project leads.",
+    desc: "PashxD is designed for the people who actually do the work -- site teams, procurement managers, project leads.",
   },
   {
     icon: Globe,
@@ -52,13 +52,12 @@ export default function AboutPage() {
   const ref = useScrollReveal();
 
   return (
-    
+          <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="About PashxD — Our Mission, Team & Story"
+        title="About PashxD -- Our Mission, Team & Story"
         description="Learn about PashxD's mission to bring AI-powered operations to industrial teams worldwide. Meet the team building the future of industrial OS."
         path="/about"
       />
-      <div ref={ref} className="pt-20 md:pt-24">
 
       {/* HERO */}
       <section className="py-20 md:py-28 bg-[#F8FAFC] text-center">

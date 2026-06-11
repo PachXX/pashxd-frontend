@@ -65,13 +65,12 @@ export default function ResourcesPage() {
   };
 
   return (
-    
+          <div className="pt-20 md:pt-24">
       <SEOHead
-        title="Resources — Guides, Case Studies & Insights | PashxD"
+        title="Resources -- Guides, Case Studies & Insights | PashxD"
         description="Explore PashxD's resource library: practical guides, case studies, and insights on AI automation for industrial and operations teams."
         path="/resources"
       />
-      <div className="pt-20 md:pt-24">
 
       {/* HERO */}
       <section className="py-20 md:py-28 bg-[#F8FAFC]">

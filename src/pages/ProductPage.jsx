@@ -30,7 +30,7 @@ const procurementFeatures = [
 const executionFeatures = [
   { icon: LayoutDashboard, title: "Project Dashboards", desc: "Unified view with milestones, Gantt charts, and critical path analysis across all active projects." },
   { icon: ListTodo, title: "Task & Workflow", desc: "Customizable workflows with automated assignments, dependencies, and escalation rules." },
-  { icon: Calculator, title: "BOQ-Based Planning", desc: "Link bill of quantities directly to procurement and execution — budget vs. actual at every level." },
+  { icon: Calculator, title: "BOQ-Based Planning", desc: "Link bill of quantities directly to procurement and execution -- budget vs. actual at every level." },
   { icon: MapPin, title: "Site Progress", desc: "Mobile-first daily progress reports with photo documentation, completion tracking, and snag management." },
 ];
 const aiFeatures = [
@@ -101,13 +101,12 @@ export default function ProductPage() {
   const ref = useScrollReveal();
 
   return (
-    <>
+    <div data-testid="product-page" ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="PashxD Product — AI Industrial Platform Features & Capabilities"
+        title="PashxD Product -- AI Industrial Platform Features & Capabilities"
         description="Explore PashxD's AI-powered features: automated workflows, real-time analytics, smart procurement, and predictive maintenance for industrial operations teams."
         path="/product"
       />
-    <div data-testid="product-page" ref={ref} className="pt-20 md:pt-24">
 
       {/* ============ HERO ============ */}
       <section className="py-16 md:py-24 bg-white relative">
@@ -145,7 +144,7 @@ export default function ProductPage() {
                 Procurement OS
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-6 md:mb-8">
-                From order to invoice — automated. Manage your entire procurement lifecycle with configurable workflows, real-time tracking, and automated invoice matching.
+                From order to invoice -- automated. Manage your entire procurement lifecycle with configurable workflows, real-time tracking, and automated invoice matching.
               </p>
               <FeatureGrid features={procurementFeatures} accentColor="green" />
             </div>
@@ -256,7 +255,7 @@ export default function ProductPage() {
                 Execution Layer
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-6 md:mb-8">
-                Projects delivered — on time, on budget. Manage tasks, track site progress, and keep every stakeholder aligned from design to handover.
+                Projects delivered -- on time, on budget. Manage tasks, track site progress, and keep every stakeholder aligned from design to handover.
               </p>
               <FeatureGrid features={executionFeatures} accentColor="blue" />
             </div>
@@ -299,8 +298,8 @@ export default function ProductPage() {
                 <div className="space-y-2">
                   {[
                     { s: "critical", t: "Cost overrun alert: Tower 3 electrical +$18K projected" },
-                    { s: "warning", t: "Invoice mismatch: PO-7820 vs INV-3421 — $4,200 difference" },
-                    { s: "success", t: "Project #31 on track for early completion — 5 days ahead" },
+                    { s: "warning", t: "Invoice mismatch: PO-7820 vs INV-3421 -- $4,200 difference" },
+                    { s: "success", t: "Project #31 on track for early completion -- 5 days ahead" },
                   ].map((a, i) => (
                     <div
                       key={i}
@@ -412,6 +411,5 @@ export default function ProductPage() {
         </Container>
       </section>
     </div>
-  </>
   );
 }

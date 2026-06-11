@@ -8,13 +8,12 @@ export default function ContactPage() {
   const ref = useScrollReveal();
 
   return (
-    
+          <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="Contact PashxD — Get in Touch with Our Team"
+        title="Contact PashxD -- Get in Touch with Our Team"
         description="Have questions about PashxD? Reach out to our team for support, partnerships, or a product demo. We're here to help."
         path="/contact"
       />
-      <div ref={ref} className="pt-20 md:pt-24">
 
       <section className="py-16 md:py-24 bg-white">
         <Container>
@@ -36,7 +35,7 @@ export default function ContactPage() {
               </h1>
 
               <p className="text-base md:text-lg text-slate-500 leading-relaxed mb-8 md:mb-10 max-w-lg">
-                Questions about the platform, pricing, or partnerships — we're here to help. Reach out directly or book a demo to see PashxD in action.
+                Questions about the platform, pricing, or partnerships -- we're here to help. Reach out directly or book a demo to see PashxD in action.
               </p>
 
               {/* CONTACT INFO */}
@@ -88,7 +87,7 @@ export default function ContactPage() {
                   </h2>
 
                   <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-8">
-                    Book a personalized 30-minute demo and our team will walk you through how PashxD fits your workflow — with a custom ROI analysis for your company.
+                    Book a personalized 30-minute demo and our team will walk you through how PashxD fits your workflow -- with a custom ROI analysis for your company.
                   </p>
 
                   {/* Benefits */}

@@ -97,13 +97,12 @@ export default function BookDemoPage() {
   // ============ SUCCESS SCREEN ============
   if (submitted) {
     return (
-      
+            <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
       <SEOHead
-        title="Book a Free Demo — See PashxD in Action"
+        title="Book a Free Demo -- See PashxD in Action"
         description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
         path="/book-demo"
       />
-      <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
         <Container className="max-w-3xl">
 
           <div className="text-center mb-10">
@@ -119,7 +118,7 @@ export default function BookDemoPage() {
             </h1>
 
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto">
-              We've received your details. Pick a time below that works for you — our team will walk you through how PashxD fits your workflow.
+              We've received your details. Pick a time below that works for you -- our team will walk you through how PashxD fits your workflow.
             </p>
           </div>
 
@@ -156,7 +155,7 @@ export default function BookDemoPage() {
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
 
-          {/* LEFT — Pitch */}
+          {/* LEFT -- Pitch */}
           <div className="lg:col-span-2">
             <p className="text-xs tracking-[0.25em] uppercase text-[#15803D] font-semibold mb-5">
               Book a Demo
@@ -207,7 +206,7 @@ export default function BookDemoPage() {
             </div>
           </div>
 
-          {/* RIGHT — Form */}
+          {/* RIGHT -- Form */}
           <div className="lg:col-span-3">
             <form
               onSubmit={handleSubmit}
