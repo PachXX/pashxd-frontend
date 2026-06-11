@@ -98,13 +98,7 @@ function Reveal({ children, className = "", delay = 0 }) {
   }, []);
 
   return (
-    
-      <SEOHead
-        title="PashxD Marketplace — AI Modules & Integrations"
-        description="Browse PashxD's marketplace of AI modules, workflow integrations, and add-ons for industrial operations. Extend your platform with pre-built solutions."
-        path="/marketplace"
-      />
-      <div
+    <div
       ref={ref}
       className={className}
       style={{
@@ -128,6 +122,11 @@ export default function MarketplacePage() {
 
   return (
     <div className="bg-white text-[#0A2540] overflow-x-hidden">
+      <SEOHead
+        title="PashxD Marketplace — AI Modules & Integrations"
+        description="Browse PashxD's marketplace of AI modules, workflow integrations, and add-ons for industrial operations. Extend your platform with pre-built solutions."
+        path="/marketplace"
+      />
 
       {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 sm:pb-16 md:pb-20 bg-gradient-to-br from-green-50 via-white to-emerald-50">

@@ -55,13 +55,7 @@ function FeatureGrid({ features, accentColor }) {
     amber: "text-amber-600 bg-amber-50 border-amber-100",
   };
   return (
-    
-      <SEOHead
-        title="PashxD Product — AI Industrial Platform Features & Capabilities"
-        description="Explore PashxD's AI-powered features: automated workflows, real-time analytics, smart procurement, and predictive maintenance for industrial operations teams."
-        path="/product"
-      />
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {features.map((f) => (
         <div
           key={f.title}
@@ -107,6 +101,12 @@ export default function ProductPage() {
   const ref = useScrollReveal();
 
   return (
+    <>
+      <SEOHead
+        title="PashxD Product — AI Industrial Platform Features & Capabilities"
+        description="Explore PashxD's AI-powered features: automated workflows, real-time analytics, smart procurement, and predictive maintenance for industrial operations teams."
+        path="/product"
+      />
     <div data-testid="product-page" ref={ref} className="pt-20 md:pt-24">
 
       {/* ============ HERO ============ */}
@@ -412,5 +412,6 @@ export default function ProductPage() {
         </Container>
       </section>
     </div>
+  </>
   );
 }
