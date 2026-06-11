@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import {
   Building2,
   Store,
@@ -145,7 +146,13 @@ export default function IndustriesPage() {
   }, [hash]);
 
   return (
-    <div ref={ref} className="pt-20 md:pt-24">
+    
+      <SEOHead
+        title="Industries We Serve — PashxD AI Industrial Platform"
+        description="PashxD powers AI-driven operations across construction, manufacturing, energy, retail, and more. See how we serve your industry."
+        path="/industries"
+      />
+      <div ref={ref} className="pt-20 md:pt-24">
 
       {/* HERO */}
       <section className="py-20 md:py-28 bg-white">

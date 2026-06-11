@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import { Mail, Phone, MapPin, ArrowRight, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollReveal } from "../hooks/useScrollReveal";
@@ -7,7 +8,13 @@ export default function ContactPage() {
   const ref = useScrollReveal();
 
   return (
-    <div ref={ref} className="pt-20 md:pt-24">
+    
+      <SEOHead
+        title="Contact PashxD — Get in Touch with Our Team"
+        description="Have questions about PashxD? Reach out to our team for support, partnerships, or a product demo. We're here to help."
+        path="/contact"
+      />
+      <div ref={ref} className="pt-20 md:pt-24">
 
       <section className="py-16 md:py-24 bg-white">
         <Container>

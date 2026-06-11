@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { logPageView } from "./analytics/googleAnalytics";
 
 // Pages
 import Landing from "./pages/Landing";
@@ -21,12 +22,13 @@ import BlogPostPage from './pages/BlogPostPage';
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 
-/* ================= SCROLL TO TOP ================= */
+/* ================= SCROLL TO TOP + GA PAGE VIEW ================= */
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    logPageView(pathname);
   }, [pathname]);
 
   return null;

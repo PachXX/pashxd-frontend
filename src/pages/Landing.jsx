@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import HeroSection from "../components/landing/HeroSection.jsx";
 import TrustStrip from "../components/landing/TrustStrip.jsx";
 import ProblemSection from "../components/landing/ProblemSection.jsx";
@@ -14,6 +15,11 @@ import CTASection from "../components/landing/CTASection.jsx";
 export default function Landing() {
   return (
     <div className="bg-white w-full overflow-x-hidden">
+      <SEOHead
+        title="PashxD — AI-Powered Industrial OS for Real World Operations"
+        description="Streamline industrial workflows, reduce operational costs, and optimize processes with PashxD's AI-powered platform. Built for real-world operations teams."
+        path="/"
+      />
 
       {/* HERO */}
       <HeroSection />

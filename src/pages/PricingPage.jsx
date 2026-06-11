@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import { CheckCircle2, X, ArrowRight, Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -82,7 +83,13 @@ export default function PricingPage() {
   const ref = useScrollReveal();
 
   return (
-    <div data-testid="pricing-page" ref={ref} className="pt-20 md:pt-24">
+    
+      <SEOHead
+        title="PashxD Pricing — Plans for Industrial AI Operations"
+        description="Simple, transparent pricing for PashxD's AI-powered industrial OS. From small teams to enterprise operations — find the plan that fits your needs."
+        path="/pricing"
+      />
+      <div data-testid="pricing-page" ref={ref} className="pt-20 md:pt-24">
 
       {/* Hero */}
       <section className="py-16 md:py-24 bg-white relative">

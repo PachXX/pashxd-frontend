@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -97,7 +98,13 @@ function Reveal({ children, className = "", delay = 0 }) {
   }, []);
 
   return (
-    <div
+    
+      <SEOHead
+        title="PashxD Marketplace — AI Modules & Integrations"
+        description="Browse PashxD's marketplace of AI modules, workflow integrations, and add-ons for industrial operations. Extend your platform with pre-built solutions."
+        path="/marketplace"
+      />
+      <div
       ref={ref}
       className={className}
       style={{

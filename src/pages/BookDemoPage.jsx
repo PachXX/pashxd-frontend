@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
@@ -96,6 +97,12 @@ export default function BookDemoPage() {
   // ============ SUCCESS SCREEN ============
   if (submitted) {
     return (
+      
+      <SEOHead
+        title="Book a Free Demo — See PashxD in Action"
+        description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
+        path="/book-demo"
+      />
       <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
         <Container className="max-w-3xl">
 

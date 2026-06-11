@@ -1,3 +1,4 @@
+import SEOHead from "../components/SEOHead";
 import {
   ShoppingCart,
   Truck,
@@ -54,7 +55,13 @@ function FeatureGrid({ features, accentColor }) {
     amber: "text-amber-600 bg-amber-50 border-amber-100",
   };
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    
+      <SEOHead
+        title="PashxD Product — AI Industrial Platform Features & Capabilities"
+        description="Explore PashxD's AI-powered features: automated workflows, real-time analytics, smart procurement, and predictive maintenance for industrial operations teams."
+        path="/product"
+      />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {features.map((f) => (
         <div
           key={f.title}
