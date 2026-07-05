@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { API_BASE_URL } from "../lib/api";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // ✅ Use your Render backend
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = API_BASE_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();

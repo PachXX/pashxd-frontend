@@ -4,13 +4,13 @@ import { Eye, EyeOff } from "lucide-react";
 import Container from "../components/layout/Container";
 import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logos/pashxd-logo2.jpg";
+import { API_BASE_URL } from "../lib/api";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
-  // ✅ HARDCODED BACKEND (to avoid env issues for now)
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = API_BASE_URL;
 
   const [formData, setFormData] = useState({
     email: "",

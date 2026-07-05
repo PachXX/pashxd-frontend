@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { API_BASE_URL } from "../lib/api";
 
 const AuthContext = createContext(null);
 
@@ -6,8 +7,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ HARDCODED BACKEND (NO API VARIABLE ANYMORE)
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = API_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
