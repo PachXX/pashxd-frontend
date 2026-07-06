@@ -4,8 +4,7 @@ export default function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // ✅ Use your Render backend
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = import.meta.env.VITE_API_URL || "https://pashxd-backend.onrender.com";
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -16,6 +15,7 @@ export default function AdminLogin() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // session lives in httpOnly cookie
         body: JSON.stringify({
           email,
           password,
@@ -36,8 +36,10 @@ export default function AdminLogin() {
         return;
       }
 
-      // ✅ Save token
-      localStorage.setItem("token", data.access_token);
+      // TRANSITIONAL — remove once the cookie-auth backend is deployed.
+      if (data.access_token) {
+        localStorage.setItem("token", data.access_token);
+      }
 
       // ✅ Detect role (supports both formats)
       const role = data?.user?.role || data?.role;

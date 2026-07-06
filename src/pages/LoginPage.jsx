@@ -9,8 +9,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const { setUser } = useAuth();
 
-  // ✅ HARDCODED BACKEND (to avoid env issues for now)
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = import.meta.env.VITE_API_URL || "https://pashxd-backend.onrender.com";
 
   const [formData, setFormData] = useState({
     email: "",
@@ -39,6 +38,7 @@ export default function LoginPage() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include", // session lives in httpOnly cookie
         body: JSON.stringify(formData),
       });
 
@@ -55,7 +55,8 @@ export default function LoginPage() {
         throw new Error(data?.detail || "Login failed");
       }
 
-      // ✅ Save token
+      // TRANSITIONAL — remove once the cookie-auth backend is deployed.
+      // Old backend sets no cookie, so keep the Bearer token available.
       if (data.access_token) {
         localStorage.setItem("token", data.access_token);
       }

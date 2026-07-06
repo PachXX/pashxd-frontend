@@ -9,16 +9,20 @@ export default function AdminLeadsPage() {
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 📡 Fetch leads
+  // 📡 Fetch leads — auth via httpOnly cookie (+ transitional Bearer);
+  // 401/403 sends us to login (old backend answers 403 when unauthenticated)
   const fetchLeads = async () => {
     try {
       const token = localStorage.getItem("token");
-
       const res = await fetch(`${API}/api/demo-requests`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
+
+      if (res.status === 401 || res.status === 403) {
+        navigate("/admin/login");
+        return;
+      }
 
       if (!res.ok) {
         throw new Error("Failed to fetch leads");
@@ -34,15 +38,7 @@ export default function AdminLeadsPage() {
     }
   };
 
-  // 🔐 Protect route + fetch data
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      navigate("/admin/login");
-      return;
-    }
-
     fetchLeads();
   }, []);
 

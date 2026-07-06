@@ -6,21 +6,16 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ HARDCODED BACKEND (NO API VARIABLE ANYMORE)
-  const BASE_URL = "https://pashxd-backend.onrender.com";
+  const BASE_URL = import.meta.env.VITE_API_URL || "https://pashxd-backend.onrender.com";
 
   useEffect(() => {
+    // Session lives in an httpOnly cookie (new backend). TRANSITIONAL: also
+    // send the stored Bearer token — the currently deployed backend sets no
+    // cookie. Remove the header once the cookie-auth backend is live.
     const token = localStorage.getItem("token");
-
-    if (!token) {
-      setLoading(false);
-      return;
-    }
-
     fetch(`${BASE_URL}/api/auth/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
       .then((res) => {
         if (!res.ok) throw new Error("Session expired");
@@ -36,8 +31,13 @@ export function AuthProvider({ children }) {
 
   const logout = () => {
     localStorage.removeItem("token");
-    setUser(null);
-    window.location.href = "/login";
+    fetch(`${BASE_URL}/api/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    }).finally(() => {
+      setUser(null);
+      window.location.href = "/login";
+    });
   };
 
   if (loading) {
