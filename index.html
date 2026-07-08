@@ -38,11 +38,25 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="192x192" href="/favicon-192x192.png">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-310NXQ8H2H"></script>
+    <!-- Google Consent Mode v2 — defaults MUST fire before any Google tag -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        analytics_storage:      'denied',
+        ad_storage:             'denied',
+        ad_user_data:           'denied',
+        ad_personalization:     'denied',
+        functionality_storage:  'granted',
+        personalization_storage:'granted',
+        security_storage:       'granted',
+        wait_for_update: 500,
+      });
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-310NXQ8H2H"></script>
+    <script>
       gtag('js', new Date());
       gtag('config', 'G-310NXQ8H2H');
     </script>

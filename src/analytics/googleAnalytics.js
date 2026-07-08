@@ -32,3 +32,15 @@ export const logEvent = (action, category, label, value) => {
     });
   }
 };
+
+// Update Consent Mode v2 signals after user decision (accept=true / decline=false)
+export const updateConsent = (granted) => {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+  const state = granted ? 'granted' : 'denied';
+  window.gtag('consent', 'update', {
+    analytics_storage:      state,
+    ad_storage:             state,
+    ad_user_data:           state,
+    ad_personalization:     state,
+  });
+};

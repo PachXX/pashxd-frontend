@@ -21,6 +21,7 @@ import BlogPostPage from './pages/BlogPostPage';
 // Components
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import CookieConsentBanner from "./components/CookieConsentBanner";
 
 /* ================= SCROLL TO TOP + GA PAGE VIEW ================= */
 function ScrollToTop() {
@@ -50,6 +51,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <CookieConsentBanner />
 
       <Routes>
 
