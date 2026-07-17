@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Container from "../components/layout/Container";
+import SEOHead from "../components/SEOHead";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -26,11 +27,6 @@ export default function BlogPostPage() {
       }
       const data = await response.json();
       setPost(data);
-
-      // Update page title
-      if (data.meta_title || data.title) {
-        document.title = data.meta_title || data.title;
-      }
     } catch (error) {
       console.error('Failed to fetch blog post:', error);
       setError(true);
@@ -53,6 +49,7 @@ export default function BlogPostPage() {
   if (error || !post) {
     return (
       <div className="min-h-screen pt-32 flex items-center justify-center">
+        <SEOHead title="Article Not Found — PashxD" description="This article doesn't exist." path={`/blog/${slug}`} noIndex />
         <div className="text-center">
           <h1 className="text-4xl font-bold text-[#0A2540] mb-4">Article Not Found</h1>
           <p className="text-slate-500 mb-8">The article you're looking for doesn't exist.</p>
@@ -68,8 +65,36 @@ export default function BlogPostPage() {
     );
   }
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.meta_title || post.title,
+    "description": post.meta_description || post.excerpt,
+    "image": post.cover_image || undefined,
+    "datePublished": post.created_at,
+    "dateModified": post.updated_at || post.created_at,
+    "author": { "@type": "Person", "name": post.author || "PashxD Team" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PashxD",
+      "logo": { "@type": "ImageObject", "url": "https://pashx.com/og-image.png" },
+    },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": `https://pashx.com/blog/${post.slug}` },
+  };
+
   return (
     <div className="pt-20 md:pt-24 pb-20">
+      <SEOHead
+        title={post.meta_title || post.title}
+        description={post.meta_description || post.excerpt}
+        path={`/blog/${post.slug}`}
+        image={post.cover_image || undefined}
+        type="article"
+        publishedTime={post.created_at}
+        modifiedTime={post.updated_at}
+        author={post.author || "PashxD Team"}
+        jsonLd={jsonLd}
+      />
       {/* Back Button */}
       <Container className="mb-8">
         <Link

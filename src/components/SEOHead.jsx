@@ -14,6 +14,10 @@ export default function SEOHead({
   image = DEFAULT_IMAGE,
   type = "website",
   noIndex = false,
+  publishedTime,
+  modifiedTime,
+  author,
+  jsonLd,
 }) {
   const canonicalUrl = `${BASE_URL}${path}`;
 
@@ -35,6 +39,15 @@ export default function SEOHead({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content="PashxD" />
+      {type === "article" && publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )}
+      {type === "article" && modifiedTime && (
+        <meta property="article:modified_time" content={modifiedTime} />
+      )}
+      {type === "article" && author && (
+        <meta property="article:author" content={author} />
+      )}
 
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
@@ -42,6 +55,11 @@ export default function SEOHead({
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={image} />
+
+      {/* Structured data (JSON-LD) — e.g. BlogPosting schema for blog posts */}
+      {jsonLd && (
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      )}
     </Helmet>
   );
 }

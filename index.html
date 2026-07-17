@@ -10,25 +10,17 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="PashxD">
 
-    <!-- Default Meta Tags (overridden per-page by react-helmet-async) -->
+    <!-- Bare fallback title only — react-helmet-async's <title> replaces this
+         per-page reliably (single-instance tag), but it does NOT remove
+         pre-existing static <meta> tags, only ones it rendered itself. A
+         static description/og:*/twitter:* block here would sit alongside
+         each page's SEOHead output as a duplicate, and browsers/crawlers
+         read the FIRST matching tag — meaning every page's real og:type,
+         description, and image would be silently shadowed by whatever
+         static defaults lived here. Every route already renders its own
+         SEOHead (see src/components/SEOHead.jsx and src/pages/Landing.jsx
+         for the homepage's), so there's nothing to default to. -->
     <title>PashxD — AI-Powered Industrial OS for Real World Operations</title>
-    <meta name="title" content="PashxD — AI-Powered Industrial OS for Real World Operations">
-    <meta name="description" content="Streamline industrial workflows, reduce operational costs, and optimize processes with PashxD's AI-powered platform. Built for real-world operations.">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://pashx.com/">
-    <meta property="og:title" content="PashxD — AI-Powered Industrial OS for Real World Operations">
-    <meta property="og:description" content="Streamline industrial workflows, reduce operational costs, and optimize processes with PashxD's AI-powered platform.">
-    <meta property="og:image" content="https://pashx.com/og-image.png">
-    <meta property="og:site_name" content="PashxD">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://pashx.com/">
-    <meta property="twitter:title" content="PashxD — AI-Powered Industrial OS for Real World Operations">
-    <meta property="twitter:description" content="Streamline industrial workflows, reduce operational costs, and optimize processes with PashxD's AI-powered platform.">
-    <meta property="twitter:image" content="https://pashx.com/og-image.png">
 
     <!-- Theme Color -->
     <meta name="theme-color" content="#15803D">

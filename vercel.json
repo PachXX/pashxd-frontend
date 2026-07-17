@@ -1,6 +1,7 @@
 {
   "rewrites":[
     {"source":"/api/:path*", "destination":"https://pashxd-api-214145020309.europe-west1.run.app/api/:path*"},
+    {"source":"/sitemap.xml", "destination":"https://pashxd-api-214145020309.europe-west1.run.app/sitemap.xml"},
     {"source":"/(.*)", "destination":"/index.html"}
   ]
 }
