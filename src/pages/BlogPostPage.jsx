@@ -5,6 +5,7 @@ import Container from "../components/layout/Container";
 import SEOHead from "../components/SEOHead";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import "../styles/blog-content.css";
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
@@ -155,7 +156,7 @@ export default function BlogPostPage() {
         )}
 
         {/* Content - ✅ FIXED: Support both Markdown and HTML */}
-        <article className="prose prose-lg prose-slate max-w-none
+        <article className="blog-post-body prose prose-lg prose-slate max-w-none
           prose-headings:text-[#0A2540] prose-headings:font-bold
           prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl
           prose-a:text-[#15803D] prose-a:no-underline hover:prose-a:underline
