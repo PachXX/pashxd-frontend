@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import logo from "../../assets/logos/pashxd-logo.png";
+import { trackCtaClick } from "../../analytics/events";
 
 export default function Navbar() {
   const location = useLocation();
@@ -38,7 +39,11 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  // "Platform" leads the list because it is where the Industrial OS story went
+  // when the homepage narrowed to Autopilot — without it that narrative has no
+  // entry point in the navigation at all.
   const navItems = [
+    { name: "Platform", path: "/platform" },
     { name: "Product", path: "/product" },
     { name: "Pricing", path: "/pricing" },
     { name: "Industries", path: "/industries" },
@@ -65,7 +70,7 @@ export default function Navbar() {
             max-w-7xl mx-auto px-4 sm:px-6 lg:px-8
             flex items-center justify-between relative
             transition-all duration-300
-            ${scrolled ? "h-[72px] md:h-[88px]" : "h-[80px] md:h-[140px]"}
+            ${scrolled ? "h-[68px] md:h-[76px]" : "h-[76px] md:h-[96px]"}
           `}
         >
           {/* LOGO */}
@@ -75,13 +80,16 @@ export default function Navbar() {
               alt="PashxD"
               className={`
                 object-contain transition-all duration-300
-                ${scrolled ? "h-10 md:h-14" : "h-12 md:h-28"}
+                ${scrolled ? "h-9 md:h-11" : "h-10 md:h-16"}
               `}
             />
           </Link>
 
           {/* CENTER NAV — DESKTOP ONLY */}
-          <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-8 lg:gap-12 text-[15px] font-medium text-slate-500">
+          {/* gap tightened when "Platform" made this a seven-item row — at the
+              old gap-8/gap-12 the centred nav collided with the logo and the
+              CTA between the md and lg breakpoints. */}
+          <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-5 lg:gap-8 text-[14px] lg:text-[15px] font-medium text-slate-500">
             {navItems.map((item) => {
               const isActive = location.pathname === item.path;
 
@@ -120,6 +128,7 @@ export default function Navbar() {
             {/* BOOK A DEMO */}
             <Link
               to="/book-demo"
+              onClick={() => trackCtaClick("navbar", "Book a Demo", "/book-demo")}
               className={`
                 hidden sm:inline-block
                 bg-[#15803D] hover:bg-[#166534]
@@ -203,7 +212,10 @@ export default function Navbar() {
 
           <Link
             to="/book-demo"
-            onClick={() => setMobileOpen(false)}
+            onClick={() => {
+              trackCtaClick("mobile_drawer", "Book a Demo", "/book-demo");
+              setMobileOpen(false);
+            }}
             className="block w-full text-center bg-[#15803D] hover:bg-[#166534] text-white rounded-full font-semibold py-3.5 text-sm shadow-md shadow-green-600/20 transition"
           >
             Book a Demo

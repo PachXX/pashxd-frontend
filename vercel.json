@@ -1,7 +1,22 @@
 {
-  "rewrites":[
-    {"source":"/api/:path*", "destination":"https://pashxd-api-214145020309.europe-west1.run.app/api/:path*"},
-    {"source":"/sitemap.xml", "destination":"https://pashxd-api-214145020309.europe-west1.run.app/sitemap.xml"},
-    {"source":"/(.*)", "destination":"/index.html"}
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
+  "rewrites": [
+    {"source": "/api/:path*", "destination": "https://pashxd-api-214145020309.europe-west1.run.app/api/:path*"},
+    {"source": "/sitemap.xml", "destination": "https://pashxd-api-214145020309.europe-west1.run.app/sitemap.xml"},
+
+    {"source": "/platform", "destination": "/platform/index.html"},
+    {"source": "/product", "destination": "/product/index.html"},
+    {"source": "/pricing", "destination": "/pricing/index.html"},
+    {"source": "/industries", "destination": "/industries/index.html"},
+    {"source": "/about", "destination": "/about/index.html"},
+    {"source": "/resources", "destination": "/resources/index.html"},
+    {"source": "/contact", "destination": "/contact/index.html"},
+    {"source": "/marketplace", "destination": "/marketplace/index.html"},
+    {"source": "/book-demo", "destination": "/book-demo/index.html"},
+    {"source": "/terms", "destination": "/terms/index.html"},
+    {"source": "/privacy", "destination": "/privacy/index.html"},
+
+    {"source": "/(.*)", "destination": "/index.html"}
   ]
 }

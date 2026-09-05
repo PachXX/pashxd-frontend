@@ -3,8 +3,36 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, FileText, Video, ArrowRight, Clock } from "lucide-react";
 import Container from "../components/layout/Container";
+import { useSsrBlogList } from "../context/SsrDataContext.jsx";
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
+/**
+ * Reads the post index the prerenderer inlined next to this page's markup
+ * (see scripts/prerender.mjs). Lets the browser hydrate from the same list
+ * the server rendered instead of flashing the loading state — the page then
+ * refreshes the list from the API in the background for freshness.
+ * Parsed once per page load and cached (StrictMode double-invokes state
+ * initializers in development).
+ */
+const SSR_BLOG_DATA_ID = "ssr-blog-data";
+let embeddedBlogsCache = null;
+let embeddedBlogsRead = false;
+function readEmbeddedBlogPosts() {
+  if (embeddedBlogsRead) return embeddedBlogsCache;
+  embeddedBlogsRead = true;
+  if (typeof document === "undefined") return null;
+  const el = document.getElementById(SSR_BLOG_DATA_ID);
+  if (!el) return null;
+  try {
+    const data = JSON.parse(el.textContent || "null");
+    el.remove();
+    embeddedBlogsCache = data && Array.isArray(data.blogPosts) ? data.blogPosts : null;
+  } catch {
+    embeddedBlogsCache = null;
+  }
+  return embeddedBlogsCache;
+}
 
 const resources = [
   {
@@ -37,8 +65,9 @@ const categoryColors = {
 };
 
 export default function ResourcesPage() {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const ssrBlogs = useSsrBlogList();
+  const [blogs, setBlogs] = useState(() => ssrBlogs || readEmbeddedBlogPosts() || []);
+  const [loading, setLoading] = useState(() => !(ssrBlogs || readEmbeddedBlogPosts()));
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -67,7 +96,7 @@ export default function ResourcesPage() {
   return (
           <div className="pt-20 md:pt-24">
       <SEOHead
-        title="Resources -- Guides, Case Studies & Insights | PashxD"
+        title="Resources — Guides, Case Studies & Insights | PashxD"
         description="Explore PashxD's resource library: practical guides, case studies, and insights on AI automation for industrial and operations teams."
         path="/resources"
       />

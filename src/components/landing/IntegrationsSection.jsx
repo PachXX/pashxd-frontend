@@ -1,8 +1,8 @@
+import { Mail, MessageCircle, FileText, Webhook } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import Container from "../layout/Container";
 
 // LOGOS
-import pashxdLogo from "../../assets/logos/pashxd-logo2.jpg";
 import sap from "../../assets/logos/sap.png";
 import zoho from "../../assets/logos/zoho.png";
 import quickbooks from "../../assets/logos/quickbooks.png";
@@ -12,16 +12,47 @@ import tally from "../../assets/logos/tally.png";
 import odoo from "../../assets/logos/odoo.png";
 import excel from "../../assets/logos/excel.png";
 
-const integrations = [
-  { name: "SAP", desc: "ERP", logo: sap },
-  { name: "Zoho", desc: "CRM", logo: zoho },
-  { name: "QuickBooks", desc: "Accounting", logo: quickbooks },
-  { name: "Oracle", desc: "ERP", logo: oracle },
-  { name: "Microsoft", desc: "Office 365", logo: microsoft },
-  { name: "Tally", desc: "Finance", logo: tally },
-  { name: "Odoo", desc: "ERP", logo: odoo },
-  { name: "Excel", desc: "Spreadsheets", logo: excel },
+/**
+ * Where data comes in, and where approved work goes out.
+ *
+ * The previous version rendered these eight logos in an orbit around the PashX
+ * mark with no qualification, which reads as "we have built connectors for all
+ * of these". What exists in the backend today is a generic outbound webhook
+ * layer plus per-customer API work — a real and defensible capability, and a
+ * different claim. Each destination therefore carries an explicit status, and
+ * `status` here must track what is actually deployed.
+ */
+
+const INTAKE = [
+  { icon: Mail, name: "Email", detail: "A shared mailbox, or forwarding rules from the one you already use." },
+  { icon: MessageCircle, name: "WhatsApp", detail: "A WhatsApp Business number your suppliers already message." },
+  { icon: FileText, name: "Documents", detail: "PDFs, scans and spreadsheets — quotes, challans, invoices, certificates." },
+  { icon: Webhook, name: "Forms & webhooks", detail: "Site apps and project systems posting events straight in." },
 ];
+
+/**
+ * status:
+ *   "live"     — a shipped, tested path today
+ *   "pilot"    — working against at least one real customer instance
+ *   "request"  — no connector yet; delivered per engagement over the API
+ */
+const DESTINATIONS = [
+  { name: "Webhooks / REST API", desc: "Any system that can receive JSON", logo: null, status: "live" },
+  { name: "Excel / CSV", desc: "Export and scheduled drops", logo: excel, status: "live" },
+  { name: "Tally", desc: "Finance", logo: tally, status: "pilot" },
+  { name: "Zoho", desc: "CRM and Books", logo: zoho, status: "pilot" },
+  { name: "Microsoft 365", desc: "Mail and files", logo: microsoft, status: "pilot" },
+  { name: "SAP", desc: "ERP", logo: sap, status: "request" },
+  { name: "Oracle", desc: "ERP", logo: oracle, status: "request" },
+  { name: "Odoo", desc: "ERP", logo: odoo, status: "request" },
+  { name: "QuickBooks", desc: "Accounting", logo: quickbooks, status: "request" },
+];
+
+const STATUS_META = {
+  live: { label: "Live", className: "bg-green-50 text-green-700 border-green-200" },
+  pilot: { label: "In pilot", className: "bg-blue-50 text-blue-700 border-blue-200" },
+  request: { label: "On request", className: "bg-slate-100 text-slate-600 border-slate-200" },
+};
 
 export default function IntegrationsSection() {
   const ref = useScrollReveal();
@@ -29,226 +60,95 @@ export default function IntegrationsSection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 md:py-36 bg-gradient-to-b from-white to-slate-50/60 overflow-hidden"
+      className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50/60 py-20 md:py-28"
     >
-      {/* Keyframes for data flow animation */}
-      <style>
-        {`
-          @keyframes pulse-glow {
-            0%, 100% { transform: scale(1); opacity: 0.6; }
-            50% { transform: scale(1.15); opacity: 1; }
-          }
-
-          .hub-pulse::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 9999px;
-            border: 2px solid rgba(21, 128, 61, 0.3);
-            animation: pulse-glow 2.5s ease-in-out infinite;
-          }
-
-          .hub-pulse::after {
-            content: '';
-            position: absolute;
-            inset: -18px;
-            border-radius: 9999px;
-            border: 1px solid rgba(21, 128, 61, 0.15);
-            animation: pulse-glow 2.5s ease-in-out infinite 0.5s;
-          }
-        `}
-      </style>
-
       <Container>
-
-        {/* HEADER */}
-        <div className="text-center max-w-4xl mx-auto mb-16 md:mb-24">
-
-          <p className="text-xs md:text-sm tracking-[0.35em] text-[#15803D] font-semibold mb-5">
-            INTEGRATIONS
+        <div className="reveal mx-auto mb-14 max-w-2xl text-center md:mb-20">
+          <p className="mb-4 text-xs font-semibold tracking-[0.25em] text-brand-green">
+            CONNECTS TO WHAT YOU RUN
           </p>
-
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-[#0A2540] mb-6 leading-tight">
-            Works With Your{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
-              Existing Systems
+          <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
+            Messages in.{" "}
+            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+              Approved records out.
             </span>
           </h2>
-
-          <p className="text-slate-500 text-base md:text-xl leading-relaxed">
-            Seamlessly integrates with ERP, CRM, accounting, and operations tools —
-            without disrupting your workflows.
+          <p className="text-base text-slate-500 md:text-lg">
+            Autopilot does not ask your suppliers to change how they contact you,
+            and it does not ask you to change your system of record.
           </p>
-
         </div>
 
-        {/* ===== CONNECTION HUB ===== */}
-        <div className="relative max-w-5xl mx-auto">
-
-          {/* Mobile: simple grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 md:hidden">
-            {integrations.map((int) => (
-              <LogoCard key={int.name} int={int} />
+        {/* INTAKE */}
+        <div className="reveal mb-14 md:mb-16">
+          <p className="mb-6 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            Where work comes in
+          </p>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 md:gap-5">
+            {INTAKE.map((c) => (
+              <div
+                key={c.name}
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-green-100 bg-green-50">
+                  <c.icon className="h-5 w-5 text-brand-green" />
+                </div>
+                <h3 className="mb-1.5 text-[15px] font-semibold text-brand-navy">
+                  {c.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-slate-500">{c.detail}</p>
+              </div>
             ))}
           </div>
+        </div>
 
-          {/* Desktop: hub with radial connections */}
-          <div className="hidden md:block relative h-[600px]">
-
-            {/* SVG connection lines + animated dots */}
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 1000 600"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <linearGradient id="intLine" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#15803D" stopOpacity="0.05" />
-                  <stop offset="50%" stopColor="#22C55E" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#15803D" stopOpacity="0.05" />
-                </linearGradient>
-              </defs>
-
-              {/* Connection lines — from each logo position to center (500, 300) */}
-              {[
-                { x: 120, y: 100, delay: 0 },
-                { x: 380, y: 80,  delay: 0.3 },
-                { x: 620, y: 80,  delay: 0.6 },
-                { x: 880, y: 100, delay: 0.9 },
-                { x: 120, y: 500, delay: 1.2 },
-                { x: 380, y: 520, delay: 1.5 },
-                { x: 620, y: 520, delay: 1.8 },
-                { x: 880, y: 500, delay: 2.1 },
-              ].map((pos, i) => (
-                <g key={i}>
-                  <line
-                    x1={pos.x}
-                    y1={pos.y}
-                    x2="500"
-                    y2="300"
-                    stroke="url(#intLine)"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 4"
-                  />
-                  {/* Animated dot traveling along this line */}
-                  <circle r="4" fill="#22C55E">
-                    <animateMotion
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin={`${pos.delay}s`}
-                      path={`M ${pos.x} ${pos.y} L 500 300`}
-                    />
-                    <animate
-                      attributeName="opacity"
-                      values="0;1;1;0"
-                      dur="3s"
-                      repeatCount="indefinite"
-                      begin={`${pos.delay}s`}
-                    />
-                  </circle>
-                </g>
-              ))}
-            </svg>
-
-            {/* Logo cards positioned in 8 spots around the hub */}
-            <div className="absolute inset-0">
-              <div className="absolute" style={{ left: "2%", top: "7%" }}>
-                <LogoCard int={integrations[0]} />
-              </div>
-              <div className="absolute" style={{ left: "30%", top: "0%" }}>
-                <LogoCard int={integrations[1]} />
-              </div>
-              <div className="absolute" style={{ right: "30%", top: "0%" }}>
-                <LogoCard int={integrations[2]} />
-              </div>
-              <div className="absolute" style={{ right: "2%", top: "7%" }}>
-                <LogoCard int={integrations[3]} />
-              </div>
-
-              <div className="absolute" style={{ left: "2%", bottom: "7%" }}>
-                <LogoCard int={integrations[4]} />
-              </div>
-              <div className="absolute" style={{ left: "30%", bottom: "0%" }}>
-                <LogoCard int={integrations[5]} />
-              </div>
-              <div className="absolute" style={{ right: "30%", bottom: "0%" }}>
-                <LogoCard int={integrations[6]} />
-              </div>
-              <div className="absolute" style={{ right: "2%", bottom: "7%" }}>
-                <LogoCard int={integrations[7]} />
-              </div>
-
-              {/* Central Hub with PashxD logo */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-                <div className="hub-pulse relative">
-                  <div className="relative w-32 h-32 rounded-full bg-white p-2 shadow-[0_20px_60px_rgba(10,37,64,0.35)] border border-slate-200">
-                    <img
-                      src={pashxdLogo}
-                      alt="PashxD"
-                      className="w-full h-full object-cover rounded-full"
-                    />
+        {/* DESTINATIONS */}
+        <div className="reveal reveal-delay-1">
+          <p className="mb-6 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+            Where approved actions go
+          </p>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {DESTINATIONS.map((d) => {
+              const meta = STATUS_META[d.status];
+              return (
+                <div
+                  key={d.name}
+                  className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3.5 transition-all duration-300 hover:border-slate-300 hover:shadow-sm"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50">
+                    {d.logo ? (
+                      <img
+                        src={d.logo}
+                        alt=""
+                        className="h-6 w-6 object-contain"
+                      />
+                    ) : (
+                      <Webhook className="h-5 w-5 text-slate-400" />
+                    )}
                   </div>
-                  {/* Label under hub */}
-                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[#15803D] font-semibold">
-                      Unified Hub
-                    </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-brand-navy">
+                      {d.name}
+                    </p>
+                    <p className="truncate text-xs text-slate-400">{d.desc}</p>
                   </div>
+                  <span
+                    className={`shrink-0 rounded-full border px-2.5 py-[3px] text-[11px] font-semibold ${meta.className}`}
+                  >
+                    {meta.label}
+                  </span>
                 </div>
-              </div>
-            </div>
-
+              );
+            })}
           </div>
 
-        </div>
-
-        {/* Bottom copy */}
-        <div className="text-center mt-12 md:mt-16">
-          <p className="text-sm text-slate-500">
-            <span className="inline-flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              Two-way sync. Real-time data flow.
-            </span>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-slate-400">
+            &ldquo;On request&rdquo; means there is no packaged connector yet —
+            the sync runs over our API or your integration layer, scoped during
+            onboarding. We would rather say that than imply a button exists.
           </p>
         </div>
-
       </Container>
     </section>
-  );
-}
-
-/* ===== Helper ===== */
-
-function LogoCard({ int }) {
-  return (
-    <div
-      className="
-        group
-        bg-white
-        border border-slate-200
-        rounded-2xl p-5 md:p-6
-        text-center
-        shadow-sm
-        transition-all duration-300
-        hover:shadow-xl hover:-translate-y-2
-        hover:border-green-200
-        w-[140px] md:w-[160px]
-      "
-    >
-      <div className="h-10 md:h-12 flex items-center justify-center mb-3">
-        <img
-          src={int.logo}
-          alt={int.name}
-          className="max-h-8 md:max-h-10 object-contain opacity-70 transition-all duration-300 group-hover:opacity-100 group-hover:scale-110"
-          loading="lazy"
-        />
-      </div>
-      <div className="text-sm md:text-base font-semibold text-[#0A2540]">
-        {int.name}
-      </div>
-      <div className="text-[11px] md:text-xs text-slate-500 mt-1">
-        {int.desc}
-      </div>
-    </div>
   );
 }

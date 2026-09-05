@@ -103,7 +103,7 @@ export default function ProductPage() {
   return (
     <div data-testid="product-page" ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="PashxD Product -- AI Industrial Platform Features & Capabilities"
+        title="PashxD Product | AI Industrial Platform Features & Capabilities"
         description="Explore PashxD's AI-powered features: automated workflows, real-time analytics, smart procurement, and predictive maintenance for industrial operations teams."
         path="/product"
       />

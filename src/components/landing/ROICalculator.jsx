@@ -1,60 +1,132 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Calculator, Clock, TrendingUp, DollarSign, ArrowRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, Calculator, Clock, ShieldAlert } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import Container from "../layout/Container";
+import CtaLink, { DEMO_PATH } from "../CtaLink";
+import { trackRoiCalculated } from "../../analytics/events";
+
+/**
+ * ROI calculator.
+ *
+ * The previous version multiplied monthly procurement spend by a hardcoded 8%
+ * and called the result "savings". Nothing justifies that number, it scales
+ * with spend rather than with anything PashX does, and a CFO who spots it
+ * discounts the entire page.
+ *
+ * This version only models what Autopilot mechanically changes: coordination
+ * time (messages that no longer need a human to read, chase and re-key) and
+ * exception leakage (billing errors caught before payment instead of after).
+ * Every assumption is a visible input the user can argue with, the automation
+ * rate is deliberately conservative, and the working is printed underneath so
+ * the output is a starting point for a conversation rather than a claim.
+ */
+
+// ─── Model constants ─────────────────────────────────────────────────────────
+// AUTOMATION_RATE: share of routine coordination messages that clear without a
+// human. Held well under what a demo can show, because the honest number for a
+// new deployment on messy real-world data is not the best-case number.
+const AUTOMATION_RATE = 0.6;
+// Share of the value flagged as an exception that would otherwise have been
+// paid out or absorbed. Conservative: most disputes are partially recovered.
+const LEAKAGE_RECOVERY_RATE = 0.35;
+const MONTHS = 12;
+
+const inr = new Intl.NumberFormat("en-IN", {
+  style: "currency",
+  currency: "INR",
+  maximumFractionDigits: 0,
+});
+
+function Slider({ id, label, hint, value, min, max, step, format, onChange }) {
+  return (
+    <div className="mb-7 last:mb-0">
+      <div className="mb-2 flex items-baseline justify-between gap-4">
+        <label htmlFor={id} className="text-sm font-medium text-brand-navy">
+          {label}
+        </label>
+        <span className="text-sm font-semibold tabular-nums text-brand-green">
+          {format(value)}
+        </span>
+      </div>
+      <input
+        id={id}
+        type="range"
+        className="roi-slider"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+      {hint && <p className="mt-2 text-xs text-slate-400">{hint}</p>}
+    </div>
+  );
+}
 
 export default function ROICalculator() {
   const ref = useScrollReveal();
 
-  const [orders, setOrders] = useState(500);
-  const [avgValue, setAvgValue] = useState(5000);
-  const [projects, setProjects] = useState(20);
+  const [messages, setMessages] = useState(1200);
+  const [minutesEach, setMinutesEach] = useState(6);
+  const [hourlyCost, setHourlyCost] = useState(600);
+  const [monthlySpend, setMonthlySpend] = useState(25000000); // ₹2.5 Cr
+  const [errorRate, setErrorRate] = useState(1.5); // % of spend that arrives wrong
 
-  const monthlySpend = orders * avgValue;
-  const monthlySavings = monthlySpend * 0.08;
-  const yearlySavings = monthlySavings * 12;
+  const model = useMemo(() => {
+    const hoursToday = (messages * minutesEach) / 60;
+    const hoursSaved = hoursToday * AUTOMATION_RATE;
+    const timeValue = hoursSaved * hourlyCost;
+
+    const disputedValue = monthlySpend * (errorRate / 100);
+    const leakageRecovered = disputedValue * LEAKAGE_RECOVERY_RATE;
+
+    const monthly = timeValue + leakageRecovered;
+
+    return {
+      hoursToday: Math.round(hoursToday),
+      hoursSaved: Math.round(hoursSaved),
+      timeValue: Math.round(timeValue),
+      disputedValue: Math.round(disputedValue),
+      leakageRecovered: Math.round(leakageRecovered),
+      monthly: Math.round(monthly),
+      annual: Math.round(monthly * MONTHS),
+    };
+  }, [messages, minutesEach, hourlyCost, monthlySpend, errorRate]);
 
   return (
     <section
       ref={ref}
-      className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50/40"
+      className="bg-gradient-to-b from-white to-slate-50/40 py-20 md:py-28"
     >
       <Container>
-
-        {/* HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-          <p className="text-xs tracking-[0.25em] text-[#15803D] font-semibold mb-3">
-            ROI CALCULATOR
+        <div className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
+          <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-brand-green">
+            WHAT IT IS WORTH
           </p>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540] mb-4 leading-tight">
-            See Your Potential{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
-              Savings
+          <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
+            Two things change.{" "}
+            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+              Only two.
             </span>
           </h2>
-
-          <p className="text-slate-500 text-base md:text-lg">
-            Adjust the sliders to see how PashxD can impact your bottom line.
+          <p className="text-base text-slate-500 md:text-lg">
+            Coordination time your team stops spending, and billing errors caught
+            before the money leaves. Every assumption below is yours to change.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-10 items-start">
-
-          {/* =============== LEFT PANEL =============== */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-5 md:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-
-            <div className="flex items-center gap-3 mb-6 md:mb-8">
-              <div className="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
-                <Calculator className="w-5 h-5 text-[#15803D]" />
+        <div className="grid items-start gap-6 md:gap-10 lg:grid-cols-2">
+          {/* ─── INPUTS ─────────────────────────────────────────────── */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:p-8">
+            <div className="mb-6 flex items-center gap-3 md:mb-8">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-green-100 bg-green-50">
+                <Calculator className="h-5 w-5 text-brand-green" />
               </div>
-              <h3 className="font-semibold text-[#0A2540] text-base md:text-lg">
-                Your Operations
+              <h3 className="text-base font-semibold text-brand-navy md:text-lg">
+                Your operation
               </h3>
             </div>
 
-            {/* SLIDER STYLES */}
             <style>
               {`
               .roi-slider {
@@ -67,218 +139,164 @@ export default function ROICalculator() {
                 outline: none;
                 cursor: pointer;
               }
-
               .roi-slider::-webkit-slider-thumb {
                 -webkit-appearance: none;
                 appearance: none;
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                border-radius: 999px;
                 background: #15803D;
+                border: 3px solid #fff;
+                box-shadow: 0 2px 8px rgba(21,128,61,0.35);
                 cursor: pointer;
-                box-shadow: 0 4px 12px rgba(21,128,61,0.5);
-                border: 3px solid white;
-                transition: transform 0.2s;
               }
-
-              .roi-slider::-webkit-slider-thumb:hover,
-              .roi-slider::-webkit-slider-thumb:active {
-                transform: scale(1.15);
-              }
-
               .roi-slider::-moz-range-thumb {
-                width: 24px;
-                height: 24px;
-                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                border-radius: 999px;
                 background: #15803D;
+                border: 3px solid #fff;
+                box-shadow: 0 2px 8px rgba(21,128,61,0.35);
                 cursor: pointer;
-                box-shadow: 0 4px 12px rgba(21,128,61,0.5);
-                border: 3px solid white;
+              }
+              .roi-slider:focus-visible {
+                outline: 2px solid #15803D;
+                outline-offset: 4px;
               }
               `}
             </style>
 
-            {/* SLIDER 1 */}
-            <SliderField
-              label="Monthly Purchase Orders"
-              value={orders}
-              displayValue={orders.toLocaleString()}
-              min={50}
-              max={5000}
-              step={50}
-              onChange={setOrders}
-              minLabel="50"
-              maxLabel="5,000"
+            <Slider
+              id="roi-messages"
+              label="Supplier messages a month"
+              hint="Order confirmations, delivery updates, rate revisions, document chases — across email and WhatsApp."
+              value={messages}
+              min={100}
+              max={10000}
+              step={100}
+              format={(v) => v.toLocaleString("en-IN")}
+              onChange={setMessages}
             />
-
-            {/* SLIDER 2 */}
-            <SliderField
-              label="Average PO Value"
-              value={avgValue}
-              displayValue={`$${(avgValue / 1000).toFixed(0)}K`}
-              min={500}
-              max={50000}
-              step={500}
-              onChange={setAvgValue}
-              minLabel="$500"
-              maxLabel="$50K"
-            />
-
-            {/* SLIDER 3 */}
-            <SliderField
-              label="Active Projects"
-              value={projects}
-              displayValue={projects}
-              min={1}
-              max={200}
+            <Slider
+              id="roi-minutes"
+              label="Minutes a person spends on each"
+              hint="Reading it, working out which order it belongs to, replying, and putting it somewhere."
+              value={minutesEach}
+              min={2}
+              max={20}
               step={1}
-              onChange={setProjects}
-              minLabel="1"
-              maxLabel="200"
-              isLast
+              format={(v) => `${v} min`}
+              onChange={setMinutesEach}
             />
-
-            {/* RESULT */}
-            <div className="pt-5 md:pt-6 border-t border-slate-100">
-              <p className="text-xs md:text-sm text-slate-400 mb-1 uppercase tracking-wider font-medium">
-                Monthly Procurement Spend
-              </p>
-              <p className="text-2xl md:text-3xl font-bold text-[#0A2540] font-mono-data">
-                ${(monthlySpend / 1000000).toFixed(2)}M
-              </p>
-            </div>
+            <Slider
+              id="roi-hourly"
+              label="Loaded cost of that person, per hour"
+              value={hourlyCost}
+              min={200}
+              max={3000}
+              step={50}
+              format={(v) => inr.format(v)}
+              onChange={setHourlyCost}
+            />
+            <Slider
+              id="roi-spend"
+              label="Monthly procurement spend"
+              value={monthlySpend}
+              min={2500000}
+              max={500000000}
+              step={2500000}
+              format={(v) => inr.format(v)}
+              onChange={setMonthlySpend}
+            />
+            <Slider
+              id="roi-error"
+              label="Share of spend that arrives wrong"
+              hint="Rate drift against the quote, short deliveries, duplicate or mis-taxed invoices."
+              value={errorRate}
+              min={0.2}
+              max={5}
+              step={0.1}
+              format={(v) => `${v.toFixed(1)}%`}
+              onChange={setErrorRate}
+            />
           </div>
 
-          {/* =============== RIGHT PANEL =============== */}
-          <div className="space-y-5 md:space-y-6">
-
-            {/* BIG CARD — SAVINGS */}
-            <div className="relative bg-gradient-to-br from-[#15803D] to-[#166534] text-white rounded-2xl p-6 md:p-8 shadow-[0_20px_50px_rgba(21,128,61,0.35)] overflow-hidden">
-
-              {/* Subtle glow */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-green-400/20 blur-3xl rounded-full" />
-
-              <div className="relative">
-                <p className="text-[11px] md:text-xs opacity-80 mb-2 uppercase tracking-widest font-semibold">
-                  Estimated Annual Savings
-                </p>
-
-                <h3 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-2 tracking-tight font-mono-data">
-                  ${(yearlySavings / 1000000).toFixed(2)}M
-                </h3>
-
-                <p className="opacity-80 text-sm">
-                  per year with PashxD
-                </p>
-              </div>
-            </div>
-
-            {/* STATS — responsive grid (1 col on narrow mobile, 3 cols from sm) */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
-
-              <StatCard
-                icon={DollarSign}
-                iconColor="text-[#15803D]"
-                iconBg="bg-green-50 border-green-100"
-                value={`$${(monthlySavings / 1000).toFixed(0)}K`}
-                label="Monthly procurement savings (8%)"
-              />
-
-              <StatCard
-                icon={Clock}
-                iconColor="text-blue-600"
-                iconBg="bg-blue-50 border-blue-100"
-                value="150h"
-                label="Hours saved monthly on processing"
-              />
-
-              <StatCard
-                icon={TrendingUp}
-                iconColor="text-amber-600"
-                iconBg="bg-amber-50 border-amber-100"
-                value="$15K"
-                label="Cost overruns prevented monthly"
-              />
-
-            </div>
-
-            {/* CTA */}
-            <Link
-              to="/book-demo"
-              className="flex items-center justify-center gap-2 w-full bg-[#15803D] hover:bg-[#166534] hover:-translate-y-[2px] transition-all duration-300 text-white py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold shadow-lg shadow-green-600/20"
-            >
-              Get Your Custom ROI Report
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <p className="text-[11px] text-slate-400 text-center">
-              * Savings calculated at 8% procurement efficiency, industry average for enterprise platforms.
+          {/* ─── OUTPUT ─────────────────────────────────────────────── */}
+          <div className="rounded-2xl border border-slate-200 bg-brand-navy p-5 text-white shadow-[0_20px_60px_rgba(10,37,64,0.25)] md:p-8">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+              Indicative annual value
+            </p>
+            <p className="mb-8 text-4xl font-extrabold tabular-nums text-green-400 md:text-5xl">
+              {inr.format(model.annual)}
             </p>
 
-          </div>
+            <div className="mb-6 rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <Clock className="h-4 w-4 text-green-400" />
+                <p className="text-sm font-semibold text-white">
+                  Coordination time
+                </p>
+              </div>
+              <p className="text-sm leading-relaxed text-slate-300">
+                Your team spends about{" "}
+                <strong className="text-white tabular-nums">
+                  {model.hoursToday.toLocaleString("en-IN")} hours
+                </strong>{" "}
+                a month on these messages. At a {Math.round(AUTOMATION_RATE * 100)}%
+                automation rate that returns{" "}
+                <strong className="text-white tabular-nums">
+                  {model.hoursSaved.toLocaleString("en-IN")} hours
+                </strong>{" "}
+                — {inr.format(model.timeValue)} a month.
+              </p>
+            </div>
 
+            <div className="mb-8 rounded-xl border border-white/10 bg-white/5 p-4">
+              <div className="mb-2 flex items-center gap-2">
+                <ShieldAlert className="h-4 w-4 text-green-400" />
+                <p className="text-sm font-semibold text-white">
+                  Exceptions caught in time
+                </p>
+              </div>
+              <p className="text-sm leading-relaxed text-slate-300">
+                {inr.format(model.disputedValue)} of monthly spend arrives wrong
+                on your own estimate. Catching it before payment rather than
+                after recovers{" "}
+                <strong className="text-white tabular-nums">
+                  {inr.format(model.leakageRecovered)}
+                </strong>{" "}
+                a month at a {Math.round(LEAKAGE_RECOVERY_RATE * 100)}% recovery
+                assumption.
+              </p>
+            </div>
+
+            <CtaLink
+              to={DEMO_PATH}
+              location="roi_calculator"
+              variant="primary-gradient"
+              size="md"
+              className="w-full"
+              onClick={() =>
+                trackRoiCalculated({
+                  orders: messages,
+                  suppliers: null,
+                  annualSaving: model.annual,
+                })
+              }
+            >
+              Pressure-test this on your numbers
+              <ArrowRight className="h-4 w-4" />
+            </CtaLink>
+
+            <p className="mt-5 text-xs leading-relaxed text-slate-400">
+              This is arithmetic on your inputs, not a result PashX has measured
+              at your company. The automation and recovery rates above are
+              deliberately conservative; a pilot measures your real baseline
+              before and after.
+            </p>
+          </div>
         </div>
       </Container>
     </section>
-  );
-}
-
-/* ============ Reusable Slider Field ============ */
-
-function SliderField({
-  label,
-  value,
-  displayValue,
-  min,
-  max,
-  step = 1,
-  onChange,
-  minLabel,
-  maxLabel,
-  isLast = false,
-}) {
-  return (
-    <div className={isLast ? "mb-6 md:mb-8" : "mb-6 md:mb-8"}>
-      <div className="flex justify-between items-center mb-3">
-        <span className="text-sm text-slate-600 font-medium">{label}</span>
-        <span className="text-[#15803D] font-bold text-base md:text-lg bg-green-50 px-3 py-0.5 rounded-full border border-green-100 min-w-[60px] text-center">
-          {displayValue}
-        </span>
-      </div>
-
-      <input
-        type="range"
-        className="roi-slider"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        aria-label={label}
-      />
-
-      <div className="flex justify-between text-[11px] text-slate-400 mt-2">
-        <span>{minLabel}</span>
-        <span>{maxLabel}</span>
-      </div>
-    </div>
-  );
-}
-
-/* ============ Reusable Stat Card ============ */
-
-function StatCard({ icon: Icon, iconColor, iconBg, value, label }) {
-  return (
-    <div className="bg-white border border-slate-200 rounded-xl p-4 md:p-5 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300">
-      <div className={`w-9 h-9 rounded-lg ${iconBg} border flex items-center justify-center mb-3`}>
-        <Icon className={`w-4 h-4 ${iconColor}`} />
-      </div>
-      <p className="font-bold text-lg md:text-xl text-[#0A2540] font-mono-data">
-        {value}
-      </p>
-      <p className="text-[11px] md:text-xs text-slate-500 mt-1 leading-snug">
-        {label}
-      </p>
-    </div>
   );
 }

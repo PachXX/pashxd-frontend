@@ -1,27 +1,38 @@
-import { FileSpreadsheet, Unlink, Users, Eye } from "lucide-react";
+import { MessagesSquare, ClipboardX, PhoneCall, ReceiptText } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import Container from "../layout/Container";
 
-const problems = [
+/**
+ * The operator's day.
+ *
+ * The old copy here framed the problem as "too many tools" — which is the
+ * pitch for replacing every one of them, and every ops director has already
+ * survived one rip-and-replace. The real, narrower, truer problem is that the
+ * operating data never arrives in a system at all: it arrives as messages, and
+ * a person is the integration layer. That framing is what PashX Autopilot
+ * actually addresses, and it does not require the buyer to abandon anything.
+ */
+
+const PROBLEMS = [
   {
-    icon: FileSpreadsheet,
-    title: "Procurement in Spreadsheets",
-    desc: "Orders, approvals, and vendor data scattered across emails, WhatsApp, and Excel — no single source of truth.",
+    icon: MessagesSquare,
+    title: "The real order book is a chat thread",
+    desc: "Confirmations, rate revisions and delivery dates arrive on WhatsApp and email. Nothing that matters starts life as a record.",
   },
   {
-    icon: Unlink,
-    title: "Projects in Disconnected Tools",
-    desc: "Execution tracked in one tool, procurement in another. Teams operate in silos with no connected workflow.",
+    icon: PhoneCall,
+    title: "Chasing is a full-time job nobody was hired for",
+    desc: "Unconfirmed POs, missing test certificates, silent subcontractors. Someone re-reads the same thread every morning to work out who to nudge.",
   },
   {
-    icon: Users,
-    title: "Vendors Outside Workflows",
-    desc: "Supplier communication is manual. Delivery tracking, invoice matching, and disputes happen outside the system.",
+    icon: ClipboardX,
+    title: "Re-keying is where the errors get in",
+    desc: "A quantity typed from a PDF into the ERP, a rate copied from a quote sent three weeks ago. The mistake surfaces at reconciliation, not at entry.",
   },
   {
-    icon: Eye,
-    title: "Costs Tracked Too Late",
-    desc: "No real-time budget vs. actual visibility. Cost overruns are discovered weeks after they happen.",
+    icon: ReceiptText,
+    title: "Exceptions are found after the money moves",
+    desc: "Short delivery, price drift against the quote, a duplicate invoice. All visible in the messages at the time — all caught at month-end.",
   },
 ];
 
@@ -29,67 +40,43 @@ export default function ProblemSection() {
   const ref = useScrollReveal();
 
   return (
-    <section
-      ref={ref}
-      className="py-20 md:py-24 bg-slate-50 min-h-[60vh]"
-    >
+    <section ref={ref} className="bg-slate-50 py-20 md:py-24">
       <Container>
-
-        {/* Heading */}
-        <div className="reveal max-w-2xl mx-auto text-center mb-14 md:mb-20">
-          <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-[#0A2540] mb-5 leading-[1.1] tracking-tight">
-            Too Many Tools.{" "}
-            <span className="bg-gradient-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
-              No Real Control.
+        <div className="reveal mx-auto mb-14 max-w-2xl text-center md:mb-20">
+          <p className="mb-4 text-xs font-semibold tracking-[0.25em] text-brand-green">
+            THE OPERATOR&apos;S DAY
+          </p>
+          <h2 className="mb-5 text-[28px] font-extrabold leading-[1.1] tracking-tight text-brand-navy sm:text-[32px] md:text-[40px]">
+            Your team is the{" "}
+            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+              integration layer
             </span>
           </h2>
-
-          <p className="text-slate-500 text-base md:text-lg leading-relaxed">
-            Enterprises lose millions every year because operations are fragmented
-            across disconnected systems.
+          <p className="text-base leading-relaxed text-slate-500 md:text-lg">
+            Not because the systems are bad — because the work arrives as
+            messages, and only a human can read a message, decide what it means,
+            and put it somewhere.
           </p>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-
-          {problems.map((p, i) => (
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:gap-6 lg:grid-cols-4">
+          {PROBLEMS.map((p, i) => (
             <div
               key={p.title}
-              className={`
-                reveal reveal-delay-${(i % 4) + 1}
-                group relative rounded-2xl p-5 md:p-6
-                bg-white/70 backdrop-blur
-                border border-slate-200/60
-                shadow-sm transition-all duration-300
-                hover:shadow-xl hover:-translate-y-2
-                hover:border-[#16A34A]/30
-              `}
+              className={`reveal reveal-delay-${(i % 4) + 1} group relative rounded-2xl border border-slate-200/60 bg-white/70 p-5 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-2 hover:border-brand-green-mid/30 hover:shadow-xl md:p-6`}
             >
-
-              {/* Glow */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#16A34A]/0 to-[#22C55E]/0 group-hover:from-[#16A34A]/10 group-hover:to-[#22C55E]/10 transition duration-300 pointer-events-none" />
-
-              {/* Icon */}
-              <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition">
+              <div className="relative mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-red-100 bg-red-50 transition group-hover:scale-110 md:mb-5 md:h-11 md:w-11">
                 <p.icon className="h-5 w-5 text-red-500" />
               </div>
-
-              {/* Title */}
-              <h3 className="relative text-[15px] font-semibold text-[#0A2540] mb-2">
+              <h3 className="relative mb-2 text-[15px] font-semibold text-brand-navy">
                 {p.title}
               </h3>
-
-              {/* Description */}
-              <p className="relative text-sm text-slate-500 leading-relaxed">
+              <p className="relative text-sm leading-relaxed text-slate-500">
                 {p.desc}
               </p>
-
             </div>
           ))}
-
         </div>
-
       </Container>
     </section>
   );

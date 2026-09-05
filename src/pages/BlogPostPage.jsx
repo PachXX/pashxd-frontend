@@ -3,19 +3,86 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Container from "../components/layout/Container";
 import SEOHead from "../components/SEOHead";
+import { useSsrBlogPost } from "../context/SsrDataContext.jsx";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import "../styles/blog-content.css";
 
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 
+/**
+ * Article bodies (custom_html) carry their own <h1 class="post-title"> — the
+ * CMS template repeats the headline inside the content, and the page already
+ * renders the article title as the one real <h1> above the body. Two <h1>s
+ * on a page splits the heading structure crawlers read, so any <h1> inside
+ * the article body is demoted to <h2> before injection. <pre>/<style>/<script>
+ * blocks are skipped: they often contain code samples that legitimately show
+ * raw HTML with <h1> (or <title>) tags, which must not be rewritten.
+ */
+function demoteArticleH1s(html) {
+  if (!html) return html;
+  let processed = "";
+  let cursor = 0;
+  const skip = /<(pre|style|script)[\s>][\s\S]*?<\/\1>/gi;
+  let match;
+  while ((match = skip.exec(html)) !== null) {
+    processed += html.slice(cursor, match.index);
+    processed += match[0];
+    cursor = match.index + match[0].length;
+  }
+  processed += html.slice(cursor);
+  return processed
+    .replace(/<h1([\s>])/gi, "<h2$1")
+    .replace(/<\/h1>/gi, "</h2>");
+}
+
+/**
+ * ID of the JSON <script> tag that scripts/prerender.mjs inlines next to the
+ * static markup of every prerendered blog post. Reading it lets the client
+ * boot from the exact post the server rendered instead of blanking the page
+ * with the loading skeleton until the API responds again.
+ */
+const SSR_BLOG_DATA_ID = "ssr-blog-data";
+
+// Parsed once per page load and cached: React StrictMode double-invokes state
+// initializers in development, and the second call must see the same payload
+// (re-reading after removing the tag would return null and drop the content).
+let embeddedPostCache = null;
+let embeddedPostRead = false;
+function readEmbeddedBlogPost() {
+  if (embeddedPostRead) return embeddedPostCache;
+  embeddedPostRead = true;
+  if (typeof document === "undefined") return null;
+  const el = document.getElementById(SSR_BLOG_DATA_ID);
+  if (!el) return null;
+  try {
+    const data = JSON.parse(el.textContent || "null");
+    el.remove(); // one-shot: a client-side nav to another slug must refetch
+    embeddedPostCache = data && data.blogPost ? data.blogPost : null;
+  } catch {
+    embeddedPostCache = null;
+  }
+  return embeddedPostCache;
+}
+
 export default function BlogPostPage() {
   const { slug } = useParams();
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // During the build-time prerender the post arrives via SsrDataContext; in
+  // the browser the same payload is read back from the inlined <script> tag,
+  // so hydration starts from identical markup (no spinner flash, no refetch).
+  const ssrPost = useSsrBlogPost();
+  const [post, setPost] = useState(() => ssrPost || readEmbeddedBlogPost());
+  const [loading, setLoading] = useState(() => !(ssrPost || post));
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    // Already have content for this slug (SSR payload or embedded data).
+    if (post && post.slug === slug) return;
+    // Prerendered blog HTML never boots with a slug mismatch, so any slug
+    // change here is a real client-side navigation: clear and refetch.
+    setPost(null);
+    setLoading(true);
+    setError(false);
     fetchPost();
   }, [slug]);
 
@@ -66,11 +133,14 @@ export default function BlogPostPage() {
     );
   }
 
+  const metaDescription =
+    post.meta_description || post.excerpt || `${post.title}. Analysis and practical guidance from PashxD.`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.meta_title || post.title,
-    "description": post.meta_description || post.excerpt,
+    "description": metaDescription,
     "image": post.cover_image || undefined,
     "datePublished": post.created_at,
     "dateModified": post.updated_at || post.created_at,
@@ -87,7 +157,7 @@ export default function BlogPostPage() {
     <div className="pt-20 md:pt-24 pb-20">
       <SEOHead
         title={post.meta_title || post.title}
-        description={post.meta_description || post.excerpt}
+        description={metaDescription}
         path={`/blog/${post.slug}`}
         image={post.cover_image || undefined}
         type="article"
@@ -165,9 +235,16 @@ export default function BlogPostPage() {
           prose-pre:bg-slate-900 prose-pre:text-slate-100
           prose-img:rounded-xl prose-img:shadow-lg
         ">
-          {/* Render Markdown */}
+          {/* Render Markdown — bodies must not add their own <h1> on top of
+              the article title rendered above, so h1s from the markdown are
+              rendered as h2s. */}
           {post.content_type === 'markdown' || !post.content_type ? (
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: (props) => <h2 {...props} />,
+              }}
+            >
               {post.content}
             </ReactMarkdown>
           ) : null}
@@ -178,7 +255,7 @@ export default function BlogPostPage() {
               {post.custom_css && (
                 <style dangerouslySetInnerHTML={{__html: post.custom_css}} />
               )}
-              <div dangerouslySetInnerHTML={{__html: post.custom_html}} />
+              <div dangerouslySetInnerHTML={{__html: demoteArticleH1s(post.custom_html)}} />
             </>
           ) : null}
         </article>

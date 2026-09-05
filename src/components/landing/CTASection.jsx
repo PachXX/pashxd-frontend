@@ -1,93 +1,61 @@
-import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import Container from "../layout/Container";
+import CtaLink, { DEMO_PATH } from "../CtaLink";
 
+/**
+ * Closing CTA.
+ *
+ * Two changes from the previous version. The headline was "Stop managing
+ * operations across 10 tools", which sells a replacement project nobody wants
+ * to start; it now closes on the same promise the hero opened with. And the
+ * primary button linked straight out to a raw Calendly URL, so the strongest
+ * intent on the page left the site without touching the demo form or being
+ * attributable — every primary CTA now goes to DEMO_PATH, which owns the
+ * Calendly embed and fires the conversion event.
+ */
 export default function CTASection() {
   const ref = useScrollReveal();
 
   return (
     <section
       ref={ref}
-      className="py-20 md:py-32 bg-gradient-to-b from-white to-slate-50"
+      className="bg-gradient-to-b from-white to-slate-50 py-20 md:py-32"
     >
       <Container className="max-w-5xl">
-
-        <div
-          className="
-            reveal
-            relative
-            bg-[#0A2540]
-            rounded-3xl
-            p-8 sm:p-14 md:p-20
-            text-center
-            overflow-hidden
-            shadow-[0_25px_80px_rgba(0,0,0,0.25)]
-            border border-white/10
-          "
-        >
-
+        <div className="reveal relative overflow-hidden rounded-3xl border border-white/10 bg-brand-navy p-8 text-center shadow-[0_25px_80px_rgba(0,0,0,0.25)] sm:p-14 md:p-20">
           {/* Glow */}
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#16A34A]/20 via-transparent to-[#22C55E]/10" />
-            <div className="absolute top-1/2 left-1/2 w-[500px] h-[500px] -translate-x-1/2 -translate-y-1/2 bg-green-500/20 blur-[140px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-green-mid/20 via-transparent to-brand-green-light/10" />
+            <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 bg-green-500/20 blur-[140px]" />
           </div>
 
           <div className="relative">
-
-            {/* HEADING */}
-            <h2 className="reveal text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
-              Stop Managing Operations Across{" "}
-              <span className="text-green-400">10 Tools</span>
+            <h2 className="reveal mb-6 text-3xl font-extrabold leading-tight text-white sm:text-4xl md:text-5xl">
+              Put one workflow{" "}
+              <span className="text-green-400">on autopilot</span>
             </h2>
 
-            {/* SUBTEXT */}
-            <p className="reveal reveal-delay-1 text-slate-300 text-base md:text-lg max-w-xl mx-auto mb-8 md:mb-10 leading-relaxed">
-              Unify procurement, execution, and AI decision-making in one platform — and scale faster with complete visibility.
+            <p className="reveal reveal-delay-1 mx-auto mb-8 max-w-xl text-base leading-relaxed text-slate-300 md:mb-10 md:text-lg">
+              Bring us a week of your supplier messages. We will show you what
+              Autopilot would have extracted, matched and chased — before you
+              commit to anything.
             </p>
 
-            {/* BUTTONS */}
-            <div className="reveal reveal-delay-2 flex flex-wrap gap-4 md:gap-5 justify-center">
-
-              {/* ✅ PRIMARY — CALENDLY */}
-              <a
-                href="https://calendly.com/shahil-talenlio-letstalk/letstalk"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex items-center gap-2
-                  bg-gradient-to-r from-[#16A34A] to-[#22C55E]
-                  hover:scale-[1.03]
-                  text-white
-                  px-6 md:px-10 py-3 md:py-4
-                  rounded-full
-                  text-sm md:text-base font-semibold
-                  shadow-[0_10px_30px_rgba(34,197,94,0.4)]
-                  transition-all duration-300
-                "
+            <div className="reveal reveal-delay-2 flex flex-wrap justify-center gap-4 md:gap-5">
+              <CtaLink
+                to={DEMO_PATH}
+                location="final_cta"
+                variant="primary-gradient"
               >
-                Book a Demo
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-              </a>
+                See PashX Autopilot in action
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              </CtaLink>
 
-              {/* SECONDARY */}
-              <Link
-                to="/product"
-                className="
-                  px-6 md:px-10 py-3 md:py-4
-                  rounded-full
-                  text-sm md:text-base font-semibold
-                  border border-white/20
-                  text-white
-                  hover:bg-white/10
-                  transition-all duration-300
-                "
-              >
-                See Platform
-              </Link>
-
+              <CtaLink to="#workflows" location="final_cta" variant="on-dark">
+                Explore the workflows
+              </CtaLink>
             </div>
-
           </div>
         </div>
       </Container>

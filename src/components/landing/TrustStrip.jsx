@@ -44,10 +44,21 @@ export default function TrustStrip() {
     <section className="py-16 md:py-24 bg-white border-y border-slate-100">
 
       {/* ===== INTEGRATIONS ROW ===== */}
-      {/* Header — wrapped in Container for consistent alignment */}
-      <Container className="text-center mb-10 md:mb-14">
+      {/* Header — wrapped in Container for consistent alignment.
+          Previously read "TRUSTED BY TEAMS USING", which a reader parses as
+          "SAP and Oracle customers use PashX". These are systems PashX sends
+          data to, not customers or endorsements, and the label has to say so —
+          an enterprise buyer who asks for the SAP reference and finds there
+          isn't one has stopped believing the rest of the page. */}
+      <Container className="text-center mb-4 md:mb-6">
         <p className="text-xs md:text-base tracking-[0.35em] uppercase text-slate-400">
-          TRUSTED BY TEAMS USING
+          BUILT TO SIT ALONGSIDE
+        </p>
+      </Container>
+      <Container className="text-center mb-10 md:mb-14">
+        <p className="text-sm text-slate-400 max-w-xl mx-auto">
+          Your system of record stays where it is. PashX syncs approved actions
+          out to it.
         </p>
       </Container>
 
@@ -76,9 +87,13 @@ export default function TrustStrip() {
 
       {/* ===== PARTNERS ROW ===== */}
       {/* Header */}
+      {/* "Trusted partners" overstated what these relationships are. They are
+          the operating companies PashX is being designed and piloted with —
+          which is the more credible claim at this stage anyway, and the one we
+          can substantiate if asked. */}
       <Container className="text-center mt-16 md:mt-20 mb-10 md:mb-14">
         <p className="text-xs md:text-base tracking-[0.35em] uppercase text-slate-400">
-          TRUSTED PARTNERS
+          DESIGN PARTNERS &amp; PILOTS
         </p>
       </Container>
 

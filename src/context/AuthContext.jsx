@@ -40,12 +40,17 @@ export function AuthProvider({ children }) {
     });
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
+  // This provider used to return `<div>Loading...</div>` for the whole tree
+  // until GET /api/auth/me resolved. On a public marketing site that meant
+  // every visitor waited on a cross-origin auth round-trip before seeing any
+  // content, and the first paint of every page — including whatever a crawler
+  // or the prerenderer captures — was the literal string "Loading...".
+  //
+  // Only LoginPage consumes this context, and only for `setUser`, so the
+  // session check now runs in the background and `loading` is exposed for the
+  // one screen that cares instead of gating the entire application.
   return (
-    <AuthContext.Provider value={{ user, setUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );

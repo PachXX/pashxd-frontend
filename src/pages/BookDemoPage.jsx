@@ -3,6 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 import Container from "../components/layout/Container";
+import {
+  trackDemoSubmit,
+  trackDemoError,
+  trackCalendlyOpen,
+} from "../analytics/events";
 const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
 const companySizes = [
   "1-10 employees",
@@ -84,10 +89,18 @@ export default function BookDemoPage() {
      const data = await response.json();
      console.log("[BookDemo] Submitted:", data);
 
+     // The conversion. Fired after the server accepted the lead, not on click,
+     // so the GA4 number means "we have this lead" rather than "someone pressed
+     // a button". The Calendly embed renders on the next screen, so the
+     // scheduler impression is counted here too.
+     trackDemoSubmit("book_demo_page");
+     trackCalendlyOpen("book_demo_success");
+
      setSubmitted(true);
 
    } catch (err) {
      console.error(err);
+     trackDemoError(err?.message || "unknown");
      setError("Something went wrong. Please try again.");
    } finally {
      setSubmitting(false);
@@ -99,7 +112,7 @@ export default function BookDemoPage() {
     return (
             <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
       <SEOHead
-        title="Book a Free Demo -- See PashxD in Action"
+        title="Book a Free Demo | PashxD"
         description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
         path="/book-demo"
       />
@@ -151,6 +164,15 @@ export default function BookDemoPage() {
   // ============ FORM SCREEN ============
   return (
     <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
+      {/* The SEOHead used to live only in the post-submission branch above, so
+          the form screen — the state every crawler and unfurler actually
+          receives — shipped with no title or description. Both branches must
+          carry it. */}
+      <SEOHead
+        title="Book a Free Demo | PashxD"
+        description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
+        path="/book-demo"
+      />
       <Container className="max-w-5xl">
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">

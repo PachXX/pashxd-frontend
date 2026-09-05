@@ -148,7 +148,7 @@ export default function IndustriesPage() {
   return (
           <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="Industries We Serve -- PashxD AI Industrial Platform"
+        title="Industries We Serve | PashxD AI Industrial Platform"
         description="PashxD powers AI-driven operations across construction, manufacturing, energy, retail, and more. See how we serve your industry."
         path="/industries"
       />

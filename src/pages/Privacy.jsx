@@ -1,3 +1,5 @@
+import SEOHead from "../components/SEOHead";
+
 // Container component inline
 function Container({ children, className = "" }) {
   return (
@@ -10,6 +12,11 @@ function Container({ children, className = "" }) {
 export default function PrivacyPage() {
   return (
     <div className="bg-white min-h-screen">
+      <SEOHead
+        title="Privacy Policy | PashxD"
+        description="How PashxD collects, uses and protects your data across its AI-powered industrial operating system, website and marketplace."
+        path="/privacy"
+      />
       {/* Hero Section */}
       <section className="pt-32 pb-12 sm:pt-36 sm:pb-16 bg-gradient-to-br from-green-50 via-white to-emerald-50">
         <Container>

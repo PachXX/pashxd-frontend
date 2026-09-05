@@ -10,7 +10,7 @@ export default function ContactPage() {
   return (
           <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="Contact PashxD -- Get in Touch with Our Team"
+        title="Contact PashxD | Get in Touch with Our Team"
         description="Have questions about PashxD? Reach out to our team for support, partnerships, or a product demo. We're here to help."
         path="/contact"
       />

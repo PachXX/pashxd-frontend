@@ -54,7 +54,7 @@ export default function AboutPage() {
   return (
           <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="About PashxD -- Our Mission, Team & Story"
+        title="About PashxD | Our Mission, Team & Story"
         description="Learn about PashxD's mission to bring AI-powered operations to industrial teams worldwide. Meet the team building the future of industrial OS."
         path="/about"
       />
