@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import SEOHead from "../components/SEOHead";
 import { Mail, Phone, MapPin, ArrowRight, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -137,7 +138,7 @@ function Info({ icon: Icon, title, value, href }) {
   const content = (
     <>
       <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
-        <Icon className="w-5 h-5 text-[#15803D]" />
+        {createElement(Icon, {className: "w-5 h-5 text-[#15803D]"})}
       </div>
 
       <div>

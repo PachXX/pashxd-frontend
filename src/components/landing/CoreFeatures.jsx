@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import {
   ShoppingCart,
   Network,
@@ -43,7 +44,7 @@ export default function CoreFeatures() {
           </h2>
 
           <p className="text-slate-500 max-w-2xl mx-auto text-base md:text-lg">
-            PashxD combines procurement, execution, and AI intelligence into a seamless operational engine.
+            Pashx Dashboard combines procurement, execution, and AI intelligence into a seamless operational engine.
           </p>
         </div>
 
@@ -52,6 +53,7 @@ export default function CoreFeatures() {
           {tabs.map((tab) => (
             <button
               key={tab.id}
+              aria-pressed={active === tab.id}
               onClick={() => setActive(tab.id)}
               className={`pb-4 text-sm font-medium transition whitespace-nowrap ${
                 active === tab.id
@@ -64,13 +66,13 @@ export default function CoreFeatures() {
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div key={active} className="px-panel-enter grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
 
           {/* LEFT */}
           <div>
             <p className="text-slate-400 mb-6 md:mb-8 text-sm">
               {active === "procurement" && "From order to invoice — automated"}
-              {active === "execution" && "Projects delivered — on time, on budget"}
+              {active === "execution" && "Track project progress, responsibilities, and budgets"}
               {active === "ai" && "Decisions powered by data, not guesswork"}
             </p>
 
@@ -95,8 +97,8 @@ export default function CoreFeatures() {
 
               {active === "ai" && (
                 <>
-                  <Card icon={Brain} title="Delay Prediction" desc="Predict project delays before they happen." />
-                  <Card icon={TrendingDown} title="Cost Overrun Detection" desc="Detect cost overruns instantly." />
+                  <Card icon={Brain} title="Delay Prediction" desc="Surface potential delays for your team to review." />
+                  <Card icon={TrendingDown} title="Cost Overrun Detection" desc="Review budget exceptions as project data changes." />
                   <Card icon={UserCheck} title="Smart Supplier Recs" desc="AI-powered vendor selection." />
                   <Card icon={Zap} title="Workflow Automation" desc="Automate approvals and operations." />
                 </>
@@ -119,10 +121,10 @@ export default function CoreFeatures() {
 
 /* ============ CARD ============ */
 
-function Card({ icon: Icon, title, desc }) {
+function Card({ icon: _Icon, title, desc }) {
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 hover:shadow-lg hover:border-green-200 transition-all duration-300 hover:-translate-y-1">
-      <Icon className="w-5 h-5 text-[#15803D] mb-3 md:mb-4" />
+      {createElement(_Icon, {className: "w-5 h-5 text-[#15803D] mb-3 md:mb-4"})}
       <h4 className="font-semibold text-[#0A2540] mb-2 text-sm md:text-base">{title}</h4>
       <p className="text-xs md:text-sm text-slate-500 leading-relaxed">{desc}</p>
     </div>
@@ -195,7 +197,7 @@ function AIDashboard() {
     <DashboardWrapper title="AI Intelligence Panel">
       <KPIGrid
         items={[
-          { label: "PREDICTIONS", value: "1,247", sub: "98.2% accuracy", color: "yellow" },
+          { label: "PREDICTIONS", value: "1,247", sub: "Sample predictions", color: "yellow" },
           { label: "ALERTS RESOLVED", value: "342", sub: "This month", color: "yellow" },
           { label: "COST SAVED", value: "$2.1M", sub: "AI-detected", color: "yellow" },
         ]}
@@ -215,7 +217,7 @@ function AIDashboard() {
 function DashboardWrapper({ title, children }) {
   return (
     <div className="bg-[#0B0F14] rounded-2xl p-4 md:p-6 w-full max-w-[580px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/5">
-      <div className="text-slate-400 text-xs mb-4">{title}</div>
+      <div className="text-slate-400 text-xs mb-4">{title} · Illustrative demo</div>
       {children}
     </div>
   );

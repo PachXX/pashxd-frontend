@@ -67,11 +67,12 @@ export function trackCalendlyOpen(location) {
 }
 
 /** The ROI calculator produced a figure — a strong intent signal. */
-export function trackRoiCalculated({ orders, suppliers, annualSaving }) {
+export function trackRoiCalculated({ currency, annualNetValue, annualCost, coordinationHours }) {
   send(EVENT.ROI_CALCULATED, {
-    orders_per_month: orders,
-    supplier_count: suppliers,
-    annual_saving: annualSaving,
+    currency,
+    annual_net_value: annualNetValue,
+    annual_cost: annualCost,
+    coordination_hours_per_month: coordinationHours,
   });
 }
 

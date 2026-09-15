@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import Container from "../components/layout/Container";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext-shared.js";
 import logo from "../assets/logos/pashxd-logo2.jpg";
 
 export default function LoginPage() {

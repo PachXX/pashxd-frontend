@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import {
   ShoppingCart,
   LayoutDashboard,
@@ -16,7 +17,7 @@ import {
 } from "lucide-react";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 import Container from "../layout/Container";
-import pashxdLogo from "../../assets/logos/pashxd-logo2.jpg";
+import BrandMark from "../BrandMark";
 
 const projectTypes = [
   { icon: Store, label: "Retail" },
@@ -118,7 +119,7 @@ export default function SolutionSection() {
           </h2>
 
           <p className="reveal reveal-delay-1 text-slate-500 text-base md:text-lg leading-relaxed">
-            From retail fit-outs to energy infrastructure — PashxD adapts to your workflow.
+            From retail fit-outs to energy infrastructure — Pashx Dashboard adapts to your workflow.
             Every project type, every operation, connected through one intelligent platform.
           </p>
         </div>
@@ -134,7 +135,7 @@ export default function SolutionSection() {
                 Project Types
               </h3>
               <span className="text-[10px] uppercase tracking-[0.2em] text-[#15803D] font-semibold bg-green-50 border border-green-100 px-2.5 py-1 rounded-full">
-                10+ Verticals
+                Project workflows
               </span>
             </div>
 
@@ -143,7 +144,7 @@ export default function SolutionSection() {
               {projectTypes.map((type, i) => (
                 <div
                   key={type.label}
-                  className="type-card group flex flex-col items-center justify-center gap-2.5 bg-slate-50 hover:bg-green-50 border border-slate-100 hover:border-green-200 rounded-xl py-5 md:py-6 transition-all duration-300 cursor-pointer hover:-translate-y-1 hover:shadow-md"
+                  className="type-card group flex flex-col items-center justify-center gap-2.5 bg-slate-50 hover:bg-green-50 border border-slate-100 hover:border-green-200 rounded-xl py-5 md:py-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
                   style={{ animationDelay: `${i * 60}ms` }}
                 >
                   <div className="relative">
@@ -162,7 +163,7 @@ export default function SolutionSection() {
             {/* Connected indicator */}
             <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-center gap-2 text-xs text-slate-500">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span>All verticals unified on PashxD</span>
+              <span>All verticals unified on Pashx Dashboard</span>
             </div>
 
           </div>
@@ -230,16 +231,12 @@ export default function SolutionSection() {
                 </circle>
               </svg>
 
-              {/* Central PashxD Hub */}
+              {/* Central Pashx Dashboard Hub */}
               <div className="relative z-10 group solution-hub-ring">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400/40 to-green-600/20 blur-2xl scale-150" />
 
-                <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-2 shadow-[0_0_40px_rgba(21,128,61,0.3),0_20px_40px_rgba(0,0,0,0.08)] border border-green-100">
-                  <img
-                    src={pashxdLogo}
-                    alt="PashxD"
-                    className="w-full h-full object-cover rounded-full"
-                  />
+                <div aria-label="Pashx Dashboard" className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-2 shadow-[0_0_40px_rgba(21,128,61,0.3),0_20px_40px_rgba(0,0,0,0.08)] border border-green-100">
+                  <BrandMark className="w-full h-full" />
                 </div>
               </div>
 
@@ -273,11 +270,11 @@ export default function SolutionSection() {
 
 /* ===== Satellite Helper ===== */
 
-function Satellite({ icon: Icon, label }) {
+function Satellite({ icon: _Icon, label }) {
   return (
     <div className="flex flex-col items-center gap-1.5 group">
       <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110 group-hover:border-green-300 group-hover:shadow-[0_0_25px_rgba(34,197,94,0.4)]">
-        <Icon className="w-5 h-5 md:w-6 md:h-6 text-[#15803D]" />
+        {createElement(_Icon, {className: "w-5 h-5 md:w-6 md:h-6 text-[#15803D]"})}
       </div>
       <span className="text-[10px] md:text-xs font-semibold text-[#0A2540] whitespace-nowrap bg-white/80 backdrop-blur px-2 py-0.5 rounded-full">
         {label}

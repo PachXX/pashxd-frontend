@@ -57,7 +57,7 @@ export default function TrustStrip() {
       </Container>
       <Container className="text-center mb-10 md:mb-14">
         <p className="text-sm text-slate-400 max-w-xl mx-auto">
-          Your system of record stays where it is. PashX syncs approved actions
+          Your system of record stays where it is. Pashx Dashboard syncs approved actions
           out to it.
         </p>
       </Container>

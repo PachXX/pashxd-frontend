@@ -34,7 +34,7 @@ function ScrollToTop() {
     // it — the browser's own hash handling has already been pre-empted by the
     // router — so honour the target when there is one.
     if (hash) {
-      const target = document.querySelector(hash);
+      const target = document.getElementById(hash.slice(1));
       if (target) {
         target.scrollIntoView({ behavior: "smooth", block: "start" });
         logPageView(pathname);
@@ -80,6 +80,7 @@ export function AppRoutes() {
         <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
         <Route path="/industries" element={<Layout><IndustriesPage /></Layout>} />
         <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+        <Route path="/blog" element={<Layout><ResourcesPage /></Layout>} />
         <Route path="/resources" element={<Layout><ResourcesPage /></Layout>} />
         <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
         <Route path="/marketplace" element={<Layout><MarketplacePage /></Layout>} />

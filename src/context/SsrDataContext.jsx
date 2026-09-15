@@ -1,4 +1,5 @@
-import { createContext, useContext } from "react";
+import { SsrDataContext } from './SsrDataContext-shared.js';
+import { } from "react";
 
 /**
  * SSR data channel between the build-time prerenderer (src/entry-server.jsx)
@@ -16,7 +17,7 @@ import { createContext, useContext } from "react";
  * BlogPostPage), so hydration starts from the exact markup the server sent
  * instead of blanking it with a spinner.
  */
-export const SsrDataContext = createContext(null);
+
 
 export function SsrDataProvider({ value, children }) {
   return (
@@ -27,13 +28,6 @@ export function SsrDataProvider({ value, children }) {
 }
 
 /** The blog post payload supplied for the currently rendered route, if any. */
-export function useSsrBlogPost() {
-  const ctx = useContext(SsrDataContext);
-  return ctx && ctx.blogPost ? ctx.blogPost : null;
-}
+
 
 /** The blog index (list of posts) supplied for routes that render the grid. */
-export function useSsrBlogList() {
-  const ctx = useContext(SsrDataContext);
-  return ctx && Array.isArray(ctx.blogPosts) ? ctx.blogPosts : null;
-}

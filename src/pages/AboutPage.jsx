@@ -17,7 +17,7 @@ const values = [
   {
     icon: Users,
     title: "Built for Teams",
-    desc: "PashxD is designed for the people who actually do the work -- site teams, procurement managers, project leads.",
+    desc: "Pashx Dashboard is designed for the people who actually do the work -- site teams, procurement managers, project leads.",
   },
   {
     icon: Globe,
@@ -31,7 +31,7 @@ const team = [
     name: "Shahil Mohideen",
     role: "Founder & CEO",
     image: shahil,
-    desc: "Founder of PashxD, focused on transforming physical operations through AI-driven systems, automation, and scalable enterprise infrastructure.",
+    desc: "Founder of Pashx Dashboard, focused on transforming physical operations through AI-driven systems, automation, and scalable enterprise infrastructure.",
   },
 ];
 
@@ -39,7 +39,7 @@ const milestones = [
   {
     year: "2024",
     event:
-      "PashxD founded with a vision to unify procurement, execution, and AI for physical operations.",
+      "Pashx Dashboard founded with a vision to unify procurement, execution, and AI for physical operations.",
   },
   {
     year: "Today",
@@ -54,8 +54,8 @@ export default function AboutPage() {
   return (
           <div ref={ref} className="pt-20 md:pt-24">
       <SEOHead
-        title="About PashxD | Our Mission, Team & Story"
-        description="Learn about PashxD's mission to bring AI-powered operations to industrial teams worldwide. Meet the team building the future of industrial OS."
+        title="About Pashx Dashboard | Our Mission, Team & Story"
+        description="Learn about Pashx Dashboard's mission to bring AI-powered operations to industrial teams worldwide. Meet the team building the future of industrial OS."
         path="/about"
       />
 
@@ -64,7 +64,7 @@ export default function AboutPage() {
         <Container>
 
           <p className="reveal text-xs md:text-sm font-semibold tracking-[0.25em] text-[#15803D] uppercase mb-5 md:mb-6">
-            About PashxD
+            About Pashx Dashboard
           </p>
 
           <h1 className="reveal text-3xl sm:text-4xl md:text-[3.5rem] leading-[1.15] font-extrabold text-[#0A2540] tracking-tight max-w-4xl mx-auto mb-5 md:mb-6">
@@ -98,7 +98,7 @@ export default function AboutPage() {
               </h2>
 
               <p className="text-slate-500 mb-4 leading-relaxed">
-                PashxD was born when our founders experienced firsthand the painful fragmentation of managing large-scale physical operations. Procurement in spreadsheets, execution in disconnected tools, and decisions based on outdated data.
+                Pashx Dashboard was born when our founders experienced firsthand the painful fragmentation of managing large-scale physical operations. Procurement in spreadsheets, execution in disconnected tools, and decisions based on outdated data.
               </p>
 
               <p className="text-slate-500 leading-relaxed">

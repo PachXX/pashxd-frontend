@@ -8,7 +8,7 @@ import {
   trackDemoError,
   trackCalendlyOpen,
 } from "../analytics/events";
-const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+const API = ''; // Same-origin proxy in local previews and production.
 const companySizes = [
   "1-10 employees",
   "11-50 employees",
@@ -68,7 +68,7 @@ export default function BookDemoPage() {
        name: formData.name,
        email: formData.email,
        company: formData.company,
-       role: formData.companySize || "",
+       company_size: formData.companySize || "",
        industry: formData.industry || "",
        message: formData.message || "",
        phone: formData.phone || "", // ✅ added
@@ -86,8 +86,7 @@ export default function BookDemoPage() {
        throw new Error("Submission failed");
      }
 
-     const data = await response.json();
-     console.log("[BookDemo] Submitted:", data);
+     await response.json();
 
      // The conversion. Fired after the server accepted the lead, not on click,
      // so the GA4 number means "we have this lead" rather than "someone pressed
@@ -112,8 +111,8 @@ export default function BookDemoPage() {
     return (
             <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
       <SEOHead
-        title="Book a Free Demo | PashxD"
-        description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
+        title="Book a Free Demo | Pashx Dashboard"
+        description="Schedule a free personalized demo of Pashx Dashboard's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
         path="/book-demo"
       />
         <Container className="max-w-3xl">
@@ -131,7 +130,7 @@ export default function BookDemoPage() {
             </h1>
 
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto">
-              We've received your details. Pick a time below that works for you -- our team will walk you through how PashxD fits your workflow.
+              We've received your details. Pick a time below that works for you -- our team will walk you through how Pashx Dashboard fits your workflow.
             </p>
           </div>
 
@@ -169,8 +168,8 @@ export default function BookDemoPage() {
           receives — shipped with no title or description. Both branches must
           carry it. */}
       <SEOHead
-        title="Book a Free Demo | PashxD"
-        description="Schedule a free personalized demo of PashxD's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
+        title="Book a Free Demo | Pashx Dashboard"
+        description="Schedule a free personalized demo of Pashx Dashboard's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
         path="/book-demo"
       />
       <Container className="max-w-5xl">
@@ -184,7 +183,7 @@ export default function BookDemoPage() {
             </p>
 
             <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2540] leading-[1.1] mb-5">
-              See PashxD in{" "}
+              See Pashx Dashboard in{" "}
               <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                 action.
               </span>

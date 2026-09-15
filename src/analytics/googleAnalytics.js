@@ -1,5 +1,5 @@
 // Google Analytics setup
-export const GA_MEASUREMENT_ID = 'G-310NXQ8H2H'; // Replace with your actual ID
+export const GA_MEASUREMENT_ID = 'G-310NXQ8H2H';
 
 // Initialize GA
 export const initGA = () => {
@@ -9,16 +9,23 @@ export const initGA = () => {
       window.dataLayer.push(arguments);
     }
     gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID);
+    gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
   }
 };
 
-// Track page views
+// Track each route once, including React StrictMode's repeated mount effect.
+let lastPagePath;
 export const logPageView = (url) => {
-  if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', GA_MEASUREMENT_ID, {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function' || lastPagePath === url) return;
+  try {
+    window.gtag('event', 'page_view', {
       page_path: url,
+      page_location: window.location.origin + url,
+      send_to: GA_MEASUREMENT_ID,
     });
+    lastPagePath = url;
+  } catch {
+    // Tracking must not stop navigation when an extension blocks the tag.
   }
 };
 

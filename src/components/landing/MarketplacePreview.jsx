@@ -96,7 +96,7 @@ export default function MarketplacePreview() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
               </span>
               <span className="text-green-400 text-xs font-semibold tracking-widest uppercase">
-                Marketplace is Live
+                Pashx Dashboard Marketplace
               </span>
             </div>
 
@@ -111,9 +111,8 @@ export default function MarketplacePreview() {
 
             {/* Description - UPDATED */}
             <p className="text-slate-400 text-base sm:text-lg md:text-xl leading-relaxed mb-6 sm:mb-8 max-w-lg">
-              PashxD Marketplace connects you with verified vendors across
-              10 countries. Submit one RFQ and receive 3-5 competitive quotes
-              within 48 hours — compare pricing, quality, and delivery in one place.
+              Explore materials and supplier options for your projects. Bring specifications,
+              quantities, and delivery requirements into one sourcing conversation.
             </p>
 
             {/* CTA Buttons */}
@@ -137,15 +136,15 @@ export default function MarketplacePreview() {
             <div className="flex flex-wrap gap-4 sm:gap-6 text-xs sm:text-sm text-slate-500">
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-green-500 flex-shrink-0" />
-                <span>KYB Verified</span>
+                <span>Supplier details</span>
               </div>
               <div className="flex items-center gap-2">
                 <CreditCard className="w-4 h-4 text-green-500 flex-shrink-0" />
-                <span>Escrow Protected</span>
+                <span>Payment terms</span>
               </div>
               <div className="flex items-center gap-2">
                 <BadgeCheck className="w-4 h-4 text-green-500 flex-shrink-0" />
-                <span>Quality Certified</span>
+                <span>Specifications</span>
               </div>
             </div>
           </div>
@@ -153,6 +152,7 @@ export default function MarketplacePreview() {
           {/* Right — Dashboard Preview Card */}
           <div className="mt-8 lg:mt-0">
             <div className="bg-white/[0.04] border border-white/[0.06] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 backdrop-blur-sm">
+              <p className="text-xs text-green-300 mb-4">Illustrative marketplace preview · sample products and prices</p>
               {/* Mini search bar */}
               <div className="flex items-center gap-2 sm:gap-3 bg-white/[0.06] border border-white/[0.08] rounded-lg sm:rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 mb-4 sm:mb-6">
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 text-slate-500 flex-shrink-0" />
@@ -239,24 +239,24 @@ export default function MarketplacePreview() {
               <div className="grid grid-cols-3 gap-2 sm:gap-3">
                 <div className="bg-white/[0.04] rounded-md sm:rounded-lg p-2 sm:p-3 text-center border border-white/[0.05]">
                   <div className="text-green-400 text-base sm:text-lg font-bold">
-                    <CountUp target={25} suffix="+" />
+                    <CountUp target={8} />
                   </div>
                   <div className="text-slate-500 text-[9px] sm:text-[10px] uppercase tracking-wider">
-                    Vendors
+                    Categories
                   </div>
                 </div>
                 <div className="bg-white/[0.04] rounded-md sm:rounded-lg p-2 sm:p-3 text-center border border-white/[0.05]">
                   <div className="text-green-400 text-base sm:text-lg font-bold">
-                    <CountUp target={1000} suffix="+" />
+                    <CountUp target={3} />
                   </div>
                   <div className="text-slate-500 text-[9px] sm:text-[10px] uppercase tracking-wider">
-                    Products
+                    Sourcing steps
                   </div>
                 </div>
                 <div className="bg-white/[0.04] rounded-md sm:rounded-lg p-2 sm:p-3 text-center border border-white/[0.05]">
-                  <div className="text-green-400 text-base sm:text-lg font-bold">48h</div>
+                  <div className="text-green-400 text-base sm:text-lg font-bold">RFQ</div>
                   <div className="text-slate-500 text-[9px] sm:text-[10px] uppercase tracking-wider">
-                    Quote Time
+                    Supplier quotes
                   </div>
                 </div>
               </div>
@@ -286,8 +286,8 @@ export default function MarketplacePreview() {
             },
             {
               icon: Truck,
-              title: "48h Multi-Quote",
-              desc: "Submit one RFQ, get 3-5 competitive quotes from verified vendors within 48 hours",
+              title: "Supplier Quotes",
+              desc: "Share specifications and requested delivery dates with suppliers",
               color: "text-amber-400",
               bg: "bg-amber-500/10",
               border: "border-amber-500/15",
@@ -295,7 +295,7 @@ export default function MarketplacePreview() {
             {
               icon: CreditCard,
               title: "Flexible Payment",
-              desc: "Net 30/60/90 credit lines, escrow protection, and auto-matched invoices",
+              desc: "Confirm payment and invoicing terms with your chosen supplier",
               color: "text-purple-400",
               bg: "bg-purple-500/10",
               border: "border-purple-500/15",
@@ -331,13 +331,12 @@ export default function MarketplacePreview() {
               <h3 className="text-white font-bold text-base sm:text-lg">For Buyers</h3>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
-              Stop wasting days on phone calls and quote cycles. Browse verified
-              products, compare prices instantly, and order with delivery
-              guaranteed to your site.
+              Explore materials for your project and compare supplier options. Confirm
+              specifications, availability, and delivery terms before ordering.
             </p>
             <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
               {[
-                "Submit one RFQ — receive 3-5 quotes in 48 hours",
+                "Prepare your quantities and delivery requirements",
                 "Compare prices, quality, and delivery side-by-side",
                 "Direct vendor contact after quote acceptance",
               ].map((item) => (
@@ -370,15 +369,14 @@ export default function MarketplacePreview() {
               </h3>
             </div>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-6">
-              Get a digital storefront and reach thousands of project buyers
-              across Europe, Middle East & India. PashxD handles logistics,
-              payments, and buyer acquisition.
+              Talk to the Pashx Dashboard team about listing your products and connecting
+              with project buyers. Agree on service areas and fulfilment terms.
             </p>
             <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
               {[
-                "List products and start selling in minutes",
-                "Access buyers across 10 countries",
-                "Automated payments and analytics dashboard",
+                "Discuss your product catalogue",
+                "Define your delivery coverage",
+                "Confirm order and payment workflows",
               ].map((item) => (
                 <li
                   key={item}
@@ -402,7 +400,7 @@ export default function MarketplacePreview() {
         {/* ══════════════ COUNTRIES STRIP ══════════════ */}
         <div className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-6 gap-y-2 sm:gap-y-3">
           <span className="text-slate-600 text-[10px] sm:text-xs uppercase tracking-widest font-semibold">
-            Available in
+            Markets of interest
           </span>
           {[
             "UAE",

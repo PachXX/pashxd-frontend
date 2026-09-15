@@ -1,16 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { updateConsent } from "../analytics/googleAnalytics";
+
+const subscribe = () => () => {};
 
 const STORAGE_KEY = "pashxd_cookie_consent";
 
 export default function CookieConsentBanner() {
-  const [visible, setVisible] = useState(false);
+  const mounted = useSyncExternalStore(subscribe, () => true, () => false);
+  const [dismissed, setDismissed] = useState(false);
+  const visible = mounted && !dismissed && !localStorage.getItem(STORAGE_KEY);
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      setVisible(true);
-    } else {
+    if (stored) {
       // Re-apply saved decision on every page load so GA consent state
       // is always in sync even after a hard refresh.
       updateConsent(stored === "accepted");
@@ -20,13 +22,13 @@ export default function CookieConsentBanner() {
   function accept() {
     localStorage.setItem(STORAGE_KEY, "accepted");
     updateConsent(true);
-    setVisible(false);
+    setDismissed(true);
   }
 
   function decline() {
     localStorage.setItem(STORAGE_KEY, "declined");
     updateConsent(false);
-    setVisible(false);
+    setDismissed(true);
   }
 
   if (!visible) return null;

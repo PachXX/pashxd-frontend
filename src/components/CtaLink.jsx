@@ -49,7 +49,7 @@ export default function CtaLink({
   const text = label ?? (typeof children === "string" ? children : "");
 
   const handleClick = (event) => {
-    trackCtaClick(location, text, to);
+    trackCtaClick(location, text || event.currentTarget.textContent?.trim() || to, to);
     onClick?.(event);
   };
 

@@ -3,12 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Container from "../components/layout/Container";
 import SEOHead from "../components/SEOHead";
-import { useSsrBlogPost } from "../context/SsrDataContext.jsx";
+import { useSsrBlogPost } from "../context/SsrDataContext-shared.js";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import "../styles/blog-content.css";
+import { fetchBlogJson, blogDate, blogAuthor } from "../lib/blog";
 
-const API = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
+
 
 /**
  * Article bodies (custom_html) carry their own <h1 class="post-title"> — the
@@ -71,37 +72,32 @@ export default function BlogPostPage() {
   // the browser the same payload is read back from the inlined <script> tag,
   // so hydration starts from identical markup (no spinner flash, no refetch).
   const ssrPost = useSsrBlogPost();
-  const [post, setPost] = useState(() => ssrPost || readEmbeddedBlogPost());
-  const [loading, setLoading] = useState(() => !(ssrPost || post));
-  const [error, setError] = useState(false);
+  const [storedPost, setPost] = useState(() => {
+    const initial = ssrPost || readEmbeddedBlogPost();
+    return initial?.slug === slug ? initial : null;
+  });
+  const [request, setRequest] = useState({ slug, loading: !storedPost, error: null });
+  const [retry, setRetry] = useState(0);
+  const post = storedPost?.slug === slug ? storedPost : null;
+  const loading = !post && (request.slug !== slug || request.loading);
+  const error = request.slug === slug ? request.error : null;
 
   useEffect(() => {
-    // Already have content for this slug (SSR payload or embedded data).
-    if (post && post.slug === slug) return;
-    // Prerendered blog HTML never boots with a slug mismatch, so any slug
-    // change here is a real client-side navigation: clear and refetch.
-    setPost(null);
-    setLoading(true);
-    setError(false);
-    fetchPost();
-  }, [slug]);
-
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`${API}/api/blogs/${slug}`);
-      if (!response.ok) {
-        setError(true);
-        return;
-      }
-      const data = await response.json();
+    const controller = new AbortController();
+    // Revalidate even when static HTML supplied the post: admin edits and
+    // unpublishing must be reflected without waiting for another site build.
+    fetchBlogJson(encodeURIComponent(slug), controller.signal).then(data => {
+      if (controller.signal.aborted) return;
+      if (data.slug !== slug) throw new Error('Article response did not match its URL');
       setPost(data);
-    } catch (error) {
-      console.error('Failed to fetch blog post:', error);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
+      setRequest({ slug, loading: false, error: null });
+    }).catch(err => {
+      if (controller.signal.aborted) return;
+      if (err.status === 404) setPost(null);
+      setRequest({ slug, loading: false, error: err.status === 404 ? 'missing' : 'network' });
+    });
+    return () => controller.abort();
+  }, [slug, retry]);
 
   if (loading) {
     return (
@@ -114,13 +110,14 @@ export default function BlogPostPage() {
     );
   }
 
-  if (error || !post) {
+  if (!post) {
     return (
       <div className="min-h-screen pt-32 flex items-center justify-center">
-        <SEOHead title="Article Not Found — PashxD" description="This article doesn't exist." path={`/blog/${slug}`} noIndex />
+        <SEOHead title={error === 'network' ? "Article temporarily unavailable | Pashx Dashboard" : "Article Not Found | Pashx Dashboard"} description="Explore articles from Pashx Dashboard." path={`/blog/${slug}`} noIndex />
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#0A2540] mb-4">Article Not Found</h1>
-          <p className="text-slate-500 mb-8">The article you're looking for doesn't exist.</p>
+          <h1 className="text-4xl font-bold text-[#0A2540] mb-4">{error === 'network' ? 'Unable to load this article' : 'Article not found'}</h1>
+          <p className="text-slate-500 mb-8">{error === 'network' ? 'Please try again. There may be a temporary connection problem.' : 'This article may have been removed or is no longer published.'}</p>
+          {error === 'network' && <button className="block mx-auto mb-6 text-brand-green underline" onClick={() => { setRequest({ slug, loading: true, error: null }); setRetry(n => n + 1); }}>Try again</button>}
           <Link
             to="/resources"
             className="inline-flex items-center gap-2 text-[#15803D] font-semibold hover:underline"
@@ -134,38 +131,39 @@ export default function BlogPostPage() {
   }
 
   const metaDescription =
-    post.meta_description || post.excerpt || `${post.title}. Analysis and practical guidance from PashxD.`;
+    post.meta_description || post.excerpt || `${post.title}. Analysis and practical guidance from Pashx Dashboard.`;
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     "headline": post.meta_title || post.title,
     "description": metaDescription,
-    "image": post.cover_image || undefined,
-    "datePublished": post.created_at,
+    "image": post.og_image || post.cover_image || undefined,
+    "datePublished": post.published_at || post.created_at,
     "dateModified": post.updated_at || post.created_at,
-    "author": { "@type": "Person", "name": post.author || "PashxD Team" },
+    "author": { "@type": blogAuthor(post.author) === "Pashx Dashboard Team" ? "Organization" : "Person", "name": blogAuthor(post.author) },
     "publisher": {
       "@type": "Organization",
-      "name": "PashxD",
+      "name": "Pashx Dashboard",
       "logo": { "@type": "ImageObject", "url": "https://pashx.com/og-image.png" },
     },
     "mainEntityOfPage": { "@type": "WebPage", "@id": `https://pashx.com/blog/${post.slug}` },
   };
 
   return (
-    <div className="pt-20 md:pt-24 pb-20">
+    <div className="pt-28 md:pt-36 pb-20">
       <SEOHead
         title={post.meta_title || post.title}
         description={metaDescription}
         path={`/blog/${post.slug}`}
-        image={post.cover_image || undefined}
+        image={post.og_image || post.cover_image || undefined}
         type="article"
-        publishedTime={post.created_at}
+        publishedTime={post.published_at || post.created_at}
         modifiedTime={post.updated_at}
-        author={post.author || "PashxD Team"}
+        author={blogAuthor(post.author)}
         jsonLd={jsonLd}
       />
+      {error === 'network' && <Container><p role="status" className="mb-6 text-sm text-amber-800">Showing the last available version. <button className="underline" onClick={() => setRetry(n => n + 1)}>Retry update</button></p></Container>}
       {/* Back Button */}
       <Container className="mb-8">
         <Link
@@ -178,7 +176,7 @@ export default function BlogPostPage() {
       </Container>
 
       {/* Hero */}
-      <Container className="max-w-4xl">
+      <Container className="!max-w-4xl">
         {/* Category & Meta */}
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           {post.category && (
@@ -188,11 +186,7 @@ export default function BlogPostPage() {
           )}
           <span className="text-sm text-slate-500 flex items-center gap-1.5">
             <Calendar className="w-4 h-4" />
-            {new Date(post.created_at).toLocaleDateString('en-US', {
-              month: 'long',
-              day: 'numeric',
-              year: 'numeric'
-            })}
+            <time dateTime={post.published_at || post.created_at}>{blogDate(post.published_at || post.created_at)}</time>
           </span>
           {post.reading_time && (
             <span className="text-sm text-slate-500 flex items-center gap-1.5">
@@ -214,6 +208,11 @@ export default function BlogPostPage() {
           </p>
         )}
 
+        <div className="mb-8 border-y border-slate-200 py-5 text-sm">
+          <p className="font-semibold text-brand-navy">By {blogAuthor(post.author)}</p>
+          {post.author_bio && <p className="mt-2 max-w-2xl leading-relaxed text-slate-600">{post.author_bio}</p>}
+          {post.updated_at && blogDate(post.updated_at) !== blogDate(post.published_at || post.created_at) && <p className="mt-2 text-xs text-slate-500">Updated <time dateTime={post.updated_at}>{blogDate(post.updated_at)}</time></p>}
+        </div>
         {/* Cover Image */}
         {post.cover_image && (
           <div className="mb-12 rounded-2xl overflow-hidden shadow-xl">
@@ -277,13 +276,14 @@ export default function BlogPostPage() {
           </div>
         )}
 
+        <div className="mt-10 text-sm text-slate-600 border-t border-slate-200 pt-6">Questions or corrections? <Link to="/contact" className="text-brand-green underline">Contact our team</Link>. <Link to="/resources" className="text-brand-green underline">Read more articles</Link>.</div>
         {/* CTA */}
         <div className="mt-16 p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border border-green-200">
           <h3 className="text-xl font-bold text-[#0A2540] mb-3">
             Ready to transform your operations?
           </h3>
           <p className="text-slate-600 mb-6">
-            See how PashxD can help streamline your procurement and execution workflows.
+            See how Pashx Dashboard can help streamline your procurement and execution workflows.
           </p>
           <Link
             to="/book-demo"

@@ -1,12 +1,14 @@
-import { createContext, useContext, useState, useEffect } from "react";
+const BASE_URL = '';
+import { AuthContext } from './AuthContext-shared.js';
+import { useState, useEffect } from "react";
 
-const AuthContext = createContext(null);
+
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const BASE_URL = import.meta.env.VITE_API_URL || "https://pashxd-backend.onrender.com";
+
 
   useEffect(() => {
     // Session lives in an httpOnly cookie (new backend). TRANSITIONAL: also
@@ -54,8 +56,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-export function useAuth() {
-  return useContext(AuthContext);
 }

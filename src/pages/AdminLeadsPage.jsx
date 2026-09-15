@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API = import.meta.env.VITE_API_URL;
+const API = '';
 
 export default function AdminLeadsPage() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ export default function AdminLeadsPage() {
 
   // 📡 Fetch leads — auth via httpOnly cookie (+ transitional Bearer);
   // 401/403 sends us to login (old backend answers 403 when unauthenticated)
-  const fetchLeads = async () => {
+  const fetchLeads = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       const res = await fetch(`${API}/api/demo-requests`, {
@@ -36,11 +36,13 @@ export default function AdminLeadsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [navigate]);
 
   useEffect(() => {
-    fetchLeads();
-  }, []);
+    // Initial network request; state changes occur after the response.
+    const frame = requestAnimationFrame(() => fetchLeads());
+    return () => cancelAnimationFrame(frame);
+  }, [fetchLeads]);
 
   // ⏳ Loading state
   if (loading) {

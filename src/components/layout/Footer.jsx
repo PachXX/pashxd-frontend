@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Mail } from "lucide-react";
 import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
 import Container from "./Container";
-import logo from "../../assets/logos/pashxd-logo2.jpg";
+import BrandMark from "../BrandMark";
 
 export default function Footer() {
   return (
@@ -11,13 +11,13 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-12">
           <div className="col-span-2 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-5 md:mb-6">
-              <img src={logo} alt="PashxD" className="h-9 w-9 md:h-10 md:w-10 rounded-xl object-cover" />
+              <BrandMark className="h-10 w-10" />
               <span className="text-lg md:text-xl font-semibold text-[#0A2540]">
-                Pash<span className="text-green-600">xD</span>
+                PxD
               </span>
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-sm">
-              AI-Powered Industrial OS for real world operations with B2B Marketplace for Procurement.
+              Pashx Dashboard connects procurement, project execution, and AI for real-world operations.
             </p>
             <div className="flex gap-3 md:gap-4 mt-6 md:mt-8">
               <a href="https://www.linkedin.com/company/pashx-ai" target="_blank" rel="noopener noreferrer" className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-green-600 hover:border-green-200 transition" aria-label="LinkedIn">
@@ -56,8 +56,8 @@ export default function Footer() {
           <div className="md:col-span-2">
             <h4 className="text-xs tracking-[0.2em] text-green-600 font-semibold mb-4 md:mb-6">RESOURCES</h4>
             <ul className="space-y-3 md:space-y-4 text-sm text-slate-600">
-              <li><Link to="/resources" className="hover:text-green-600 transition">Documentation</Link></li>
-              <li><Link to="/resources" className="hover:text-green-600 transition">Case Studies</Link></li>
+              <li><Link to="/platform" className="hover:text-green-600 transition">Platform guide</Link></li>
+              <li><Link to="/product" className="hover:text-green-600 transition">Product overview</Link></li>
               <li><Link to="/resources" className="hover:text-green-600 transition">Blog</Link></li>
             </ul>
           </div>
@@ -73,7 +73,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-slate-200 mt-12 md:mt-16 pt-6 flex flex-col-reverse sm:flex-row justify-between items-start sm:items-center gap-4">
-          <p className="text-sm text-slate-400">© {new Date().getFullYear()} PashxD. All rights reserved.</p>
+          <p className="text-sm text-slate-400">© {new Date().getFullYear()} Pashx Dashboard. All rights reserved.</p>
           <div className="flex flex-wrap gap-4 md:gap-6 text-sm text-slate-400">
             <Link to="/privacy" className="hover:text-green-600 transition">Privacy Policy</Link>
             <Link to="/terms" className="hover:text-green-600 transition">Terms of Service</Link>

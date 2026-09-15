@@ -74,8 +74,8 @@ export default function IntegrationsSection() {
             </span>
           </h2>
           <p className="text-base text-slate-500 md:text-lg">
-            Autopilot does not ask your suppliers to change how they contact you,
-            and it does not ask you to change your system of record.
+            Pashx Dashboard works with the channels your suppliers already use,
+            and connects approved records to your existing systems.
           </p>
         </div>
 

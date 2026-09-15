@@ -1,120 +1,61 @@
+import { useEffect, useRef } from "react";
+import { ArrowRight } from "lucide-react";
 import SEOHead from "../components/SEOHead";
+import Container from "../components/layout/Container";
+import CtaLink from "../components/CtaLink";
 import HeroSection from "../components/landing/HeroSection.jsx";
 import TrustStrip from "../components/landing/TrustStrip.jsx";
-import ProblemSection from "../components/landing/ProblemSection.jsx";
-import AutopilotFlow from "../components/landing/AutopilotFlow.jsx";
-import ExceptionCockpit from "../components/landing/ExceptionCockpit.jsx";
-import WorkflowsSection from "../components/landing/WorkflowsSection.jsx";
-import IntegrationsSection from "../components/landing/IntegrationsSection.jsx";
-import ROICalculator from "../components/landing/ROICalculator.jsx";
-import SecuritySection from "../components/landing/SecuritySection.jsx";
+import HowItWorks from "../components/landing/HowItWorks.jsx";
 import IndustriesPreview from "../components/landing/IndustriesPreview.jsx";
-import ProofSection from "../components/landing/ProofSection.jsx";
-import FAQSection from "../components/landing/FAQSection.jsx";
-import CTASection from "../components/landing/CTASection.jsx";
+import IntegrationsSection from "../components/landing/IntegrationsSection.jsx";
 
-/**
- * Homepage.
- *
- * Reordered around one workflow claim instead of a platform category. The page
- * now argues in sequence: here is the promise (hero) → here is the day you
- * actually have (problem) → here is the mechanism (flow) → here is why it is
- * safe (cockpit) → here is exactly what ships (workflows) → here is how it
- * reaches your systems (integrations) → here is what it is worth (ROI) → here
- * is what finance will ask (security) → who it is for (industries) → what we
- * will and will not claim (proof) → objections (FAQ) → close.
- *
- * Removed from the homepage rather than deleted:
- *  - SolutionSection / CoreFeatures / HowItWorks: the "Industrial OS, three
- *    pillars" story. It is the destination, not the doorway, and it now lives
- *    on /platform where a buyer who wants the full scope can find it.
- *  - MarketplacePreview: still at /marketplace. On the homepage it introduced a
- *    second, unrelated business model halfway through the argument.
- *  - SocialProof: deleted outright. See ProofSection for why.
- */
+import ProblemSection from "../components/landing/ProblemSection.jsx";
+import SolutionSection from "../components/landing/SolutionSection.jsx";
+import CoreFeatures from "../components/landing/CoreFeatures.jsx";
+import ROICalculator from "../components/landing/ROICalculator.jsx";
+import MarketplacePreview from "../components/landing/MarketplacePreview.jsx";
+import SocialProof from "../components/landing/SocialProof.jsx";
 
-const AUTOPILOT_JSON_LD = {
+const JSON_LD = {
   "@context": "https://schema.org",
   "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://pashx.com/#organization",
-      name: "PashxD",
-      url: "https://pashx.com",
-      logo: "https://pashx.com/favicon-512x512.png",
-      description:
-        "PashX Autopilot captures operational requests from email, WhatsApp, documents and project systems, then coordinates suppliers, purchase orders, deliveries, invoices and exceptions for construction, industrial, infrastructure, retail and project-operations teams.",
-      sameAs: [
-        "https://www.linkedin.com/company/pashx-ai",
-        "https://www.instagram.com/pashx.ai",
-      ],
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://pashx.com/#website",
-      url: "https://pashx.com",
-      name: "PashxD",
-      publisher: { "@id": "https://pashx.com/#organization" },
-    },
-    {
-      // SoftwareApplication is what makes the page eligible to be understood as
-      // a product rather than a company brochure. No aggregateRating and no
-      // review nodes: we have no verifiable reviews, and inventing them is the
-      // structured-data version of the testimonials that were just removed.
-      "@type": "SoftwareApplication",
-      "@id": "https://pashx.com/#autopilot",
-      name: "PashX Autopilot",
-      applicationCategory: "BusinessApplication",
-      applicationSubCategory: "Procurement and project coordination automation",
-      operatingSystem: "Web",
-      url: "https://pashx.com",
-      publisher: { "@id": "https://pashx.com/#organization" },
-      description:
-        "PashX Autopilot turns fragmented operational communication into completed actions. It captures requests from email, WhatsApp, documents and forms, classifies and extracts them into structured data, matches them to suppliers, projects, BOQs, purchase orders, invoices and deliveries, follows up with suppliers and subcontractors, detects delays and mismatches, escalates exceptions for human approval, and syncs approved actions to connected systems with a full audit trail.",
-      featureList: [
-        "Intake from email, WhatsApp, documents and forms",
-        "Classification and structured field extraction",
-        "Matching to suppliers, projects, BOQs, purchase orders and deliveries",
-        "Automated supplier and subcontractor follow-up",
-        "Delay, price change, missing document and invoice mismatch detection",
-        "Confidence scoring with human approval for low-confidence actions",
-        "Exception management cockpit",
-        "Audit trail and system-of-record synchronisation",
-      ],
-      offers: {
-        "@type": "Offer",
-        // Priced per engagement; stating a number we do not publish would be
-        // worse than stating none. Availability signals it is a real product.
-        availability: "https://schema.org/InStock",
-        priceCurrency: "INR",
-      },
-    },
+    { "@type": "Organization", "@id": "https://pashx.com/#organization", name: "Pashx Dashboard", url: "https://pashx.com", logo: "https://pashx.com/favicon-512x512.png", description: "A connected workspace for procurement, project execution, and AI-assisted industrial operations.", sameAs: ["https://www.linkedin.com/company/pashx-ai", "https://www.instagram.com/pashx.ai"] },
+    { "@type": "WebSite", "@id": "https://pashx.com/#website", name: "Pashx Dashboard", url: "https://pashx.com", publisher: { "@id": "https://pashx.com/#organization" } },
+    { "@type": "SoftwareApplication", name: "Pashx Dashboard", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: "https://pashx.com", description: "Connect procurement, project execution, and AI-assisted coordination in one operational workspace.", publisher: { "@id": "https://pashx.com/#organization" } },
   ],
 };
-
 export default function Landing() {
+  const landingRef = useRef(null);
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const sections = landingRef.current.querySelectorAll('section:not(.os-hero)');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('px-section-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.02 });
+    sections.forEach(section => { section.classList.add('px-section-reveal'); observer.observe(section); });
+    return () => { observer.disconnect(); sections.forEach(section => section.classList.remove('px-section-reveal', 'px-section-visible')); };
+  }, []);
   return (
-    <div className="w-full overflow-x-hidden bg-white">
-      <SEOHead
-        title="PashX Autopilot — Procurement & Project Coordination on Autopilot"
-        description="PashX Autopilot turns procurement and project requests from email, WhatsApp, documents and systems into completed, coordinated actions — with human approval."
-        path="/"
-        jsonLd={AUTOPILOT_JSON_LD}
-      />
-
+    <div ref={landingRef} className="px-landing w-full bg-white">
+      <SEOHead title="Pashx Dashboard | The Operating System for Physical Operations" description="Connect procurement, project execution, and AI in one workspace. Pashx Dashboard brings orders, site updates, and operational decisions together." path="/" jsonLd={JSON_LD} />
       <HeroSection />
       <TrustStrip />
       <ProblemSection />
-      <AutopilotFlow />
-      <ExceptionCockpit />
-      <WorkflowsSection />
-      <IntegrationsSection />
+      <div id="platform" className="scroll-mt-24"><SolutionSection /></div>
+      <MarketplacePreview />
+      <CoreFeatures />
+      <div id="workflows" className="scroll-mt-24"><HowItWorks /></div>
       <ROICalculator />
-      <SecuritySection />
       <IndustriesPreview />
-      <ProofSection />
-      <FAQSection />
-      <CTASection />
+      <IntegrationsSection />
+      <SocialProof />
+      <section className="border-y border-slate-200 bg-slate-50 py-12"><Container className="flex flex-col sm:flex-row justify-between gap-6 sm:items-center"><div><p className="os-section-label">From the Pashx Dashboard journal</p><h2 className="text-2xl font-semibold text-brand-navy">Ideas for better-run operations.</h2><p className="text-slate-600 mt-3">Explore our latest articles on procurement, projects, and AI.</p></div><CtaLink to="/resources" location="homepage_blog" variant="secondary">Read the blog <ArrowRight size={16} /></CtaLink></Container></section>
+      <Container><section className="os-closing"><div><p className="os-section-label !text-green-300">Build with a connected operation</p><h2>Bring your next project<br />into one clear view.</h2><p>Walk us through your procurement and project workflows. We’ll show you where Pashx Dashboard fits, and what to connect first.</p></div><CtaLink location="final_cta" label="Book a demo" className="shrink-0">Book a demo <ArrowRight size={17} /></CtaLink></section></Container>
     </div>
   );
 }
