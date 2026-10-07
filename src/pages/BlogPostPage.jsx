@@ -11,31 +11,7 @@ import { fetchBlogJson, blogDate, blogAuthor } from "../lib/blog";
 
 
 
-/**
- * Article bodies (custom_html) carry their own <h1 class="post-title"> — the
- * CMS template repeats the headline inside the content, and the page already
- * renders the article title as the one real <h1> above the body. Two <h1>s
- * on a page splits the heading structure crawlers read, so any <h1> inside
- * the article body is demoted to <h2> before injection. <pre>/<style>/<script>
- * blocks are skipped: they often contain code samples that legitimately show
- * raw HTML with <h1> (or <title>) tags, which must not be rewritten.
- */
-function demoteArticleH1s(html) {
-  if (!html) return html;
-  let processed = "";
-  let cursor = 0;
-  const skip = /<(pre|style|script)[\s>][\s\S]*?<\/\1>/gi;
-  let match;
-  while ((match = skip.exec(html)) !== null) {
-    processed += html.slice(cursor, match.index);
-    processed += match[0];
-    cursor = match.index + match[0].length;
-  }
-  processed += html.slice(cursor);
-  return processed
-    .replace(/<h1([\s>])/gi, "<h2$1")
-    .replace(/<\/h1>/gi, "</h2>");
-}
+import { demoteArticleH1s } from "../lib/articleHtml.js";
 
 /**
  * ID of the JSON <script> tag that scripts/prerender.mjs inlines next to the

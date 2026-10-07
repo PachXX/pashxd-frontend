@@ -56,7 +56,7 @@ export default function BookDemoPage() {
    setError("");
 
    // ✅ Basic validation (added)
-   if (!formData.name || !formData.email || !formData.company) {
+   if (!formData.name.trim() || !formData.email.trim() || !formData.company.trim()) {
      setError("Please fill all required fields");
      return;
    }
@@ -65,9 +65,9 @@ export default function BookDemoPage() {
 
    try {
      const payload = {
-       name: formData.name,
-       email: formData.email,
-       company: formData.company,
+       name: formData.name.trim(),
+       email: formData.email.trim(),
+       company: formData.company.trim(),
        company_size: formData.companySize || "",
        industry: formData.industry || "",
        message: formData.message || "",
@@ -80,6 +80,7 @@ export default function BookDemoPage() {
          "Content-Type": "application/json",
        },
        body: JSON.stringify(payload),
+       signal: AbortSignal.timeout(20000),
      });
 
      if (!response.ok) {
@@ -123,7 +124,7 @@ export default function BookDemoPage() {
             </div>
 
             <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2540] mb-4">
-              Thanks, {formData.name.split(" ")[0]}!{" "}
+              Thanks, {formData.name.trim().split(/\s+/)[0]}!{" "}
               <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                 Let's book your demo.
               </span>
@@ -212,10 +213,10 @@ export default function BookDemoPage() {
             {/* Trust */}
             <div className="mt-10 pt-8 border-t border-slate-200">
               <p className="text-xs text-slate-400 uppercase tracking-widest mb-3">
-                Trusted by 500+ teams
+                See how PxD fits your workflow
               </p>
               <div className="flex flex-wrap gap-2">
-                {["SOC 2", "GDPR", "99.9% Uptime"].map((badge) => (
+                {["Guided demo", "Your use case", "No obligation"].map((badge) => (
                   <span
                     key={badge}
                     className="px-3 py-1 rounded-full bg-green-50 text-[#15803D] text-xs border border-green-100 font-medium"
@@ -367,7 +368,7 @@ export default function BookDemoPage() {
               </button>
 
               <p className="mt-4 text-[11px] text-slate-400 text-center">
-                By submitting, you agree to our{" "}
+                Read our{" "}
                 <a href="/privacy" className="underline hover:text-[#15803D]">Privacy Policy</a>.
                 We'll never share your info.
               </p>

@@ -4,16 +4,16 @@ import { HelmetProvider } from "react-helmet-async";
 import App from "./App";
 import "./index.css";
 
-import { AuthProvider } from "./context/AuthContext.jsx";
+
 
 const container = document.getElementById("root");
 
 const tree = (
   <React.StrictMode>
     <HelmetProvider>
-      <AuthProvider>
+
         <App />
-      </AuthProvider>
+
     </HelmetProvider>
   </React.StrictMode>
 );
@@ -26,7 +26,7 @@ const tree = (
 // The check is on actual content, not on a build flag: `vite dev` serves the
 // untouched index.html with an empty #root, and hydrateRoot against an empty
 // container warns and re-renders anyway. This keeps both paths correct.
-if (container.hasChildNodes()) {
+if (container.hasChildNodes() && container.dataset.prerenderPath === (window.location.pathname.replace(/\/$/, "") || "/")) {
   hydrateRoot(container, tree);
 } else {
   createRoot(container).render(tree);

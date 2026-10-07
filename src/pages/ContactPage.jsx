@@ -50,11 +50,11 @@ export default function ContactPage() {
               <div className="mt-10 md:mt-12 pt-6 md:pt-8 border-t border-slate-100">
 
                 <p className="text-xs text-slate-400 uppercase tracking-widest mb-4">
-                  TRUSTED BY 500+ TEAMS
+                  LET’S TALK ABOUT YOUR WORKFLOW
                 </p>
 
                 <div className="flex gap-2 md:gap-3 flex-wrap">
-                  {["SOC 2 Compliant", "99.9% Uptime", "24/7 Support"].map((t) => (
+                  {["Direct contact", "Workflow review", "Clear next steps"].map((t) => (
                     <span
                       key={t}
                       className="px-3 md:px-4 py-1.5 rounded-full bg-green-50 text-[#15803D] text-xs border border-green-100 font-medium"

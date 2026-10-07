@@ -32,11 +32,11 @@ export const logPageView = (url) => {
 // Track custom events
 export const logEvent = (action, category, label, value) => {
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('event', action, {
+    try { window.gtag('event', action, {
       event_category: category,
       event_label: label,
       value: value,
-    });
+    }); } catch { /* Optional tracking must not interrupt the action. */ }
   }
 };
 
@@ -44,10 +44,10 @@ export const logEvent = (action, category, label, value) => {
 export const updateConsent = (granted) => {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
   const state = granted ? 'granted' : 'denied';
-  window.gtag('consent', 'update', {
+  try { window.gtag('consent', 'update', {
     analytics_storage:      state,
-    ad_storage:             state,
-    ad_user_data:           state,
-    ad_personalization:     state,
-  });
+    ad_storage:             'denied',
+    ad_user_data:           'denied',
+    ad_personalization:     'denied',
+  }); } catch { /* Consent controls still work if the tag is blocked. */ }
 };

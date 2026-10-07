@@ -38,66 +38,6 @@ export default function SolutionSection() {
   return (
     <section ref={ref} className="py-20 md:py-28 bg-white relative overflow-hidden">
 
-      {/* Keyframes */}
-      <style>
-        {`
-          @keyframes orbit-rotate-slow {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(360deg); }
-          }
-
-          @keyframes orbit-rotate-fast {
-            from { transform: rotate(0deg); }
-            to   { transform: rotate(-360deg); }
-          }
-
-          @keyframes hub-pulse-ring {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50%      { transform: scale(1.2); opacity: 1; }
-          }
-
-          @keyframes satellite-float {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(-6px); }
-          }
-
-          @keyframes type-fade-in {
-            from { opacity: 0; transform: translateY(8px) scale(0.95); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-          }
-
-          .solution-orbit-outer { animation: orbit-rotate-slow 45s linear infinite; }
-          .solution-orbit-inner { animation: orbit-rotate-fast 30s linear infinite; }
-
-          .solution-hub-ring::before {
-            content: '';
-            position: absolute;
-            inset: -8px;
-            border-radius: 9999px;
-            border: 2px solid rgba(21, 128, 61, 0.35);
-            animation: hub-pulse-ring 3s ease-in-out infinite;
-          }
-
-          .solution-hub-ring::after {
-            content: '';
-            position: absolute;
-            inset: -18px;
-            border-radius: 9999px;
-            border: 1px solid rgba(21, 128, 61, 0.18);
-            animation: hub-pulse-ring 3s ease-in-out infinite 0.6s;
-          }
-
-          .sat-float-1 { animation: satellite-float 4s ease-in-out infinite; }
-          .sat-float-2 { animation: satellite-float 4s ease-in-out infinite 1s; }
-          .sat-float-3 { animation: satellite-float 4s ease-in-out infinite 2s; }
-          .sat-float-4 { animation: satellite-float 4s ease-in-out infinite 3s; }
-
-          .type-card {
-            animation: type-fade-in 0.5s ease-out backwards;
-          }
-        `}
-      </style>
-
       {/* Ambient background glow */}
       <div className="absolute inset-0 pointer-events-none opacity-40">
         <div className="absolute top-1/2 right-1/4 w-[500px] h-[500px] bg-green-200/30 blur-[140px] rounded-full" />

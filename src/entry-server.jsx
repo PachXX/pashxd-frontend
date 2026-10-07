@@ -8,7 +8,26 @@ import { StaticRouter } from "react-router";
 import { HelmetProvider } from "react-helmet-async";
 
 import { AppRoutes } from "./App";
-import { AuthProvider } from "./context/AuthContext.jsx";
+
+// Pages
+import Landing from "./pages/Landing";
+import PlatformPage from "./pages/PlatformPage";
+import ProductPage from "./pages/ProductPage";
+import PricingPage from "./pages/PricingPage";
+import IndustriesPage from "./pages/IndustriesPage";
+import AboutPage from "./pages/AboutPage";
+import ResourcesPage from "./pages/ResourcesPage";
+import ContactPage from "./pages/ContactPage";
+import BookDemoPage from "./pages/BookDemoPage";
+import LoginPage from "./pages/LoginPage";
+import MarketplacePage from "./pages/MarketplacePage";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import AdminLeadsPage from "./pages/AdminLeadsPage";
+import BlogPostPage from './pages/BlogPostPage';
+
+
+const pages = { Landing, PlatformPage, ProductPage, PricingPage, IndustriesPage, AboutPage, ResourcesPage, ContactPage, BookDemoPage, LoginPage, MarketplacePage, Terms, Privacy, AdminLeadsPage, BlogPostPage };
 import { SsrDataProvider } from "./context/SsrDataContext.jsx";
 
 /**
@@ -42,11 +61,11 @@ export function render(url, ssrData) {
     <StrictMode>
       <HelmetProvider context={helmetContext}>
         <SsrDataProvider value={ssrData}>
-          <AuthProvider>
+
             <StaticRouter location={url}>
-              <AppRoutes />
+              <AppRoutes pages={pages} />
             </StaticRouter>
-          </AuthProvider>
+
         </SsrDataProvider>
       </HelmetProvider>
     </StrictMode>

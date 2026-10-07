@@ -59,16 +59,16 @@ const SELLER_TYPES = [
 const HOW_STEPS = [
   { num: "01", title: "Search or scan BOQ", desc: "Find materials by name, spec, or upload your BOQ to auto-populate a smart cart.", icon: Search },
   { num: "02", title: "Compare & choose", desc: "AI ranks vendors by price, distance, rating, and delivery speed.", icon: BarChart3 },
-  { num: "03", title: "Send RFQ", desc: "Submit RFQ to multiple vendors. Get competitive quotes within 48 hours.", icon: FileText },
+  { num: "03", title: "Send RFQ", desc: "Share specifications and agree a quotation deadline with suppliers.", icon: FileText },
   { num: "04", title: "Track to site", desc: "Real-time GPS tracking, photo proof at delivery, digital GRN.", icon: Truck },
-  { num: "05", title: "Pay on terms", desc: "Net 30/60/90 credit lines. Escrow protection. Auto-matched invoices.", icon: CreditCard },
+  { num: "05", title: "Pay on terms", desc: "Confirm payment terms and invoice requirements with your supplier.", icon: CreditCard },
 ];
 
 const STATS = [
-  { value: "25+", label: "Verified Vendors" },
-  { value: "1,000+", label: "Products Listed" },
-  { value: "48 hrs", label: "Quote Response" },
-  { value: "99.2%", label: "Order Accuracy" },
+  { value: "8", label: "Example categories" },
+  { value: "9", label: "Sample products" },
+  { value: "RFQ", label: "Supplier quotations" },
+  { value: "Demo", label: "Explore the workflow" },
 ];
 
 const COUNTRIES = ["UAE", "Saudi Arabia", "India", "Qatar", "Oman", "Germany", "Poland", "Netherlands", "France", "Italy"];
@@ -83,6 +83,10 @@ function Reveal({ children, className = "", delay = 0 }) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.style.opacity = '1'; el.style.transform = 'none'; return;
+    }
+    if (el.getBoundingClientRect().top > window.innerHeight) { el.style.opacity = "0"; el.style.transform = "translateY(28px)"; }
     const obs = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting) {
@@ -102,8 +106,8 @@ function Reveal({ children, className = "", delay = 0 }) {
       ref={ref}
       className={className}
       style={{
-        opacity: 0,
-        transform: "translateY(28px)",
+        opacity: 1,
+        transform: "none",
         transition: `opacity 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}ms, transform 0.7s cubic-bezier(0.16,1,0.3,1) ${delay}ms`,
       }}
     >
@@ -118,13 +122,15 @@ function Reveal({ children, className = "", delay = 0 }) {
 
 export default function MarketplacePage() {
   const [searchFocused, setSearchFocused] = useState(false);
+  const [query, setQuery] = useState('');
+  const filteredProducts = PRODUCTS.filter(product => `${product.name} ${product.brand}`.toLowerCase().includes(query.trim().toLowerCase()));
   const [activeSellerTab, setActiveSellerTab] = useState(0);
 
   return (
     <div className="bg-white text-[#0A2540] overflow-x-hidden">
       <SEOHead
-        title="PashxD Marketplace | AI Modules & Integrations"
-        description="Browse PashxD's marketplace of AI modules, workflow integrations, and add-ons for industrial operations. Extend your platform with pre-built solutions."
+        title="Materials Marketplace | Pashx Dashboard"
+        description="Explore sample building materials and discuss sourcing, supplier quotations, and delivery requirements with Pashx Dashboard."
         path="/marketplace"
       />
 
@@ -146,7 +152,7 @@ export default function MarketplacePage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
                 </span>
                 <span className="text-green-700 text-xs font-semibold tracking-widest uppercase">
-                  Marketplace is Live
+                  Marketplace preview
                 </span>
               </div>
 
@@ -156,8 +162,8 @@ export default function MarketplacePage() {
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10">
-                25+ verified vendors and growing. 1,000+ products. AI-powered pricing.
-                Get competitive quotes within 48 hours. Built into PashxD.
+                Explore sample products and procurement workflows. Talk to us about supplier availability.
+                Sample prices and ratings are illustrative, not live offers. Confirm availability and terms with our team.
               </p>
             </div>
           </Reveal>
@@ -168,13 +174,16 @@ export default function MarketplacePage() {
               <div className={`flex items-center gap-2 sm:gap-3 bg-white border-2 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-1.5 sm:py-2 shadow-lg shadow-black/5 transition-all duration-300 ${searchFocused ? "border-[#15803D] shadow-green-600/10" : "border-slate-200"}`}>
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 flex-shrink-0" />
                 <input
+                  aria-label="Search sample products"
+                  value={query}
+                  onChange={event => setQuery(event.target.value)}
                   type="text"
                   placeholder="Search cement, steel, tiles, pipes..."
                   className="flex-1 border-none outline-none text-sm sm:text-base text-[#0A2540] bg-transparent py-2 sm:py-3 placeholder:text-slate-400"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
                 />
-                <button className="bg-[#15803D] hover:bg-[#166534] text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl flex items-center gap-1.5 transition-all duration-200 flex-shrink-0">
+                <button onClick={() => document.getElementById('sample-products')?.scrollIntoView({ block: 'start' })} className="bg-[#15803D] hover:bg-[#166534] text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl flex items-center gap-1.5 transition-all duration-200 flex-shrink-0">
                   Search
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 hidden sm:block" />
                 </button>
@@ -208,11 +217,11 @@ export default function MarketplacePage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
             {CATEGORIES.map((c, i) => (
               <Reveal key={c.name} delay={i * 50}>
-                <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-xl cursor-pointer transition-all duration-250 hover:border-[#15803D] hover:shadow-md hover:-translate-y-0.5">
+                <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-xl transition-all duration-250 hover:border-[#15803D] hover:shadow-md hover:-translate-y-0.5">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 bg-green-50 rounded-lg flex items-center justify-center text-base sm:text-lg flex-shrink-0">{c.icon}</div>
                   <div className="min-w-0">
                     <div className="text-xs sm:text-sm font-semibold text-[#0A2540] truncate">{c.name}</div>
-                    <div className="text-[10px] sm:text-xs text-slate-500">{c.count} products</div>
+                    <div className="text-[10px] sm:text-xs text-slate-500">Example materials</div>
                   </div>
                 </div>
               </Reveal>
@@ -222,25 +231,26 @@ export default function MarketplacePage() {
       </section>
 
       {/* ═══════════════ FEATURED PRODUCTS ═══════════════ */}
-      <section className="py-12 sm:py-16 md:py-20 bg-slate-50">
+      <section id="sample-products" className="py-12 sm:py-16 md:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6 sm:mb-8">
               <div>
-                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#15803D] mb-2 sm:mb-3">Trending now</p>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">Top Products This Week</h2>
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#15803D] mb-2 sm:mb-3">Illustrative catalog</p>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">Sample Products</h2>
               </div>
-              <a href="#" className="flex items-center gap-1 text-[#15803D] font-semibold text-sm hover:gap-2 transition-all">
-                View all products <ChevronRight className="w-4 h-4" />
+              <a href="/book-demo" className="flex items-center gap-1 text-[#15803D] font-semibold text-sm hover:gap-2 transition-all">
+                Discuss availability <ChevronRight className="w-4 h-4" />
               </a>
             </div>
           </Reveal>
 
           {/* Horizontal scroll on mobile, grid on larger */}
           <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 sm:pb-0 snap-x snap-mandatory sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 sm:overflow-visible">
-            {PRODUCTS.map((p, i) => (
+            {!filteredProducts.length && <p role="status" className="col-span-full text-slate-600 py-8">No sample products match. Try a material name or brand.</p>}
+            {filteredProducts.map((p, i) => (
               <Reveal key={p.name} delay={i * 60}>
-                <div className="min-w-[200px] sm:min-w-0 snap-start bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#15803D] cursor-pointer">
+                <div className="min-w-[200px] sm:min-w-0 snap-start bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#15803D]">
                   <div className="relative h-36 sm:h-44 bg-slate-100 overflow-hidden">
                     <img src={p.img} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
                     <span className="absolute top-2 left-2 bg-[#15803D] text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">{p.tag}</span>
@@ -277,7 +287,7 @@ export default function MarketplacePage() {
       <section className="py-4 sm:py-5 bg-green-50 border-y border-slate-200 overflow-hidden">
         <div className="flex items-center gap-3 px-4 sm:px-6 mb-2">
           <Globe className="w-4 h-4 text-[#15803D] flex-shrink-0" />
-          <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-[#15803D]">Available in these countries</span>
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-[#15803D]">Markets of interest</span>
         </div>
         <div className="overflow-hidden">
           <div className="flex animate-marquee-scroll w-max">
@@ -341,7 +351,7 @@ export default function MarketplacePage() {
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-50 border border-amber-200 rounded-lg mb-5 sm:mb-6">
                   <Timer className="w-3.5 h-3.5 text-amber-700" />
-                  <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Quotes within 48 hours</span>
+                  <span className="text-[10px] sm:text-xs font-bold text-amber-700 uppercase tracking-wider">Discuss your sourcing needs</span>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-5 leading-tight">
@@ -350,8 +360,8 @@ export default function MarketplacePage() {
                 </h2>
 
                 <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed mb-6 sm:mb-8">
-                  PashxD connects you to verified vendors across Europe. Submit RFQs and receive
-                  competitive quotes from multiple suppliers within 48 hours. Compare, negotiate,
+                  Share your specifications and delivery requirements. Review supplier quotes,
+                  confirm availability, negotiate terms,
                   and choose the best offer — all in one place.
                 </p>
 
@@ -359,7 +369,7 @@ export default function MarketplacePage() {
                   {[
                     { icon: FileText, text: "Multi-vendor RFQ system" },
                     { icon: MapPin, text: "Available in 10 countries" },
-                    { icon: Package, text: "1,000+ products in catalog" },
+                    { icon: Package, text: "Explore material categories" },
                     { icon: Truck, text: "End-to-end shipment tracking" },
                   ].map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 sm:gap-3">
@@ -436,7 +446,7 @@ export default function MarketplacePage() {
             {SELLER_TYPES.map((s, i) => (
               <Reveal key={s.title} delay={i * 100}>
                 <div
-                  className={`bg-white border rounded-xl p-5 sm:p-6 md:p-8 transition-all duration-300 cursor-pointer relative overflow-hidden ${
+                  className={`bg-white border rounded-xl p-5 sm:p-6 md:p-8 transition-all duration-300 relative overflow-hidden ${
                     activeSellerTab === i
                       ? "border-[#15803D] shadow-lg shadow-green-600/5"
                       : "border-slate-200 hover:border-[#15803D]/50 hover:shadow-md"
@@ -452,7 +462,7 @@ export default function MarketplacePage() {
                     </div>
                     <div>
                       <div className="text-base sm:text-lg font-bold">{s.title}</div>
-                      <div className="text-[10px] sm:text-xs text-[#15803D] font-semibold">{s.count} on platform</div>
+                      <div className="text-[10px] sm:text-xs text-[#15803D] font-semibold">Discuss supplier onboarding</div>
                     </div>
                   </div>
 
@@ -472,16 +482,16 @@ export default function MarketplacePage() {
             <div className="text-center mb-8 sm:mb-12">
               <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-[#15803D] mx-auto mb-3" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2">Built on Trust</h2>
-              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-md mx-auto">Every vendor verified. Every transaction protected. Every delivery guaranteed.</p>
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-md mx-auto">Review supplier details, compare quotations, and agree delivery terms before ordering.</p>
             </div>
           </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { icon: BadgeCheck, title: "KYB Verified Vendors", desc: "Trade license, GST, factory audits" },
-              { icon: Shield, title: "Escrow Protection", desc: "Payment released after delivery" },
-              { icon: Star, title: "Ratings & Reviews", desc: "Transparent vendor scoring" },
-              { icon: Globe, title: "Compliance Ready", desc: "IS, DIN, EN, ASTM certifications" },
+              { icon: BadgeCheck, title: "Supplier checks", desc: "Ask for business details and relevant credentials" },
+              { icon: Shield, title: "Payment terms", desc: "Agree payment milestones with your supplier" },
+              { icon: Star, title: "Supplier evaluation", desc: "Review references, quotations, and delivery history" },
+              { icon: Globe, title: "Material specifications", desc: "Request the certificates your project requires" },
             ].map((t, i) => (
               <Reveal key={t.title} delay={i * 80}>
                 <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 transition-all duration-200 hover:border-[#15803D] hover:shadow-md">
@@ -511,7 +521,7 @@ export default function MarketplacePage() {
                   Start Buying. Start Selling.
                 </h2>
                 <p className="text-sm sm:text-base md:text-lg text-green-200 mb-8 sm:mb-10 max-w-md mx-auto">
-                  Join 25+ verified vendors and growing project teams already using PashxD Marketplace.
+                  Discuss your sourcing needs and confirm which suppliers and workflows are available for your team.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">

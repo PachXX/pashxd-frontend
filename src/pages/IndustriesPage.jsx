@@ -36,11 +36,6 @@ const industries = [
       "Automated invoice matching",
       "Mobile DPR tracking",
     ],
-    metrics: [
-      { value: "45%", label: "Faster procurement" },
-      { value: "$2M+", label: "Savings" },
-      { value: "90%", label: "On-time delivery" },
-    ],
   },
   {
     id: "retail",
@@ -56,11 +51,6 @@ const industries = [
       "Progress dashboards",
       "Rate contracts",
       "Snag tracking",
-    ],
-    metrics: [
-      { value: "3x", label: "Faster rollouts" },
-      { value: "30%", label: "Cost reduction" },
-      { value: "100+", label: "Stores" },
     ],
   },
   {
@@ -78,11 +68,6 @@ const industries = [
       "Inventory automation",
       "Compliance logs",
     ],
-    metrics: [
-      { value: "60%", label: "Faster POs" },
-      { value: "25%", label: "Better pricing" },
-      { value: "99%", label: "Compliance" },
-    ],
   },
   {
     id: "manufacturing",
@@ -98,11 +83,6 @@ const industries = [
       "Supplier performance tracking",
       "Production batch tracking",
       "Component cost analytics",
-    ],
-    metrics: [
-      { value: "35%", label: "Lower material waste" },
-      { value: "50%", label: "Faster BOM-to-PO" },
-      { value: "98%", label: "Inventory accuracy" },
     ],
   },
   {
@@ -120,11 +100,6 @@ const industries = [
       "Compliance",
       "Risk prediction",
     ],
-    metrics: [
-      { value: "40%", label: "Cost visibility" },
-      { value: "20%", label: "Fewer delays" },
-      { value: "$5M+", label: "Projects" },
-    ],
   },
 ];
 
@@ -139,7 +114,7 @@ export default function IndustriesPage() {
       setTimeout(() => {
         const el = document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          el.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
         }
       }, 100);
     }
@@ -219,18 +194,8 @@ export default function IndustriesPage() {
 
                 {/* METRICS */}
                 <div className="grid grid-cols-3 gap-3 md:gap-4 pt-4 md:pt-6">
-                  {ind.metrics.map((m) => (
-                    <div
-                      key={m.label}
-                      className="bg-white border border-slate-200 rounded-xl p-4 md:p-5 text-center shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300"
-                    >
-                      <div className="text-2xl md:text-3xl font-bold text-[#15803D]">
-                        {m.value}
-                      </div>
-                      <div className="text-[11px] md:text-xs text-slate-400 mt-2 leading-tight">
-                        {m.label}
-                      </div>
-                    </div>
+                  {ind.useCases.slice(0, 3).map((capability) => (
+                    <div key={capability} className="text-sm font-semibold text-[#15803D]">{capability}</div>
                   ))}
                 </div>
               </div>

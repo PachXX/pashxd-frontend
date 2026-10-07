@@ -368,10 +368,10 @@ export default function ProductPage() {
             Enterprise-Grade Security
           </h2>
           <p className="reveal text-slate-500 mb-8 text-base md:text-lg">
-            SOC 2 compliant, end-to-end encryption, role-based access control, and audit trails for every action.
+            Review access roles, approval workflows, and available audit records during your evaluation. Ask our team about the controls and integrations your deployment needs.
           </p>
           <div className="reveal flex flex-wrap gap-2 md:gap-3 justify-center">
-            {["SOC 2 Type II", "256-bit Encryption", "RBAC", "SSO Ready", "Audit Logs"].map((s) => (
+            {["Access roles", "Approval workflows", "Deployment review"].map((s) => (
               <span
                 key={s}
                 className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-green-50 text-[#15803D] border border-green-100 text-xs font-medium"

@@ -200,7 +200,7 @@ function assemblePage(template, route, html, head, ssrData) {
   let page = template
     .replace(/\n?\s*<title>[\s\S]*?<\/title>/, "")
     .replace("</head>", `    ${head}\n  </head>`)
-    .replace('<div id="root"></div>', `<div id="root">${html}</div>`);
+    .replace('<div id="root"></div>', `<div id="root" data-prerender-path="${route}">${html}</div>`);
 
   // For data-driven routes (blog posts) the client must be able to hydrate
   // from the same content the server rendered, otherwise it would blank the

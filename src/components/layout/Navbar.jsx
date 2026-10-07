@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 
 import BrandMark from "../BrandMark";
@@ -7,6 +7,8 @@ import { trackCtaClick } from "../../analytics/events";
 
 export default function Navbar() {
   const location = useLocation();
+  const menuButton = useRef(null);
+  const drawer = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -20,7 +22,8 @@ export default function Navbar() {
       setScrolled(window.scrollY > 40);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -31,13 +34,28 @@ export default function Navbar() {
   }
 
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const desktop = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = () => { if (desktop.matches) setMobileOpen(false); };
+    const onKey = (event) => {
+      if (event.key === 'Escape') { setMobileOpen(false); menuButton.current?.focus(); }
+      if (event.key === 'Tab') {
+        const links = drawer.current?.querySelectorAll('a[href]');
+        if (!links?.length) return;
+        if (event.shiftKey && document.activeElement === links[0]) { event.preventDefault(); menuButton.current?.focus(); }
+        else if (!event.shiftKey && document.activeElement === links[links.length - 1]) { event.preventDefault(); menuButton.current?.focus(); }
+        else if (document.activeElement === menuButton.current) { event.preventDefault(); links[event.shiftKey ? links.length - 1 : 0].focus(); }
+      }
+    };
+    desktop.addEventListener('change', closeOnDesktop);
+    document.addEventListener('keydown', onKey);
+    drawer.current?.querySelector('a[href]')?.focus();
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
+      desktop.removeEventListener('change', closeOnDesktop);
+      document.removeEventListener('keydown', onKey);
     };
   }, [mobileOpen]);
 
@@ -141,7 +159,10 @@ export default function Navbar() {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="xl:hidden w-10 h-10 flex items-center justify-center rounded-lg text-[#0A2540] hover:bg-slate-100 transition"
-              aria-label="Toggle menu"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
+              ref={menuButton}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
@@ -160,6 +181,9 @@ export default function Navbar() {
       />
 
       <aside
+        id="mobile-navigation"
+        ref={drawer}
+        aria-label="Mobile navigation"
         className={`
           xl:hidden fixed top-0 right-0 bottom-0 z-40 w-[80%] max-w-[340px]
           bg-white shadow-2xl

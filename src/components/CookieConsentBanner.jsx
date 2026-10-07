@@ -3,15 +3,15 @@ import { updateConsent } from "../analytics/googleAnalytics";
 
 const subscribe = () => () => {};
 
-const STORAGE_KEY = "pashxd_cookie_consent";
+import { readConsent, saveConsent } from "../lib/consentStorage";
 
 export default function CookieConsentBanner() {
   const mounted = useSyncExternalStore(subscribe, () => true, () => false);
   const [dismissed, setDismissed] = useState(false);
-  const visible = mounted && !dismissed && !localStorage.getItem(STORAGE_KEY);
+  const visible = mounted && !dismissed && !readConsent();
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = readConsent();
     if (stored) {
       // Re-apply saved decision on every page load so GA consent state
       // is always in sync even after a hard refresh.
@@ -20,13 +20,13 @@ export default function CookieConsentBanner() {
   }, []);
 
   function accept() {
-    localStorage.setItem(STORAGE_KEY, "accepted");
+    saveConsent("accepted");
     updateConsent(true);
     setDismissed(true);
   }
 
   function decline() {
-    localStorage.setItem(STORAGE_KEY, "declined");
+    saveConsent("declined");
     updateConsent(false);
     setDismissed(true);
   }
@@ -57,8 +57,7 @@ export default function CookieConsentBanner() {
       }}
     >
       <p style={{ margin: 0, flex: "1 1 300px", color: "#d1d5db" }}>
-        We use cookies to understand how visitors use our site (Google Analytics). No
-        personal data is shared with third parties.{" "}
+        With your permission, Google Analytics uses cookies to help us understand site usage. Google processes this analytics data.{" "}
         <a
           href="/privacy"
           style={{ color: "#2ECC71", textDecoration: "underline" }}
