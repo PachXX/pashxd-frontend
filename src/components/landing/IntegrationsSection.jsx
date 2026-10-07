@@ -60,7 +60,7 @@ export default function IntegrationsSection() {
   return (
     <section
       ref={ref}
-      className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50/60 py-20 md:py-28"
+      className="relative overflow-hidden bg-linear-to-b from-white to-slate-50/60 py-20 md:py-28"
     >
       <Container>
         <div className="reveal mx-auto mb-14 max-w-2xl text-center md:mb-20">
@@ -69,7 +69,7 @@ export default function IntegrationsSection() {
           </p>
           <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
             Messages in.{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               Approved records out.
             </span>
           </h2>
@@ -88,7 +88,7 @@ export default function IntegrationsSection() {
             {INTAKE.map((c) => (
               <div
                 key={c.name}
-                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-green-100 bg-green-50">
                   <c.icon className="h-5 w-5 text-brand-green" />
@@ -113,7 +113,7 @@ export default function IntegrationsSection() {
               return (
                 <div
                   key={d.name}
-                  className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3.5 transition-all duration-300 hover:border-slate-300 hover:shadow-sm"
+                  className="flex items-center gap-4 rounded-xl border border-slate-200 bg-white px-4 py-3.5 transition-all duration-300 hover:border-slate-300 hover:shadow-xs"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-slate-50">
                     {d.logo ? (

@@ -63,13 +63,13 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 bg-[#F8FAFC] text-center">
         <Container>
 
-          <p className="reveal text-xs md:text-sm font-semibold tracking-[0.25em] text-[#15803D] uppercase mb-5 md:mb-6">
+          <p className="reveal text-xs md:text-sm font-semibold tracking-[0.25em] text-brand-green uppercase mb-5 md:mb-6">
             About Pashx Dashboard
           </p>
 
-          <h1 className="reveal text-3xl sm:text-4xl md:text-[3.5rem] leading-[1.15] font-extrabold text-[#0A2540] tracking-tight max-w-4xl mx-auto mb-5 md:mb-6">
+          <h1 className="reveal text-3xl sm:text-4xl md:text-[3.5rem] leading-[1.15] font-extrabold text-brand-navy tracking-tight max-w-4xl mx-auto mb-5 md:mb-6">
             Building the OS for{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               Physical Operations
             </span>
           </h1>
@@ -89,11 +89,11 @@ export default function AboutPage() {
 
             {/* LEFT */}
             <div>
-              <p className="text-xs tracking-[0.2em] uppercase text-[#15803D] font-semibold mb-4">
+              <p className="text-xs tracking-[0.2em] uppercase text-brand-green font-semibold mb-4">
                 Our Journey
               </p>
 
-              <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540] mb-5 md:mb-6 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-5 md:mb-6 leading-tight">
                 Born from the Chaos of Real Operations
               </h2>
 
@@ -107,19 +107,19 @@ export default function AboutPage() {
             </div>
 
             {/* RIGHT TIMELINE */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm">
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-xs">
               {milestones.map((m, i) => (
                 <div key={m.year} className="flex gap-4 mb-6 last:mb-0">
 
                   <div className="flex flex-col items-center">
-                    <div className="w-3 h-3 bg-[#15803D] rounded-full flex-shrink-0" />
+                    <div className="w-3 h-3 bg-brand-green rounded-full shrink-0" />
                     {i < milestones.length - 1 && (
-                      <div className="w-[1px] h-full bg-green-200 mt-1" />
+                      <div className="w-px h-full bg-green-200 mt-1" />
                     )}
                   </div>
 
                   <div>
-                    <div className="text-sm font-bold text-[#15803D]">
+                    <div className="text-sm font-bold text-brand-green">
                       {m.year}
                     </div>
                     <div className="text-sm text-slate-500 mt-1 leading-relaxed">
@@ -142,11 +142,11 @@ export default function AboutPage() {
 
           <div className="text-center mb-12 md:mb-16">
 
-            <p className="text-xs tracking-[0.2em] uppercase text-[#15803D] font-semibold mb-4">
+            <p className="text-xs tracking-[0.2em] uppercase text-brand-green font-semibold mb-4">
               Our Values
             </p>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540]">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy">
               What Drives Us
             </h2>
 
@@ -156,13 +156,13 @@ export default function AboutPage() {
             {values.map((v) => (
               <div
                 key={v.title}
-                className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center"
+                className="bg-white border border-slate-200 rounded-2xl p-6 md:p-8 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 text-center"
               >
                 <div className="w-12 h-12 bg-green-50 border border-green-100 rounded-xl flex items-center justify-center mb-4 mx-auto">
-                  <v.icon className="w-6 h-6 text-[#15803D]" />
+                  <v.icon className="w-6 h-6 text-brand-green" />
                 </div>
 
-                <h3 className="text-lg font-semibold text-[#0A2540] mb-2">
+                <h3 className="text-lg font-semibold text-brand-navy mb-2">
                   {v.title}
                 </h3>
 
@@ -182,11 +182,11 @@ export default function AboutPage() {
 
           <div className="text-center mb-12 md:mb-16">
 
-            <p className="text-xs tracking-[0.2em] uppercase text-[#15803D] font-semibold mb-4">
+            <p className="text-xs tracking-[0.2em] uppercase text-brand-green font-semibold mb-4">
               Founder
             </p>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540]">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy">
               Meet the Founder
             </h2>
 
@@ -205,11 +205,11 @@ export default function AboutPage() {
                   className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover mx-auto mb-4 border-4 border-green-100"
                 />
 
-                <h3 className="text-xl font-semibold text-[#0A2540]">
+                <h3 className="text-xl font-semibold text-brand-navy">
                   {t.name}
                 </h3>
 
-                <p className="text-[#15803D] text-sm mb-3 font-medium">
+                <p className="text-brand-green text-sm mb-3 font-medium">
                   {t.role}
                 </p>
 
@@ -228,7 +228,7 @@ export default function AboutPage() {
       <section className="py-20 md:py-24 bg-white">
         <Container className="max-w-4xl">
 
-          <div className="bg-gradient-to-br from-[#15803D] to-[#166534] rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] relative overflow-hidden">
+          <div className="bg-linear-to-br from-[#15803D] to-brand-green-hover rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] relative overflow-hidden">
 
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 blur-[100px] rounded-full pointer-events-none" />
@@ -244,7 +244,7 @@ export default function AboutPage() {
 
               <Link
                 to="/book-demo"
-                className="inline-flex items-center gap-2 bg-white text-[#15803D] px-7 md:px-8 py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold hover:-translate-y-[2px] transition-all duration-300 shadow-lg"
+                className="inline-flex items-center gap-2 bg-white text-brand-green px-7 md:px-8 py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold hover:translate-y-[-2px] transition-all duration-300 shadow-lg"
               >
                 Get in Touch <ArrowRight className="w-4 h-4" />
               </Link>

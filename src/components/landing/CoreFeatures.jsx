@@ -32,13 +32,13 @@ export default function CoreFeatures() {
 
         {/* HEADER */}
         <div className="text-center mb-12 md:mb-16">
-          <p className="text-xs tracking-[0.25em] text-[#15803D] font-semibold mb-4">
+          <p className="text-xs tracking-[0.25em] text-brand-green font-semibold mb-4">
             CORE PLATFORM
           </p>
 
-          <h2 className="text-3xl md:text-[40px] font-bold text-[#0A2540] mb-4 leading-tight">
+          <h2 className="text-3xl md:text-[40px] font-bold text-brand-navy mb-4 leading-tight">
             Three Pillars,{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               One Platform
             </span>
           </h2>
@@ -57,8 +57,8 @@ export default function CoreFeatures() {
               onClick={() => setActive(tab.id)}
               className={`pb-4 text-sm font-medium transition whitespace-nowrap ${
                 active === tab.id
-                  ? "text-[#15803D] border-b-2 border-[#15803D]"
-                  : "text-slate-400 hover:text-[#0A2540]"
+                  ? "text-brand-green border-b-2 border-brand-green"
+                  : "text-slate-400 hover:text-brand-navy"
               }`}
             >
               {tab.label}
@@ -124,8 +124,8 @@ export default function CoreFeatures() {
 function Card({ icon: _Icon, title, desc }) {
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-5 md:p-6 hover:shadow-lg hover:border-green-200 transition-all duration-300 hover:-translate-y-1">
-      {createElement(_Icon, {className: "w-5 h-5 text-[#15803D] mb-3 md:mb-4"})}
-      <h4 className="font-semibold text-[#0A2540] mb-2 text-sm md:text-base">{title}</h4>
+      {createElement(_Icon, {className: "w-5 h-5 text-brand-green mb-3 md:mb-4"})}
+      <h4 className="font-semibold text-brand-navy mb-2 text-sm md:text-base">{title}</h4>
       <p className="text-xs md:text-sm text-slate-500 leading-relaxed">{desc}</p>
     </div>
   );
@@ -216,7 +216,7 @@ function AIDashboard() {
 
 function DashboardWrapper({ title, children }) {
   return (
-    <div className="bg-[#0B0F14] rounded-2xl p-4 md:p-6 w-full max-w-[580px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/5">
+    <div className="bg-brand-ink rounded-2xl p-4 md:p-6 w-full max-w-[580px] shadow-[0_30px_80px_rgba(0,0,0,0.5)] border border-white/5">
       <div className="text-slate-400 text-xs mb-4">{title} · Illustrative demo</div>
       {children}
     </div>
@@ -257,7 +257,7 @@ function Table({ rows }) {
 function Alert({ color, text }) {
   return (
     <div className={`flex items-start gap-2 md:gap-3 px-3 md:px-4 py-2.5 md:py-3 rounded-xl border ${alertBorder(color)} bg-white/5`}>
-      <div className={`w-2 h-2 rounded-full mt-1 flex-shrink-0 ${alertDot(color)}`} />
+      <div className={`w-2 h-2 rounded-full mt-1 shrink-0 ${alertDot(color)}`} />
       <span className="text-[11px] md:text-sm text-slate-300 leading-snug">{text}</span>
     </div>
   );

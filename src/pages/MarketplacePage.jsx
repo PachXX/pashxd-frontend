@@ -127,7 +127,7 @@ export default function MarketplacePage() {
   const [activeSellerTab, setActiveSellerTab] = useState(0);
 
   return (
-    <div className="bg-white text-[#0A2540] overflow-x-hidden">
+    <div className="bg-white text-brand-navy overflow-x-hidden">
       <SEOHead
         title="Materials Marketplace | Pashx Dashboard"
         description="Explore sample building materials and discuss sourcing, supplier quotations, and delivery requirements with Pashx Dashboard."
@@ -135,7 +135,7 @@ export default function MarketplacePage() {
       />
 
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 sm:pb-16 md:pb-20 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <section className="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-12 sm:pb-16 md:pb-20 bg-linear-to-br from-green-50 via-white to-emerald-50">
         {/* Animated gradient background */}
         <div className="absolute inset-0 opacity-30 pointer-events-none">
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-green-100 rounded-full blur-[120px]" />
@@ -158,7 +158,7 @@ export default function MarketplacePage() {
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.08] mb-4 sm:mb-6">
                 The Fastest Way to Buy{" "}
-                <span className="text-[#15803D]">Building Materials</span>
+                <span className="text-brand-green">Building Materials</span>
               </h1>
 
               <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto mb-8 sm:mb-10">
@@ -171,19 +171,19 @@ export default function MarketplacePage() {
           {/* Search Box */}
           <Reveal delay={150}>
             <div className="max-w-xl mx-auto mb-10 sm:mb-14">
-              <div className={`flex items-center gap-2 sm:gap-3 bg-white border-2 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-1.5 sm:py-2 shadow-lg shadow-black/5 transition-all duration-300 ${searchFocused ? "border-[#15803D] shadow-green-600/10" : "border-slate-200"}`}>
-                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 flex-shrink-0" />
+              <div className={`flex items-center gap-2 sm:gap-3 bg-white border-2 rounded-xl sm:rounded-2xl px-3 sm:px-5 py-1.5 sm:py-2 shadow-lg shadow-black/5 transition-all duration-300 ${searchFocused ? "border-brand-green shadow-green-600/10" : "border-slate-200"}`}>
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 shrink-0" />
                 <input
                   aria-label="Search sample products"
                   value={query}
                   onChange={event => setQuery(event.target.value)}
                   type="text"
                   placeholder="Search cement, steel, tiles, pipes..."
-                  className="flex-1 border-none outline-none text-sm sm:text-base text-[#0A2540] bg-transparent py-2 sm:py-3 placeholder:text-slate-400"
+                  className="flex-1 border-none outline-hidden text-sm sm:text-base text-brand-navy bg-transparent py-2 sm:py-3 placeholder:text-slate-400"
                   onFocus={() => setSearchFocused(true)}
                   onBlur={() => setSearchFocused(false)}
                 />
-                <button onClick={() => document.getElementById('sample-products')?.scrollIntoView({ block: 'start' })} className="bg-[#15803D] hover:bg-[#166534] text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl flex items-center gap-1.5 transition-all duration-200 flex-shrink-0">
+                <button onClick={() => document.getElementById('sample-products')?.scrollIntoView({ block: 'start' })} className="bg-brand-green hover:bg-brand-green-hover text-white text-xs sm:text-sm font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl flex items-center gap-1.5 transition-all duration-200 shrink-0">
                   Search
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 hidden sm:block" />
                 </button>
@@ -196,7 +196,7 @@ export default function MarketplacePage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
               {STATS.map((s) => (
                 <div key={s.label} className="text-center py-4 sm:py-6">
-                  <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#15803D] leading-none">{s.value}</div>
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-green leading-none">{s.value}</div>
                   <div className="text-xs sm:text-sm text-slate-500 mt-1 sm:mt-2">{s.label}</div>
                 </div>
               ))}
@@ -209,7 +209,7 @@ export default function MarketplacePage() {
       <section className="py-12 sm:py-16 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#15803D] mb-2 sm:mb-3">Browse categories</p>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase text-brand-green mb-2 sm:mb-3">Browse categories</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3">Every Material Your Site Needs</h2>
             <p className="text-sm sm:text-base md:text-lg text-slate-600 mb-8 sm:mb-10 max-w-lg">From structural steel to finishing paint — search by spec, grade, brand, or certification.</p>
           </Reveal>
@@ -217,10 +217,10 @@ export default function MarketplacePage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
             {CATEGORIES.map((c, i) => (
               <Reveal key={c.name} delay={i * 50}>
-                <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-xl transition-all duration-250 hover:border-[#15803D] hover:shadow-md hover:-translate-y-0.5">
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-green-50 rounded-lg flex items-center justify-center text-base sm:text-lg flex-shrink-0">{c.icon}</div>
+                <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white border border-slate-200 rounded-xl transition-all duration-250 hover:border-brand-green hover:shadow-md hover:-translate-y-0.5">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 bg-green-50 rounded-lg flex items-center justify-center text-base sm:text-lg shrink-0">{c.icon}</div>
                   <div className="min-w-0">
-                    <div className="text-xs sm:text-sm font-semibold text-[#0A2540] truncate">{c.name}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-brand-navy truncate">{c.name}</div>
                     <div className="text-[10px] sm:text-xs text-slate-500">Example materials</div>
                   </div>
                 </div>
@@ -236,10 +236,10 @@ export default function MarketplacePage() {
           <Reveal>
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6 sm:mb-8">
               <div>
-                <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#15803D] mb-2 sm:mb-3">Illustrative catalog</p>
+                <p className="text-xs font-bold tracking-[0.2em] uppercase text-brand-green mb-2 sm:mb-3">Illustrative catalog</p>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">Sample Products</h2>
               </div>
-              <a href="/book-demo" className="flex items-center gap-1 text-[#15803D] font-semibold text-sm hover:gap-2 transition-all">
+              <a href="/book-demo" className="flex items-center gap-1 text-brand-green font-semibold text-sm hover:gap-2 transition-all">
                 Discuss availability <ChevronRight className="w-4 h-4" />
               </a>
             </div>
@@ -250,14 +250,14 @@ export default function MarketplacePage() {
             {!filteredProducts.length && <p role="status" className="col-span-full text-slate-600 py-8">No sample products match. Try a material name or brand.</p>}
             {filteredProducts.map((p, i) => (
               <Reveal key={p.name} delay={i * 60}>
-                <div className="min-w-[200px] sm:min-w-0 snap-start bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#15803D]">
+                <div className="min-w-[200px] sm:min-w-0 snap-start bg-white border border-slate-200 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-brand-green">
                   <div className="relative h-36 sm:h-44 bg-slate-100 overflow-hidden">
                     <img src={p.img} alt={p.name} className="w-full h-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
-                    <span className="absolute top-2 left-2 bg-[#15803D] text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">{p.tag}</span>
+                    <span className="absolute top-2 left-2 bg-brand-green text-white text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md">{p.tag}</span>
                   </div>
                   <div className="p-3 sm:p-4">
                     <div className="text-[10px] sm:text-xs text-slate-500 font-medium">{p.brand}</div>
-                    <div className="text-xs sm:text-sm font-bold text-[#0A2540] mt-0.5 mb-1.5 sm:mb-2 line-clamp-1">{p.name}</div>
+                    <div className="text-xs sm:text-sm font-bold text-brand-navy mt-0.5 mb-1.5 sm:mb-2 line-clamp-1">{p.name}</div>
                     <div className="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-slate-500">
                       <span className="flex items-center gap-1">
                         <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
@@ -267,10 +267,10 @@ export default function MarketplacePage() {
                     </div>
                     <div className="flex items-baseline justify-between mt-2.5 sm:mt-3 pt-2.5 sm:pt-3 border-t border-slate-100">
                       <div>
-                        <span className="text-lg sm:text-xl font-extrabold text-[#0A2540]">{p.price}</span>
+                        <span className="text-lg sm:text-xl font-extrabold text-brand-navy">{p.price}</span>
                         <span className="text-xs text-slate-500">{p.unit}</span>
                       </div>
-                      <div className="flex items-center gap-1 text-[10px] sm:text-xs text-[#15803D] font-semibold">
+                      <div className="flex items-center gap-1 text-[10px] sm:text-xs text-brand-green font-semibold">
                         <FileText className="w-3 h-3" />
                         {p.quotes} quotes
                       </div>
@@ -286,14 +286,14 @@ export default function MarketplacePage() {
       {/* ═══════════════ COUNTRIES STRIP ═══════════════ */}
       <section className="py-4 sm:py-5 bg-green-50 border-y border-slate-200 overflow-hidden">
         <div className="flex items-center gap-3 px-4 sm:px-6 mb-2">
-          <Globe className="w-4 h-4 text-[#15803D] flex-shrink-0" />
-          <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-[#15803D]">Markets of interest</span>
+          <Globe className="w-4 h-4 text-brand-green shrink-0" />
+          <span className="text-[10px] sm:text-xs font-bold tracking-[0.15em] uppercase text-brand-green">Markets of interest</span>
         </div>
         <div className="overflow-hidden">
           <div className="flex animate-marquee-scroll w-max">
             {[...COUNTRIES, ...COUNTRIES].map((c, i) => (
               <span key={i} className="flex items-center gap-2 px-4 sm:px-6 text-xs sm:text-sm font-semibold text-slate-600 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 bg-[#15803D] rounded-full" />
+                <span className="w-1.5 h-1.5 bg-brand-green rounded-full" />
                 {c}
               </span>
             ))}
@@ -315,8 +315,8 @@ export default function MarketplacePage() {
       </section>
 
       {/* ═══════════════ HOW IT WORKS ═══════════════ */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-[#0B0F14] text-white relative overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-[#15803D]/8 rounded-full blur-[120px] pointer-events-none" />
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-brand-ink text-white relative overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-brand-green/8 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
           <Reveal>
@@ -328,9 +328,9 @@ export default function MarketplacePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             {HOW_STEPS.map((s, i) => (
               <Reveal key={s.num} delay={i * 80}>
-                <div className="bg-white/[0.04] border border-white/[0.06] rounded-xl p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-green-500/20 hover:-translate-y-1">
-                  <div className="text-3xl sm:text-4xl font-extrabold text-[#15803D]/20 leading-none mb-3 sm:mb-4">{s.num}</div>
-                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#15803D]/15 flex items-center justify-center mb-3 sm:mb-4">
+                <div className="bg-white/4 border border-white/6 rounded-xl p-5 sm:p-6 transition-all duration-300 hover:bg-white/[0.07] hover:border-green-500/20 hover:-translate-y-1">
+                  <div className="text-3xl sm:text-4xl font-extrabold text-brand-green/20 leading-none mb-3 sm:mb-4">{s.num}</div>
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-brand-green/15 flex items-center justify-center mb-3 sm:mb-4">
                     <s.icon className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                   </div>
                   <div className="text-sm sm:text-base font-bold text-white mb-1.5 sm:mb-2">{s.title}</div>
@@ -356,7 +356,7 @@ export default function MarketplacePage() {
 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-5 leading-tight">
                   From RFQ to{" "}
-                  <span className="text-[#15803D]">Multiple Quotes</span>
+                  <span className="text-brand-green">Multiple Quotes</span>
                 </h2>
 
                 <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed mb-6 sm:mb-8">
@@ -373,10 +373,10 @@ export default function MarketplacePage() {
                     { icon: Truck, text: "End-to-end shipment tracking" },
                   ].map((f) => (
                     <div key={f.text} className="flex items-start gap-2.5 sm:gap-3">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <f.icon className="w-4 h-4 text-[#15803D]" />
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 bg-green-50 rounded-lg flex items-center justify-center shrink-0">
+                        <f.icon className="w-4 h-4 text-brand-green" />
                       </div>
-                      <span className="text-xs sm:text-sm font-medium text-[#0A2540] leading-snug pt-1.5">{f.text}</span>
+                      <span className="text-xs sm:text-sm font-medium text-brand-navy leading-snug pt-1.5">{f.text}</span>
                     </div>
                   ))}
                 </div>
@@ -385,7 +385,7 @@ export default function MarketplacePage() {
 
             {/* Right — Dashboard Card */}
             <Reveal delay={200}>
-              <div className="bg-[#0B0F14] rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/5 shadow-2xl">
+              <div className="bg-brand-ink rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-white/5 shadow-2xl">
                 {/* Window dots */}
                 <div className="flex items-center gap-2 mb-4 sm:mb-5">
                   <div className="flex gap-1.5">
@@ -404,7 +404,7 @@ export default function MarketplacePage() {
                     { l: "Avg Response", v: "14 hrs", c: "text-yellow-400" },
                     { l: "Active Vendors", v: "25", c: "text-green-400" },
                   ].map((k) => (
-                    <div key={k.l} className="bg-white/[0.04] rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
+                    <div key={k.l} className="bg-white/4 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
                       <div className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider">{k.l}</div>
                       <div className={`text-lg sm:text-2xl font-bold ${k.c} mt-1 font-mono`}>{k.v}</div>
                     </div>
@@ -412,14 +412,14 @@ export default function MarketplacePage() {
                 </div>
 
                 {/* Live RFQs */}
-                <div className="bg-white/[0.04] rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
+                <div className="bg-white/4 rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/5">
                   <div className="text-[9px] sm:text-[10px] text-slate-500 uppercase tracking-wider mb-2 sm:mb-3">Recent RFQs</div>
                   {[
                     { id: "RFQ-4821", item: "OPC Cement × 500", status: "5 Quotes", time: "12 hrs ago", color: "text-green-400" },
                     { id: "RFQ-4820", item: "TMT Rebar × 200", status: "3 Quotes", time: "8 hrs ago", color: "text-yellow-400" },
                     { id: "RFQ-4819", item: "PVC Pipes × 1000", status: "Closed", time: "1 day ago", color: "text-slate-500" },
                   ].map((o) => (
-                    <div key={o.id} className="grid grid-cols-4 py-1.5 sm:py-2 border-b border-white/[0.04] last:border-0 text-[10px] sm:text-xs items-center">
+                    <div key={o.id} className="grid grid-cols-4 py-1.5 sm:py-2 border-b border-white/4 last:border-0 text-[10px] sm:text-xs items-center">
                       <span className="text-green-400 font-mono">{o.id}</span>
                       <span className="text-slate-400 col-span-1 truncate">{o.item}</span>
                       <span className={`${o.color} font-semibold`}>{o.status}</span>
@@ -437,7 +437,7 @@ export default function MarketplacePage() {
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#15803D] mb-2 sm:mb-3">Sell on PashxD</p>
+            <p className="text-xs font-bold tracking-[0.2em] uppercase text-brand-green mb-2 sm:mb-3">Sell on PashxD</p>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 sm:mb-3">Your Store. Your Prices. Our Reach.</h2>
             <p className="text-sm sm:text-base md:text-lg text-slate-600 mb-8 sm:mb-12 max-w-lg">Whether you manufacture, distribute, or import — PashxD gives you a digital storefront with active buyers.</p>
           </Reveal>
@@ -448,25 +448,25 @@ export default function MarketplacePage() {
                 <div
                   className={`bg-white border rounded-xl p-5 sm:p-6 md:p-8 transition-all duration-300 relative overflow-hidden ${
                     activeSellerTab === i
-                      ? "border-[#15803D] shadow-lg shadow-green-600/5"
-                      : "border-slate-200 hover:border-[#15803D]/50 hover:shadow-md"
+                      ? "border-brand-green shadow-lg shadow-green-600/5"
+                      : "border-slate-200 hover:border-brand-green/50 hover:shadow-md"
                   }`}
                   onMouseEnter={() => setActiveSellerTab(i)}
                 >
                   {/* Active indicator */}
-                  <div className={`absolute top-0 left-0 w-1 transition-all duration-300 ${activeSellerTab === i ? "h-full bg-[#15803D]" : "h-0"}`} />
+                  <div className={`absolute top-0 left-0 w-1 transition-all duration-300 ${activeSellerTab === i ? "h-full bg-brand-green" : "h-0"}`} />
 
                   <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center flex-shrink-0">
-                      <s.icon className="w-5 h-5 text-[#15803D]" />
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-green-50 border border-green-200 flex items-center justify-center shrink-0">
+                      <s.icon className="w-5 h-5 text-brand-green" />
                     </div>
                     <div>
                       <div className="text-base sm:text-lg font-bold">{s.title}</div>
-                      <div className="text-[10px] sm:text-xs text-[#15803D] font-semibold">Discuss supplier onboarding</div>
+                      <div className="text-[10px] sm:text-xs text-brand-green font-semibold">Discuss supplier onboarding</div>
                     </div>
                   </div>
 
-                  <span className="inline-block text-[10px] sm:text-xs font-semibold px-2.5 py-1 bg-green-50 text-[#15803D] rounded-md mb-2 sm:mb-3">{s.badge}</span>
+                  <span className="inline-block text-[10px] sm:text-xs font-semibold px-2.5 py-1 bg-green-50 text-brand-green rounded-md mb-2 sm:mb-3">{s.badge}</span>
                   <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{s.desc}</p>
                 </div>
               </Reveal>
@@ -480,7 +480,7 @@ export default function MarketplacePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
             <div className="text-center mb-8 sm:mb-12">
-              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-[#15803D] mx-auto mb-3" />
+              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-brand-green mx-auto mb-3" />
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2">Built on Trust</h2>
               <p className="text-sm sm:text-base md:text-lg text-slate-600 max-w-md mx-auto">Review supplier details, compare quotations, and agree delivery terms before ordering.</p>
             </div>
@@ -494,9 +494,9 @@ export default function MarketplacePage() {
               { icon: Globe, title: "Material specifications", desc: "Request the certificates your project requires" },
             ].map((t, i) => (
               <Reveal key={t.title} delay={i * 80}>
-                <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 transition-all duration-200 hover:border-[#15803D] hover:shadow-md">
+                <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 transition-all duration-200 hover:border-brand-green hover:shadow-md">
                   <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-green-50 flex items-center justify-center mb-3">
-                    <t.icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#15803D]" />
+                    <t.icon className="w-4 h-4 sm:w-5 sm:h-5 text-brand-green" />
                   </div>
                   <div className="text-sm sm:text-base font-bold mb-1">{t.title}</div>
                   <div className="text-xs sm:text-sm text-slate-500">{t.desc}</div>
@@ -511,7 +511,7 @@ export default function MarketplacePage() {
       <section className="pb-12 sm:pb-16 md:pb-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal>
-            <div className="bg-gradient-to-br from-[#15803D] via-[#166534] to-[#14532d] rounded-xl sm:rounded-2xl px-6 sm:px-10 md:px-16 py-12 sm:py-16 md:py-20 text-center relative overflow-hidden">
+            <div className="bg-linear-to-br from-[#15803D] via-brand-green-hover to-[#14532d] rounded-xl sm:rounded-2xl px-6 sm:px-10 md:px-16 py-12 sm:py-16 md:py-20 text-center relative overflow-hidden">
               {/* Decorative glows */}
               <div className="absolute -top-20 -left-20 w-72 h-72 bg-white/5 rounded-full blur-[80px] pointer-events-none" />
               <div className="absolute -bottom-24 -right-16 w-80 h-80 bg-white/5 rounded-full blur-[80px] pointer-events-none" />
@@ -527,7 +527,7 @@ export default function MarketplacePage() {
                 <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
                   <Link
                     to="/contact"
-                    className="inline-flex items-center gap-2 bg-white text-[#166534] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-lg shadow-black/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+                    className="inline-flex items-center gap-2 bg-white text-brand-green-hover px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-sm sm:text-base shadow-lg shadow-black/15 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
                   >
                     Sign Up as Buyer
                     <ArrowRight className="w-4 h-4" />

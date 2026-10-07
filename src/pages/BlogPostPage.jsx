@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Tag } from "lucide-react";
 import Container from "../components/layout/Container";
 import SEOHead from "../components/SEOHead";
-import { useSsrBlogPost } from "../context/SsrDataContext-shared.js";
+import { useSsrBlogPost, useSsrBlogMissing } from "../context/SsrDataContext-shared.js";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import "../styles/blog-content.css";
@@ -14,8 +14,8 @@ import { fetchBlogJson, blogDate, blogAuthor } from "../lib/blog";
 import { demoteArticleH1s } from "../lib/articleHtml.js";
 
 /**
- * ID of the JSON <script> tag that scripts/prerender.mjs inlines next to the
- * static markup of every prerendered blog post. Reading it lets the client
+ * ID of the JSON <script> tag embedded with server-rendered articles.
+ * Reading it lets the client
  * boot from the exact post the server rendered instead of blanking the page
  * with the loading skeleton until the API responds again.
  */
@@ -24,35 +24,38 @@ const SSR_BLOG_DATA_ID = "ssr-blog-data";
 // Parsed once per page load and cached: React StrictMode double-invokes state
 // initializers in development, and the second call must see the same payload
 // (re-reading after removing the tag would return null and drop the content).
-let embeddedPostCache = null;
-let embeddedPostRead = false;
-function readEmbeddedBlogPost() {
-  if (embeddedPostRead) return embeddedPostCache;
-  embeddedPostRead = true;
+let embeddedDataCache = null;
+let embeddedDataRead = false;
+function readEmbeddedBlogData() {
   if (typeof document === "undefined") return null;
+  if (embeddedDataRead) return embeddedDataCache;
+  embeddedDataRead = true;
   const el = document.getElementById(SSR_BLOG_DATA_ID);
   if (!el) return null;
   try {
     const data = JSON.parse(el.textContent || "null");
     el.remove(); // one-shot: a client-side nav to another slug must refetch
-    embeddedPostCache = data && data.blogPost ? data.blogPost : null;
+    embeddedDataCache = data;
   } catch {
-    embeddedPostCache = null;
+    embeddedDataCache = null;
   }
-  return embeddedPostCache;
+  return embeddedDataCache;
 }
 
 export default function BlogPostPage() {
   const { slug } = useParams();
-  // During the build-time prerender the post arrives via SsrDataContext; in
+  // On the server the post arrives via SsrDataContext; in
   // the browser the same payload is read back from the inlined <script> tag,
   // so hydration starts from identical markup (no spinner flash, no refetch).
   const ssrPost = useSsrBlogPost();
+  const ssrMissing = useSsrBlogMissing();
+  const embeddedData = readEmbeddedBlogData();
+  const initialMissing = ssrMissing || embeddedData?.blogMissing === true;
   const [storedPost, setPost] = useState(() => {
-    const initial = ssrPost || readEmbeddedBlogPost();
+    const initial = ssrPost || embeddedData?.blogPost;
     return initial?.slug === slug ? initial : null;
   });
-  const [request, setRequest] = useState({ slug, loading: !storedPost, error: null });
+  const [request, setRequest] = useState({ slug, loading: !storedPost && !initialMissing, error: initialMissing ? "missing" : null });
   const [retry, setRetry] = useState(0);
   const post = storedPost?.slug === slug ? storedPost : null;
   const loading = !post && (request.slug !== slug || request.loading);
@@ -60,8 +63,7 @@ export default function BlogPostPage() {
 
   useEffect(() => {
     const controller = new AbortController();
-    // Revalidate even when static HTML supplied the post: admin edits and
-    // unpublishing must be reflected without waiting for another site build.
+    // Revalidate during client navigation and while adopting server-rendered content.
     fetchBlogJson(encodeURIComponent(slug), controller.signal).then(data => {
       if (controller.signal.aborted) return;
       if (data.slug !== slug) throw new Error('Article response did not match its URL');
@@ -79,7 +81,7 @@ export default function BlogPostPage() {
     return (
       <div className="min-h-screen pt-32 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#15803D]"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-brand-green"></div>
           <p className="text-slate-500 mt-4">Loading article...</p>
         </div>
       </div>
@@ -91,12 +93,12 @@ export default function BlogPostPage() {
       <div className="min-h-screen pt-32 flex items-center justify-center">
         <SEOHead title={error === 'network' ? "Article temporarily unavailable | Pashx Dashboard" : "Article Not Found | Pashx Dashboard"} description="Explore articles from Pashx Dashboard." path={`/blog/${slug}`} noIndex />
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#0A2540] mb-4">{error === 'network' ? 'Unable to load this article' : 'Article not found'}</h1>
+          <h1 className="text-4xl font-bold text-brand-navy mb-4">{error === 'network' ? 'Unable to load this article' : 'Article not found'}</h1>
           <p className="text-slate-500 mb-8">{error === 'network' ? 'Please try again. There may be a temporary connection problem.' : 'This article may have been removed or is no longer published.'}</p>
           {error === 'network' && <button className="block mx-auto mb-6 text-brand-green underline" onClick={() => { setRequest({ slug, loading: true, error: null }); setRetry(n => n + 1); }}>Try again</button>}
           <Link
             to="/resources"
-            className="inline-flex items-center gap-2 text-[#15803D] font-semibold hover:underline"
+            className="inline-flex items-center gap-2 text-brand-green font-semibold hover:underline"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Resources
@@ -144,7 +146,7 @@ export default function BlogPostPage() {
       <Container className="mb-8">
         <Link
           to="/resources"
-          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-[#15803D] transition"
+          className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-brand-green transition"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Resources
@@ -152,11 +154,11 @@ export default function BlogPostPage() {
       </Container>
 
       {/* Hero */}
-      <Container className="!max-w-4xl">
+      <Container className="max-w-4xl!">
         {/* Category & Meta */}
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           {post.category && (
-            <span className="px-3 py-1 rounded-full bg-green-50 text-[#15803D] text-sm border border-green-100 font-medium">
+            <span className="px-3 py-1 rounded-full bg-green-50 text-brand-green text-sm border border-green-100 font-medium">
               {post.category}
             </span>
           )}
@@ -173,7 +175,7 @@ export default function BlogPostPage() {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0A2540] leading-tight mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-navy leading-tight mb-6">
           {post.title}
         </h1>
 
@@ -254,8 +256,8 @@ export default function BlogPostPage() {
 
         <div className="mt-10 text-sm text-slate-600 border-t border-slate-200 pt-6">Questions or corrections? <Link to="/contact" className="text-brand-green underline">Contact our team</Link>. <Link to="/resources" className="text-brand-green underline">Read more articles</Link>.</div>
         {/* CTA */}
-        <div className="mt-16 p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl border border-green-200">
-          <h3 className="text-xl font-bold text-[#0A2540] mb-3">
+        <div className="mt-16 p-8 bg-linear-to-br from-green-50 to-green-100 rounded-2xl border border-green-200">
+          <h3 className="text-xl font-bold text-brand-navy mb-3">
             Ready to transform your operations?
           </h3>
           <p className="text-slate-600 mb-6">
@@ -263,7 +265,7 @@ export default function BlogPostPage() {
           </p>
           <Link
             to="/book-demo"
-            className="inline-flex items-center gap-2 bg-[#15803D] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#166534] transition"
+            className="inline-flex items-center gap-2 bg-brand-green text-white px-6 py-3 rounded-full font-semibold hover:bg-brand-green-hover transition"
           >
             Book a Demo
           </Link>

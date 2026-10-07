@@ -39,10 +39,10 @@ function ScrollToTop() {
 /* ================= LAYOUT ================= */
 function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-white text-[#0A2540] flex flex-col">
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:p-3">Skip to content</a>
+    <div className="min-h-screen bg-white text-brand-navy flex flex-col">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 focus:bg-white focus:p-3">Skip to content</a>
       <Navbar />
-      <main id="main-content" tabIndex={-1} className="flex-grow">{children}</main>
+      <main id="main-content" tabIndex={-1} className="grow">{children}</main>
       <Footer />
     </div>
   );

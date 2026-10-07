@@ -37,9 +37,9 @@ export default function ProblemSection() {
 
         {/* Heading */}
         <div className="reveal max-w-2xl mx-auto text-center mb-14 md:mb-20">
-          <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-[#0A2540] mb-5 leading-[1.1] tracking-tight">
+          <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-brand-navy mb-5 leading-[1.1] tracking-tight">
             Too Many Tools.{" "}
-            <span className="bg-gradient-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
               No Real Control.
             </span>
           </h2>
@@ -59,16 +59,16 @@ export default function ProblemSection() {
               className={`
                 reveal reveal-delay-${(i % 4) + 1}
                 group relative rounded-2xl p-5 md:p-6
-                bg-white/70 backdrop-blur
+                bg-white/70 backdrop-blur-sm
                 border border-slate-200/60
-                shadow-sm transition-all duration-300
+                shadow-xs transition-all duration-300
                 hover:shadow-xl hover:-translate-y-2
-                hover:border-[#16A34A]/30
+                hover:border-brand-green-mid/30
               `}
             >
 
               {/* Glow */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#16A34A]/0 to-[#22C55E]/0 group-hover:from-[#16A34A]/10 group-hover:to-[#22C55E]/10 transition duration-300 pointer-events-none" />
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-[#16A34A]/0 to-[#22C55E]/0 group-hover:from-[#16A34A]/10 group-hover:to-[#22C55E]/10 transition duration-300 pointer-events-none" />
 
               {/* Icon */}
               <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center mb-4 md:mb-5 group-hover:scale-110 transition">
@@ -76,7 +76,7 @@ export default function ProblemSection() {
               </div>
 
               {/* Title */}
-              <h3 className="relative text-[15px] font-semibold text-[#0A2540] mb-2">
+              <h3 className="relative text-[15px] font-semibold text-brand-navy mb-2">
                 {p.title}
               </h3>
 

@@ -63,7 +63,7 @@ export default function FAQSection() {
           </p>
           <h2 className="text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
             The questions that{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               decide this
             </span>
           </h2>

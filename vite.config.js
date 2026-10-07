@@ -7,6 +7,9 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [react()],
+    // Keep server dependencies together; function tracing otherwise omits
+    // conditional React Router entry points and mixed CJS/ESM exports.
+    ssr: { noExternal: true },
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),

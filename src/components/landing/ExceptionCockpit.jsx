@@ -101,7 +101,7 @@ export default function ExceptionCockpit() {
             </p>
             <h2 className="reveal mb-5 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
               Autonomy you{" "}
-              <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
                 grant, not assume
               </span>
             </h2>

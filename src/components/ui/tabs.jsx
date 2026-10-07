@@ -33,7 +33,7 @@ function TabsTrigger({ className, ...props }) {
     <TabsPrimitive.Trigger
       className={cn(
         "px-4 py-2 text-sm font-medium rounded-md transition-all",
-        "data-[state=active]:bg-white data-[state=active]:text-[#16A34A] data-[state=active]:shadow-sm",
+        "data-[state=active]:bg-white data-[state=active]:text-brand-green-mid data-[state=active]:shadow-xs",
         "text-slate-500",
         className
       )}

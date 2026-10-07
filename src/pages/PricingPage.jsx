@@ -96,12 +96,12 @@ export default function PricingPage() {
           backgroundImage: `radial-gradient(circle at 50% 30%, rgba(21, 128, 61, 0.08) 0%, transparent 50%)`,
         }} />
         <Container className="relative max-w-4xl text-center">
-          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
             Pricing
           </span>
-          <h1 className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight font-extrabold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-[1.1]">
+          <h1 className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight font-extrabold mt-4 mb-5 md:mb-6 text-brand-navy leading-[1.1]">
             Plans That{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               Scale With You
             </span>
           </h1>
@@ -126,20 +126,20 @@ export default function PricingPage() {
                 }`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#15803D] text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-md">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-brand-green text-white text-[10px] font-bold uppercase tracking-wider rounded-full shadow-md">
                     Most Popular
                   </div>
                 )}
 
                 <div className="mb-5 md:mb-6">
-                  <h3 className="text-xl font-bold text-[#0A2540]">
+                  <h3 className="text-xl font-bold text-brand-navy">
                     {plan.name}
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">{plan.tagline}</p>
                 </div>
 
                 <div className="mb-5 md:mb-6">
-                  <span className="text-4xl font-black text-[#0A2540] font-mono-data">
+                  <span className="text-4xl font-black text-brand-navy font-mono-data">
                     {plan.price}
                   </span>
                   {plan.period && (
@@ -152,7 +152,7 @@ export default function PricingPage() {
                     data-testid={`pricing-cta-${plan.name.toLowerCase()}`}
                     className={`w-full rounded-full h-11 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 ${
                       plan.popular
-                        ? "bg-[#15803D] hover:bg-[#166534] text-white shadow-md shadow-green-600/20"
+                        ? "bg-brand-green hover:bg-brand-green-hover text-white shadow-md shadow-green-600/20"
                         : "bg-slate-100 hover:bg-slate-200 text-slate-700"
                     }`}
                   >
@@ -165,7 +165,7 @@ export default function PricingPage() {
                   <div className="space-y-2 mb-4">
                     {plan.limits.map((l) => (
                       <div key={l} className="flex items-center gap-2 text-sm">
-                        <Zap className="h-3.5 w-3.5 text-[#15803D] flex-shrink-0" />
+                        <Zap className="h-3.5 w-3.5 text-brand-green shrink-0" />
                         <span className="text-slate-700 font-medium">{l}</span>
                       </div>
                     ))}
@@ -174,9 +174,9 @@ export default function PricingPage() {
                     {plan.features.map((f) => (
                       <div key={f.label} className="flex items-center gap-2 text-sm">
                         {f.included ? (
-                          <CheckCircle2 className="h-3.5 w-3.5 text-[#15803D] flex-shrink-0" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-brand-green shrink-0" />
                         ) : (
-                          <X className="h-3.5 w-3.5 text-slate-300 flex-shrink-0" />
+                          <X className="h-3.5 w-3.5 text-slate-300 shrink-0" />
                         )}
                         <span className={f.included ? "text-slate-600" : "text-slate-300"}>
                           {f.label}
@@ -195,10 +195,10 @@ export default function PricingPage() {
       <section className="py-20 md:py-24 bg-white">
         <Container>
           <div className="reveal text-center max-w-2xl mx-auto mb-12 md:mb-16">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
               Modules
             </span>
-            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-[#0A2540]">
+            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-brand-navy">
               Add-On Modules
             </h2>
             <p className="text-slate-500 mt-4 text-base md:text-lg">
@@ -210,9 +210,9 @@ export default function PricingPage() {
             {addons.map((addon) => (
               <div
                 key={addon.name}
-                className="bg-white border border-slate-200 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
+                className="bg-white border border-slate-200 rounded-xl p-5 md:p-6 shadow-xs hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
               >
-                <h4 className="text-sm font-semibold text-[#0A2540] mb-2">
+                <h4 className="text-sm font-semibold text-brand-navy mb-2">
                   {addon.name}
                 </h4>
                 <p className="text-xs text-slate-500 leading-relaxed mb-4">
@@ -222,7 +222,7 @@ export default function PricingPage() {
                   {addon.included.map((plan) => (
                     <span
                       key={plan}
-                      className="px-2 py-0.5 rounded-full bg-green-50 text-[#15803D] text-[9px] font-medium border border-green-100"
+                      className="px-2 py-0.5 rounded-full bg-green-50 text-brand-green text-[9px] font-medium border border-green-100"
                     >
                       {plan}
                     </span>
@@ -238,10 +238,10 @@ export default function PricingPage() {
       <section className="py-20 md:py-24 bg-slate-50">
         <Container className="max-w-3xl">
           <div className="reveal text-center mb-10 md:mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
               FAQ
             </span>
-            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-[#0A2540]">
+            <h2 className="text-3xl md:text-4xl tracking-tight font-bold mt-4 text-brand-navy">
               Frequently Asked Questions
             </h2>
           </div>
@@ -251,10 +251,10 @@ export default function PricingPage() {
               <AccordionItem
                 key={i}
                 value={`faq-${i}`}
-                className="bg-white border border-slate-200 rounded-xl px-5 md:px-6 shadow-sm"
+                className="bg-white border border-slate-200 rounded-xl px-5 md:px-6 shadow-xs"
                 data-testid={`faq-item-${i}`}
               >
-                <AccordionTrigger className="text-sm font-semibold text-[#0A2540] hover:text-[#15803D] py-4 text-left">
+                <AccordionTrigger className="text-sm font-semibold text-brand-navy hover:text-brand-green py-4 text-left">
                   {faq.q}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm text-slate-500 leading-relaxed pb-4">
@@ -269,7 +269,7 @@ export default function PricingPage() {
       {/* CTA */}
       <section className="py-20 md:py-24 bg-white">
         <Container className="max-w-4xl">
-          <div className="reveal relative bg-gradient-to-br from-[#15803D] to-[#166534] rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] overflow-hidden">
+          <div className="reveal relative bg-linear-to-br from-[#15803D] to-brand-green-hover rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] overflow-hidden">
 
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 blur-[100px] rounded-full pointer-events-none" />
@@ -284,7 +284,7 @@ export default function PricingPage() {
               <Link to="/book-demo">
                 <Button
                   data-testid="pricing-bottom-cta"
-                  className="bg-white hover:bg-slate-50 text-[#15803D] h-12 px-7 md:px-8 rounded-full text-sm md:text-base font-semibold shadow-lg hover:-translate-y-[2px] transition-all duration-300"
+                  className="bg-white hover:bg-slate-50 text-brand-green h-12 px-7 md:px-8 rounded-full text-sm md:text-base font-semibold shadow-lg hover:translate-y-[-2px] transition-all duration-300"
                 >
                   Get Custom Pricing <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

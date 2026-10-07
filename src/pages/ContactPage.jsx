@@ -24,13 +24,13 @@ export default function ContactPage() {
             {/* ================= LEFT ================= */}
             <div className="reveal">
 
-              <p className="text-xs md:text-sm font-semibold tracking-[0.25em] text-[#15803D] uppercase mb-5 md:mb-6">
+              <p className="text-xs md:text-sm font-semibold tracking-[0.25em] text-brand-green uppercase mb-5 md:mb-6">
                 GET IN TOUCH
               </p>
 
-              <h1 className="text-3xl sm:text-4xl md:text-[48px] leading-[1.1] font-extrabold text-[#0A2540] mb-5 md:mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-[48px] leading-[1.1] font-extrabold text-brand-navy mb-5 md:mb-6">
                 Let's{" "}
-                <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                   Talk
                 </span>
               </h1>
@@ -57,7 +57,7 @@ export default function ContactPage() {
                   {["Direct contact", "Workflow review", "Clear next steps"].map((t) => (
                     <span
                       key={t}
-                      className="px-3 md:px-4 py-1.5 rounded-full bg-green-50 text-[#15803D] text-xs border border-green-100 font-medium"
+                      className="px-3 md:px-4 py-1.5 rounded-full bg-green-50 text-brand-green text-xs border border-green-100 font-medium"
                     >
                       {t}
                     </span>
@@ -71,7 +71,7 @@ export default function ContactPage() {
             {/* ================= RIGHT (CTA CARD) ================= */}
             <div className="reveal reveal-delay-2">
 
-              <div className="bg-gradient-to-br from-[#0A2540] via-[#0d2b4a] to-[#0A2540] rounded-2xl p-8 md:p-10 shadow-[0_20px_60px_rgba(10,37,64,0.2)] border border-white/10 relative overflow-hidden">
+              <div className="bg-linear-to-br from-[#0A2540] via-[#0d2b4a] to-[#0A2540] rounded-2xl p-8 md:p-10 shadow-[0_20px_60px_rgba(10,37,64,0.2)] border border-white/10 relative overflow-hidden">
 
                 {/* Ambient glow */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-green-500/20 blur-[100px] rounded-full pointer-events-none" />
@@ -108,7 +108,7 @@ export default function ContactPage() {
                   {/* CTA Button */}
                   <Link
                     to="/book-demo"
-                    className="inline-flex items-center justify-center gap-2 w-full bg-[#15803D] hover:bg-[#166534] text-white rounded-full font-semibold py-3.5 md:py-4 text-sm shadow-lg shadow-green-600/30 hover:-translate-y-[1px] transition-all duration-300"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-brand-green hover:bg-brand-green-hover text-white rounded-full font-semibold py-3.5 md:py-4 text-sm shadow-lg shadow-green-600/30 hover:-translate-y-px transition-all duration-300"
                   >
                     Book a Demo
                     <ArrowRight className="w-4 h-4" />
@@ -137,15 +137,15 @@ export default function ContactPage() {
 function Info({ icon: Icon, title, value, href }) {
   const content = (
     <>
-      <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
-        {createElement(Icon, {className: "w-5 h-5 text-[#15803D]"})}
+      <div className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
+        {createElement(Icon, {className: "w-5 h-5 text-brand-green"})}
       </div>
 
       <div>
-        <p className="text-xs md:text-sm font-semibold text-[#0A2540]">
+        <p className="text-xs md:text-sm font-semibold text-brand-navy">
           {title}
         </p>
-        <p className="text-sm text-slate-500 group-hover:text-[#15803D] transition">
+        <p className="text-sm text-slate-500 group-hover:text-brand-green transition">
           {value}
         </p>
       </div>

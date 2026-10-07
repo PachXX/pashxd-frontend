@@ -21,13 +21,13 @@ export const DEMO_PATH = "/book-demo";
 
 const VARIANTS = {
   primary:
-    "bg-brand-green hover:bg-brand-green-hover text-white shadow-lg shadow-green-600/20 hover:-translate-y-[2px]",
+    "bg-brand-green hover:bg-brand-green-hover text-white shadow-lg shadow-green-600/20 hover:translate-y-[-2px]",
   secondary:
     "border border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300",
   "on-dark":
     "border border-white/20 text-white hover:bg-white/10",
   "primary-gradient":
-    "bg-gradient-to-r from-brand-green-mid to-brand-green-light text-white shadow-[0_10px_30px_rgba(34,197,94,0.35)] hover:scale-[1.03]",
+    "bg-linear-to-r from-brand-green-mid to-brand-green-light text-white shadow-[0_10px_30px_rgba(34,197,94,0.35)] hover:scale-[1.03]",
 };
 
 const SIZES = {

@@ -67,13 +67,13 @@ export default function IndustriesPreview() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12 md:mb-16 gap-4">
 
           <div>
-            <p className="text-xs tracking-[0.25em] text-[#15803D] font-semibold mb-3">
+            <p className="text-xs tracking-[0.25em] text-brand-green font-semibold mb-3">
               INDUSTRIES
             </p>
 
-            <h2 className="text-3xl md:text-4xl font-bold text-[#0A2540]">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy">
               Built for{" "}
-              <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                 Real-World Operations
               </span>
             </h2>
@@ -81,7 +81,7 @@ export default function IndustriesPreview() {
 
           <Link
             to="/industries"
-            className="inline-flex items-center gap-1.5 text-[#15803D] font-semibold text-sm hover:gap-2.5 transition-all duration-300"
+            className="inline-flex items-center gap-1.5 text-brand-green font-semibold text-sm hover:gap-2.5 transition-all duration-300"
           >
             View all industries <ArrowRight className="w-4 h-4" />
           </Link>
@@ -97,10 +97,10 @@ export default function IndustriesPreview() {
               className="
                 group relative rounded-2xl overflow-hidden
                 border border-slate-200 bg-white
-                shadow-sm transition-all duration-500
+                shadow-xs transition-all duration-500
                 hover:-translate-y-2 hover:shadow-xl
                 hover:border-green-200
-                focus:outline-none focus:ring-2 focus:ring-green-200 focus:ring-offset-2
+                focus:outline-hidden focus:ring-2 focus:ring-green-200 focus:ring-offset-2
               "
             >
 
@@ -119,7 +119,7 @@ export default function IndustriesPreview() {
                 />
 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-white/60 to-white/10" />
+                <div className="absolute inset-0 bg-linear-to-t from-white/90 via-white/60 to-white/10" />
               </div>
 
               {/* CONTENT */}
@@ -135,11 +135,11 @@ export default function IndustriesPreview() {
                     group-hover:bg-green-100 group-hover:scale-105
                   "
                 >
-                  <item.icon className="w-5 h-5 text-[#15803D]" />
+                  <item.icon className="w-5 h-5 text-brand-green" />
                 </div>
 
                 {/* TITLE */}
-                <h3 className="text-base font-semibold text-[#0A2540] mb-2 group-hover:text-[#15803D] transition-colors">
+                <h3 className="text-base font-semibold text-brand-navy mb-2 group-hover:text-brand-green transition-colors">
                   {item.title}
                 </h3>
 
@@ -149,7 +149,7 @@ export default function IndustriesPreview() {
                 </p>
 
                 {/* Subtle arrow on hover */}
-                <div className="flex items-center gap-1 mt-4 text-xs font-semibold text-[#15803D] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-1 mt-4 text-xs font-semibold text-brand-green opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   Learn more <ArrowRight className="w-3 h-3" />
                 </div>
 

@@ -50,7 +50,7 @@ export default function PlatformPage() {
 
       {/* ─── VISION HERO ──────────────────────────────────────────────── */}
       <section className="relative overflow-hidden bg-white pt-28 pb-16 md:pt-36 md:pb-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-green-50/40" />
+        <div className="absolute inset-0 bg-linear-to-br from-slate-50 via-white to-green-50/40" />
         <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-green-100 bg-green-50 px-4 py-1.5">
@@ -92,7 +92,7 @@ export default function PlatformPage() {
             {HORIZON.map((h) => (
               <div
                 key={h.step}
-                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs"
               >
                 <span className="mb-4 inline-block rounded-full border border-green-200 bg-green-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-brand-green">
                   {h.step}

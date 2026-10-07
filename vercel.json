@@ -1,73 +1,106 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
-  "rewrites": [
-    {
-      "source": "/api/blogs",
-      "destination": "https://pashxd-api-214145020309.europe-west1.run.app/api/blogs/"
-    },
-    {
-      "source": "/api/:path*",
-      "destination": "https://pashxd-api-214145020309.europe-west1.run.app/api/:path*"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "https://pashxd-api-214145020309.europe-west1.run.app/sitemap.xml"
-    },
-    {
-      "source": "/platform",
-      "destination": "/platform/index.html"
-    },
-    {
-      "source": "/product",
-      "destination": "/product/index.html"
-    },
-    {
-      "source": "/pricing",
-      "destination": "/pricing/index.html"
-    },
-    {
-      "source": "/industries",
-      "destination": "/industries/index.html"
-    },
-    {
-      "source": "/about",
-      "destination": "/about/index.html"
-    },
-    {
-      "source": "/resources",
-      "destination": "/resources/index.html"
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact/index.html"
-    },
-    {
-      "source": "/marketplace",
-      "destination": "/marketplace/index.html"
-    },
-    {
-      "source": "/book-demo",
-      "destination": "/book-demo/index.html"
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms/index.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+  "functions": {
+    "api/render.js": {
+      "maxDuration": 30
     }
-  ],
-  "redirects": [
+  },
+  "routes": [
     {
-      "source": "/blog",
-      "destination": "/resources",
-      "permanent": true
+      "src": "/blog/?",
+      "status": 308,
+      "headers": {
+        "Location": "/resources"
+      }
+    },
+    {
+      "src": "/login/?",
+      "status": 307,
+      "headers": {
+        "Location": "https://admin.pashx.com/login"
+      }
+    },
+    {
+      "src": "/admin/login/?",
+      "status": 307,
+      "headers": {
+        "Location": "https://admin.pashx.com/login"
+      }
+    },
+    {
+      "src": "/admin/leads/?",
+      "status": 307,
+      "headers": {
+        "Location": "https://admin.pashx.com/contacts"
+      }
+    },
+    {
+      "src": "/blog/([^/]+)/?",
+      "dest": "/api/render?route=/blog/$1"
+    },
+    {
+      "src": "/resources/?",
+      "dest": "/api/render?route=/resources"
+    },
+    {
+      "src": "/api/blogs",
+      "dest": "https://pashxd-api-214145020309.europe-west1.run.app/api/blogs/"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "https://pashxd-api-214145020309.europe-west1.run.app/api/$1"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "https://pashxd-api-214145020309.europe-west1.run.app/sitemap.xml"
+    },
+    {
+      "src": "/platform",
+      "dest": "/platform/index.html"
+    },
+    {
+      "src": "/product",
+      "dest": "/product/index.html"
+    },
+    {
+      "src": "/pricing",
+      "dest": "/pricing/index.html"
+    },
+    {
+      "src": "/industries",
+      "dest": "/industries/index.html"
+    },
+    {
+      "src": "/about",
+      "dest": "/about/index.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact/index.html"
+    },
+    {
+      "src": "/marketplace",
+      "dest": "/marketplace/index.html"
+    },
+    {
+      "src": "/book-demo",
+      "dest": "/book-demo/index.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms/index.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy/index.html"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/render?route=/$1"
     }
   ]
 }

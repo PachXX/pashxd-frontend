@@ -61,7 +61,7 @@ export default function AdminLeadsPage() {
       {/* Leads list */}
       <div className="space-y-4">
         {leads.map((lead) => (
-          <div key={lead.id} className="p-4 border rounded-lg shadow-sm">
+          <div key={lead.id} className="p-4 border rounded-lg shadow-xs">
             <p><strong>Name:</strong> {lead.name}</p>
             <p><strong>Email:</strong> {lead.email}</p>
             <p><strong>Company:</strong> {lead.company}</p>

@@ -60,7 +60,7 @@ export default function SecuritySection() {
           </p>
           <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
             Built to survive{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               the questions finance asks
             </span>
           </h2>
@@ -74,7 +74,7 @@ export default function SecuritySection() {
           {CONTROLS.map((c, i) => (
             <div
               key={c.title}
-              className={`reveal reveal-delay-${(i % 6) + 1} rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
+              className={`reveal reveal-delay-${(i % 6) + 1} rounded-2xl border border-slate-200 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-lg`}
             >
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
                 <c.icon className="h-5 w-5 text-brand-navy" />

@@ -12,7 +12,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-4">
             <Link to="/" className="flex items-center gap-3 mb-5 md:mb-6">
               <BrandMark className="h-10 w-10" />
-              <span className="text-lg md:text-xl font-semibold text-[#0A2540]">
+              <span className="text-lg md:text-xl font-semibold text-brand-navy">
                 PxD
               </span>
             </Link>

@@ -26,7 +26,7 @@ const iconBoxClass = `
   bg-white
   border border-slate-200
   flex items-center justify-center
-  shadow-sm
+  shadow-xs
   transition-all duration-300
   group-hover:-translate-y-3
   group-hover:shadow-[0_15px_40px_rgba(22,163,74,0.25)]
@@ -39,15 +39,15 @@ export default function HowItWorks() {
   return (
     <section
       ref={ref}
-      className="py-20 md:py-28 bg-gradient-to-b from-white to-slate-50/60"
+      className="py-20 md:py-28 bg-linear-to-b from-white to-slate-50/60"
     >
       <Container>
 
         {/* HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-12 md:mb-20">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0A2540] mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4">
             From Project to Insights{" "}
-            <span className="bg-gradient-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#16A34A] to-[#22C55E] bg-clip-text text-transparent">
               in One Flow
             </span>
           </h2>
@@ -61,7 +61,7 @@ export default function HowItWorks() {
         <div className="relative">
 
           {/* Desktop horizontal gradient line — aligned to icon center (top-8 = 32px = half of h-16) */}
-          <div className="hidden md:block absolute top-8 left-[calc(8.33%+28px)] right-[calc(8.33%+28px)] h-[3px] rounded-full bg-gradient-to-r from-green-200 via-green-400 to-green-200 opacity-40" />
+          <div className="hidden md:block absolute top-8 left-[calc(8.33%+28px)] right-[calc(8.33%+28px)] h-[3px] rounded-full bg-linear-to-r from-green-200 via-green-400 to-green-200 opacity-40" />
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-x-4 gap-y-10 md:gap-8">
 
@@ -77,7 +77,7 @@ export default function HowItWorks() {
                   <div className="absolute w-20 h-20 bg-green-400/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition duration-500" />
 
                   {/* Step number badge — mobile & tablet only, gives sequential context in grid layout */}
-                  <div className="md:hidden absolute top-0 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-green-50 border border-green-300 flex items-center justify-center shadow-sm">
+                  <div className="md:hidden absolute top-0 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-green-50 border border-green-300 flex items-center justify-center shadow-xs">
                     <span className="text-[10px] font-bold text-green-700 leading-none">
                       {i + 1}
                     </span>
@@ -85,11 +85,11 @@ export default function HowItWorks() {
 
                   {/* ICON */}
                   <div className={iconBoxClass}>
-                    <step.icon className="h-5 w-5 md:h-6 md:w-6 text-[#16A34A]" />
+                    <step.icon className="h-5 w-5 md:h-6 md:w-6 text-brand-green-mid" />
                   </div>
 
                   {/* TEXT */}
-                  <div className="mt-3 md:mt-4 font-semibold text-[#0A2540] text-sm">
+                  <div className="mt-3 md:mt-4 font-semibold text-brand-navy text-sm">
                     {step.title}
                   </div>
                   <div className="text-xs text-slate-400 mt-1 max-w-[110px] group-hover:text-slate-600 transition">

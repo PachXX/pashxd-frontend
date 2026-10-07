@@ -62,7 +62,7 @@ export default function AutopilotFlow() {
     <section
       id="how-it-works"
       ref={ref}
-      className="scroll-mt-24 bg-gradient-to-b from-white to-slate-50/60 py-20 md:py-28"
+      className="scroll-mt-24 bg-linear-to-b from-white to-slate-50/60 py-20 md:py-28"
     >
       <Container>
         <div className="reveal mx-auto mb-14 max-w-2xl text-center md:mb-20">
@@ -71,7 +71,7 @@ export default function AutopilotFlow() {
           </p>
           <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
             From a message to a{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               completed action
             </span>
           </h2>
@@ -87,7 +87,7 @@ export default function AutopilotFlow() {
             return (
               <li
                 key={step.title}
-                className={`reveal reveal-delay-${(i % 6) + 1} group relative rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
+                className={`reveal reveal-delay-${(i % 6) + 1} group relative rounded-2xl border bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl ${
                   isHumanStep
                     ? "border-amber-200 ring-1 ring-amber-100"
                     : "border-slate-200 hover:border-brand-green-mid/30"

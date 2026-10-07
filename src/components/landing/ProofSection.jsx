@@ -51,7 +51,7 @@ export default function ProofSection() {
   return (
     <section
       ref={ref}
-      className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-brand-navy via-brand-navy-deep to-[#071a2c]"
+      className="relative py-20 md:py-28 overflow-hidden bg-linear-to-b from-brand-navy via-brand-navy-deep to-[#071a2c]"
     >
       {/* Ambient glow */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
@@ -66,7 +66,7 @@ export default function ProofSection() {
           </p>
           <h2 className="text-[28px] sm:text-[32px] md:text-[40px] font-extrabold text-white mb-5 leading-[1.1] tracking-tight">
             We measure your baseline{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               before we claim anything
             </span>
           </h2>
@@ -82,7 +82,7 @@ export default function ProofSection() {
           {MEASURES.map((m, i) => (
             <div
               key={m.title}
-              className={`reveal reveal-delay-${i + 1} rounded-2xl p-6 bg-white/[0.04] backdrop-blur-md border border-white/[0.08] transition-all duration-300 hover:bg-white/[0.06] hover:border-green-400/20`}
+              className={`reveal reveal-delay-${i + 1} rounded-2xl p-6 bg-white/4 backdrop-blur-md border border-white/8 transition-all duration-300 hover:bg-white/6 hover:border-green-400/20`}
             >
               <div className="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5">
                 <m.icon className="h-5 w-5 text-green-400" />
@@ -96,7 +96,7 @@ export default function ProofSection() {
         </div>
 
         {/* PILOT COMMITMENTS */}
-        <div className="reveal rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 md:p-8">
+        <div className="reveal rounded-2xl border border-white/8 bg-white/3 p-6 md:p-8">
           <div className="flex items-center gap-3 mb-5">
             <ShieldCheck className="h-5 w-5 text-green-400 shrink-0" />
             <p className="text-xs tracking-[0.2em] uppercase text-slate-400 font-semibold">

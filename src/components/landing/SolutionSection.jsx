@@ -47,13 +47,13 @@ export default function SolutionSection() {
 
         {/* HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
-          <p className="reveal text-xs tracking-[0.25em] uppercase text-[#15803D] mb-5 font-semibold">
+          <p className="reveal text-xs tracking-[0.25em] uppercase text-brand-green mb-5 font-semibold">
             The Solution
           </p>
 
-          <h2 className="reveal text-3xl sm:text-4xl md:text-[2.8rem] font-bold text-[#0A2540] leading-[1.1] mb-5">
+          <h2 className="reveal text-3xl sm:text-4xl md:text-[2.8rem] font-bold text-brand-navy leading-[1.1] mb-5">
             Built for Every Operation,{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               Unified in One Platform
             </span>
           </h2>
@@ -71,10 +71,10 @@ export default function SolutionSection() {
 
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg md:text-xl font-bold text-[#0A2540]">
+              <h3 className="text-lg md:text-xl font-bold text-brand-navy">
                 Project Types
               </h3>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-[#15803D] font-semibold bg-green-50 border border-green-100 px-2.5 py-1 rounded-full">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-brand-green font-semibold bg-green-50 border border-green-100 px-2.5 py-1 rounded-full">
                 Project workflows
               </span>
             </div>
@@ -90,10 +90,10 @@ export default function SolutionSection() {
                   <div className="relative">
                     <div className="absolute inset-0 bg-green-400/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition duration-500" />
                     <div className="relative w-10 h-10 md:w-11 md:h-11 rounded-full bg-green-100/60 group-hover:bg-white flex items-center justify-center transition-all duration-300 group-hover:scale-110">
-                      <type.icon className="w-4.5 h-4.5 md:w-5 md:h-5 text-[#15803D]" strokeWidth={1.75} />
+                      <type.icon className="w-4.5 h-4.5 md:w-5 md:h-5 text-brand-green" strokeWidth={1.75} />
                     </div>
                   </div>
-                  <span className="text-xs md:text-sm font-semibold text-[#0A2540]">
+                  <span className="text-xs md:text-sm font-semibold text-brand-navy">
                     {type.label}
                   </span>
                 </div>
@@ -112,7 +112,7 @@ export default function SolutionSection() {
           <div className="reveal reveal-delay-2 relative flex items-center justify-center min-h-[500px] md:min-h-[560px]">
 
             {/* Soft card background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-50 to-green-50/40 rounded-3xl border border-slate-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-slate-50 to-green-50/40 rounded-3xl border border-slate-100" />
 
             {/* Hub content */}
             <div className="relative w-full h-[500px] md:h-[560px] flex items-center justify-center">
@@ -130,7 +130,7 @@ export default function SolutionSection() {
               </div>
 
               {/* UNIFIED OS label */}
-              <span className="absolute top-[calc(50%-190px)] md:top-[calc(50%-220px)] left-1/2 -translate-x-1/2 bg-white px-4 py-1 rounded-full border border-green-200 text-[10px] md:text-[11px] tracking-[0.25em] font-bold text-[#15803D] uppercase shadow-sm z-20">
+              <span className="absolute top-[calc(50%-190px)] md:top-[calc(50%-220px)] left-1/2 -translate-x-1/2 bg-white px-4 py-1 rounded-full border border-green-200 text-[10px] md:text-[11px] tracking-[0.25em] font-bold text-brand-green uppercase shadow-xs z-20">
                 Unified OS
               </span>
 
@@ -173,7 +173,7 @@ export default function SolutionSection() {
 
               {/* Central Pashx Dashboard Hub */}
               <div className="relative z-10 group solution-hub-ring">
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400/40 to-green-600/20 blur-2xl scale-150" />
+                <div className="absolute inset-0 rounded-full bg-linear-to-br from-green-400/40 to-green-600/20 blur-2xl scale-150" />
 
                 <div aria-label="Pashx Dashboard" className="relative w-24 h-24 md:w-28 md:h-28 rounded-full bg-white p-2 shadow-[0_0_40px_rgba(21,128,61,0.3),0_20px_40px_rgba(0,0,0,0.08)] border border-green-100">
                   <BrandMark className="w-full h-full" />
@@ -214,9 +214,9 @@ function Satellite({ icon: _Icon, label }) {
   return (
     <div className="flex flex-col items-center gap-1.5 group">
       <div className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md transition-all duration-300 group-hover:scale-110 group-hover:border-green-300 group-hover:shadow-[0_0_25px_rgba(34,197,94,0.4)]">
-        {createElement(_Icon, {className: "w-5 h-5 md:w-6 md:h-6 text-[#15803D]"})}
+        {createElement(_Icon, {className: "w-5 h-5 md:w-6 md:h-6 text-brand-green"})}
       </div>
-      <span className="text-[10px] md:text-xs font-semibold text-[#0A2540] whitespace-nowrap bg-white/80 backdrop-blur px-2 py-0.5 rounded-full">
+      <span className="text-[10px] md:text-xs font-semibold text-brand-navy whitespace-nowrap bg-white/80 backdrop-blur-sm px-2 py-0.5 rounded-full">
         {label}
       </span>
     </div>

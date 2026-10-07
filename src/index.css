@@ -1,8 +1,55 @@
-@import "@fontsource-variable/geist";
+@import '@fontsource-variable/geist' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@theme inline {
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-brand-green: #15803d;
+  --color-brand-green-hover: #166534;
+  --color-brand-green-light: #22c55e;
+  --color-brand-green-mid: #16a34a;
+  --color-brand-navy: #0a2540;
+  --color-brand-navy-deep: #081f33;
+  --color-brand-ink: #0b0f14;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 /* ================================================================
    ROOT THEME
@@ -31,7 +78,7 @@
     --accent-foreground: oklch(0.205 0 0);
 
     --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: oklch(0.985 0 0);
 
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
@@ -129,11 +176,11 @@
    ================================================================ */
 
 .btn-primary {
-  @apply bg-[#15803D] hover:bg-[#166534] text-white px-6 py-3 rounded-full font-semibold shadow-lg shadow-green-600/20 transition-all duration-300 hover:-translate-y-[2px];
+  @apply bg-[#15803D] hover:bg-[#166534] text-white px-6 py-3 rounded-full font-semibold shadow-lg shadow-green-600/20 transition-all duration-300 hover:translate-y-[-2px];
 }
 
 .card-base {
-  @apply bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300;
+  @apply bg-white border border-slate-100 rounded-2xl shadow-xs hover:shadow-xl transition-all duration-300;
 }
 
 /* ================================================================

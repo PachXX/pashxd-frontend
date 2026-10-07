@@ -50,7 +50,7 @@ const integrations = [
 
 function FeatureGrid({ features, accentColor }) {
   const map = {
-    green: "text-[#15803D] bg-green-50 border-green-100",
+    green: "text-brand-green bg-green-50 border-green-100",
     blue: "text-blue-600 bg-blue-50 border-blue-100",
     amber: "text-amber-600 bg-amber-50 border-amber-100",
   };
@@ -59,12 +59,12 @@ function FeatureGrid({ features, accentColor }) {
       {features.map((f) => (
         <div
           key={f.title}
-          className="bg-white border border-slate-200 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
+          className="bg-white border border-slate-200 rounded-xl p-5 md:p-6 shadow-xs hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
         >
           <div className={`w-10 h-10 rounded-lg ${map[accentColor]} border flex items-center justify-center mb-4`}>
             <f.icon className="h-5 w-5" />
           </div>
-          <h3 className="text-base font-semibold mb-2 text-[#0A2540]">
+          <h3 className="text-base font-semibold mb-2 text-brand-navy">
             {f.title}
           </h3>
           <p className="text-sm text-slate-500 leading-relaxed">{f.desc}</p>
@@ -117,12 +117,12 @@ export default function ProductPage() {
           }}
         />
         <Container className="relative max-w-4xl text-center">
-          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
             Product
           </span>
-          <h1 className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight font-extrabold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-[1.1]">
+          <h1 className="reveal text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-tight font-extrabold mt-4 mb-5 md:mb-6 text-brand-navy leading-[1.1]">
             One Platform for Your{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               Entire Operation
             </span>
           </h1>
@@ -137,10 +137,10 @@ export default function ProductPage() {
         <Container>
           <div className="reveal grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
                 Pillar 01
               </span>
-              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-tight">
+              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-brand-navy leading-tight">
                 Procurement OS
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-6 md:mb-8">
@@ -251,7 +251,7 @@ export default function ProductPage() {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-blue-600">
                 Pillar 02
               </span>
-              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-tight">
+              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-brand-navy leading-tight">
                 Execution Layer
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-6 md:mb-8">
@@ -271,7 +271,7 @@ export default function ProductPage() {
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-amber-600">
                 Pillar 03
               </span>
-              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-[#0A2540] leading-tight">
+              <h2 className="text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-5 md:mb-6 text-brand-navy leading-tight">
                 AI Intelligence Layer
               </h2>
               <p className="text-slate-500 text-base leading-relaxed mb-6 md:mb-8">
@@ -313,7 +313,7 @@ export default function ProductPage() {
                       style={{ background: "#15151a" }}
                     >
                       <div
-                        className={`w-2 h-2 rounded-full mt-1 flex-shrink-0 ${
+                        className={`w-2 h-2 rounded-full mt-1 shrink-0 ${
                           a.s === "critical"
                             ? "bg-red-500"
                             : a.s === "warning"
@@ -334,10 +334,10 @@ export default function ProductPage() {
       {/* ============ INTEGRATIONS ============ */}
       <section id="integrations" className="py-16 md:py-24 bg-white">
         <Container className="text-center">
-          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-[#15803D]">
+          <span className="reveal text-xs font-bold uppercase tracking-[0.25em] text-brand-green">
             Integrations
           </span>
-          <h2 className="reveal text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-3 md:mb-4 text-[#0A2540]">
+          <h2 className="reveal text-3xl sm:text-4xl tracking-tight font-bold mt-4 mb-3 md:mb-4 text-brand-navy">
             Seamlessly Integrated
           </h2>
           <p className="reveal text-slate-500 max-w-lg mx-auto mb-10 md:mb-12 text-base">
@@ -347,10 +347,10 @@ export default function ProductPage() {
             {integrations.map((int) => (
               <div
                 key={int.name}
-                className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
+                className="bg-white border border-slate-200 rounded-xl p-4 flex flex-col items-center shadow-xs hover:shadow-md hover:-translate-y-1 hover:border-green-200 transition-all duration-300"
               >
-                <Database className="h-6 w-6 text-[#15803D]/70 mb-2" />
-                <span className="text-sm font-semibold text-[#0A2540]">{int.name}</span>
+                <Database className="h-6 w-6 text-brand-green/70 mb-2" />
+                <span className="text-sm font-semibold text-brand-navy">{int.name}</span>
                 <span className="text-[10px] text-slate-400">{int.desc}</span>
               </div>
             ))}
@@ -362,9 +362,9 @@ export default function ProductPage() {
       <section className="py-16 md:py-24 bg-slate-50">
         <Container className="max-w-4xl text-center">
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-green-50 border border-green-100 mb-5 mx-auto">
-            <Lock className="reveal h-6 w-6 text-[#15803D]" />
+            <Lock className="reveal h-6 w-6 text-brand-green" />
           </div>
-          <h2 className="reveal text-2xl sm:text-3xl md:text-4xl tracking-tight font-bold mb-4 text-[#0A2540] leading-tight">
+          <h2 className="reveal text-2xl sm:text-3xl md:text-4xl tracking-tight font-bold mb-4 text-brand-navy leading-tight">
             Enterprise-Grade Security
           </h2>
           <p className="reveal text-slate-500 mb-8 text-base md:text-lg">
@@ -374,7 +374,7 @@ export default function ProductPage() {
             {["Access roles", "Approval workflows", "Deployment review"].map((s) => (
               <span
                 key={s}
-                className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-green-50 text-[#15803D] border border-green-100 text-xs font-medium"
+                className="px-3 md:px-4 py-1.5 md:py-2 rounded-full bg-green-50 text-brand-green border border-green-100 text-xs font-medium"
               >
                 {s}
               </span>
@@ -386,7 +386,7 @@ export default function ProductPage() {
       {/* ============ CTA ============ */}
       <section className="py-16 md:py-24 bg-white">
         <Container className="max-w-4xl">
-          <div className="reveal relative bg-gradient-to-br from-[#15803D] to-[#166534] rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] overflow-hidden">
+          <div className="reveal relative bg-linear-to-br from-[#15803D] to-brand-green-hover rounded-3xl p-8 md:p-12 text-center shadow-[0_20px_60px_rgba(21,128,61,0.25)] overflow-hidden">
 
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-green-400/20 blur-[100px] rounded-full pointer-events-none" />
@@ -401,7 +401,7 @@ export default function ProductPage() {
               <Link to="/book-demo">
                 <Button
                   data-testid="product-cta"
-                  className="bg-white hover:bg-slate-50 text-[#15803D] h-12 px-7 md:px-8 rounded-full text-sm md:text-base font-semibold shadow-lg hover:-translate-y-[2px] transition-all duration-300"
+                  className="bg-white hover:bg-slate-50 text-brand-green h-12 px-7 md:px-8 rounded-full text-sm md:text-base font-semibold shadow-lg hover:translate-y-[-2px] transition-all duration-300"
                 >
                   Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>

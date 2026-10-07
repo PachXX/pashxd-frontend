@@ -82,15 +82,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-50 via-white to-green-50/40">
+    <div className="min-h-screen flex flex-col bg-linear-to-br from-slate-50 via-white to-green-50/40">
 
       {/* Header */}
       <header className="pt-6 md:pt-8">
         <Container>
           <Link to="/" className="inline-flex items-center gap-3">
             <img src={logo} alt="PashxD" className="h-10 w-10 rounded-xl object-cover" />
-            <span className="text-lg font-semibold text-[#0A2540]">
-              Pash<span className="text-[#15803D]">xD</span>
+            <span className="text-lg font-semibold text-brand-navy">
+              Pash<span className="text-brand-green">xD</span>
             </span>
           </Link>
         </Container>
@@ -101,7 +101,7 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
 
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2540] mb-3">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-brand-navy mb-3">
               Welcome back
             </h1>
             <p className="text-slate-500 text-sm md:text-base">
@@ -116,7 +116,7 @@ export default function LoginPage() {
 
             {/* Email */}
             <div className="mb-5">
-              <label className="block text-xs font-semibold text-[#0A2540] mb-1.5">
+              <label className="block text-xs font-semibold text-brand-navy mb-1.5">
                 Email
               </label>
               <input
@@ -132,7 +132,7 @@ export default function LoginPage() {
 
             {/* Password */}
             <div className="mb-2">
-              <label className="block text-xs font-semibold text-[#0A2540] mb-1.5">
+              <label className="block text-xs font-semibold text-brand-navy mb-1.5">
                 Password
               </label>
 

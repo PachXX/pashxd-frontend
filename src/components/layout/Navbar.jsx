@@ -80,8 +80,8 @@ export default function Navbar() {
           transition-all duration-300
           ${
             scrolled
-              ? "bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm"
-              : "bg-white/70 backdrop-blur border-b border-slate-100"
+              ? "bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-xs"
+              : "bg-white/70 backdrop-blur-sm border-b border-slate-100"
           }
         `}
       >
@@ -112,14 +112,14 @@ export default function Navbar() {
                   <span
                     className={`
                       transition-all duration-200
-                      ${isActive ? "text-[#0A2540]" : "hover:text-[#0A2540]"}
+                      ${isActive ? "text-brand-navy" : "hover:text-brand-navy"}
                     `}
                   >
                     {item.name}
                   </span>
                   <span
                     className={`
-                      absolute left-0 -bottom-1 h-[2px] bg-[#15803D]
+                      absolute left-0 -bottom-1 h-[2px] bg-brand-green
                       transition-all duration-300
                       ${isActive ? "w-full" : "w-0 group-hover:w-full"}
                     `}
@@ -134,7 +134,7 @@ export default function Navbar() {
             {/* LOGIN — desktop only */}
             <a
               href={ADMIN_URL}
-              className="hidden xl:inline-block text-slate-600 hover:text-[#0A2540] font-medium transition-all duration-300 text-sm"
+              className="hidden xl:inline-block text-slate-600 hover:text-brand-navy font-medium transition-all duration-300 text-sm"
             >
               Log in
             </a>
@@ -145,10 +145,10 @@ export default function Navbar() {
               onClick={() => trackCtaClick("navbar", "Book a Demo", "/book-demo")}
               className={`
                 hidden sm:inline-block
-                bg-[#15803D] hover:bg-[#166534]
+                bg-brand-green hover:bg-brand-green-hover
                 text-white rounded-full font-semibold
                 transition-all duration-300 shadow-md
-                hover:shadow-green-600/20 hover:-translate-y-[1px]
+                hover:shadow-green-600/20 hover:-translate-y-px
                 ${scrolled ? "px-4 py-2 text-xs md:px-6 md:py-2.5 md:text-sm" : "px-5 py-2.5 text-xs md:px-7 md:py-3 md:text-sm"}
               `}
             >
@@ -158,7 +158,7 @@ export default function Navbar() {
             {/* HAMBURGER — MOBILE ONLY */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden w-10 h-10 flex items-center justify-center rounded-lg text-[#0A2540] hover:bg-slate-100 transition"
+              className="xl:hidden w-10 h-10 flex items-center justify-center rounded-lg text-brand-navy hover:bg-slate-100 transition"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"
@@ -173,7 +173,7 @@ export default function Navbar() {
       {/* MOBILE NAV DRAWER */}
       <div
         className={`
-          xl:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-sm
+          xl:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-xs
           transition-opacity duration-300
           ${mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none"}
         `}
@@ -209,8 +209,8 @@ export default function Navbar() {
                       block px-4 py-3 rounded-xl text-base font-semibold transition
                       ${
                         isActive
-                          ? "bg-green-50 text-[#15803D] border border-green-100"
-                          : "text-[#0A2540] hover:bg-slate-50"
+                          ? "bg-green-50 text-brand-green border border-green-100"
+                          : "text-brand-navy hover:bg-slate-50"
                       }
                     `}
                   >
@@ -225,7 +225,7 @@ export default function Navbar() {
         <div className="p-6 border-t border-slate-100 space-y-3">
           <a
             href={ADMIN_URL}
-            className="block w-full text-center text-slate-600 hover:text-[#0A2540] font-medium py-2 transition-all duration-300 text-sm"
+            className="block w-full text-center text-slate-600 hover:text-brand-navy font-medium py-2 transition-all duration-300 text-sm"
           >
             Log in
           </a>
@@ -236,7 +236,7 @@ export default function Navbar() {
               trackCtaClick("mobile_drawer", "Book a Demo", "/book-demo");
               setMobileOpen(false);
             }}
-            className="block w-full text-center bg-[#15803D] hover:bg-[#166534] text-white rounded-full font-semibold py-3.5 text-sm shadow-md shadow-green-600/20 transition"
+            className="block w-full text-center bg-brand-green hover:bg-brand-green-hover text-white rounded-full font-semibold py-3.5 text-sm shadow-md shadow-green-600/20 transition"
           >
             Book a Demo
           </Link>

@@ -10,3 +10,7 @@ export function useSsrBlogList() {
   const ctx = useContext(SsrDataContext);
   return ctx && Array.isArray(ctx.blogPosts) ? ctx.blogPosts : null;
 }
+
+export function useSsrBlogMissing() {
+  return useContext(SsrDataContext)?.blogMissing === true;
+}

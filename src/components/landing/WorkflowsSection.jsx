@@ -101,7 +101,7 @@ export default function WorkflowsSection() {
           </p>
           <h2 className="mb-4 text-3xl font-bold leading-tight text-brand-navy md:text-[40px]">
             Start with one.{" "}
-            <span className="bg-gradient-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-brand-green-mid to-brand-green-light bg-clip-text text-transparent">
               Expand when it earns it.
             </span>
           </h2>
@@ -161,7 +161,7 @@ export default function WorkflowsSection() {
             role="tabpanel"
             id={`workflow-panel-${active.id}`}
             aria-labelledby={`workflow-tab-${active.id}`}
-            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8"
+            className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xs md:p-8"
           >
             <div className="mb-6">
               <p className="mb-2 text-[11px] font-bold uppercase tracking-widest text-slate-400">

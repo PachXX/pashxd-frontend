@@ -55,7 +55,7 @@ export default function Landing() {
       <IntegrationsSection />
       <SocialProof />
       <section className="border-y border-slate-200 bg-slate-50 py-12"><Container className="flex flex-col sm:flex-row justify-between gap-6 sm:items-center"><div><p className="os-section-label">From the Pashx Dashboard journal</p><h2 className="text-2xl font-semibold text-brand-navy">Ideas for better-run operations.</h2><p className="text-slate-600 mt-3">Explore our latest articles on procurement, projects, and AI.</p></div><CtaLink to="/resources" location="homepage_blog" variant="secondary">Read the blog <ArrowRight size={16} /></CtaLink></Container></section>
-      <Container><section className="os-closing"><div><p className="os-section-label !text-green-300">Build with a connected operation</p><h2>Bring your next project<br />into one clear view.</h2><p>Walk us through your procurement and project workflows. We’ll show you where Pashx Dashboard fits, and what to connect first.</p></div><CtaLink location="final_cta" label="Book a demo" className="shrink-0">Book a demo <ArrowRight size={17} /></CtaLink></section></Container>
+      <Container><section className="os-closing"><div><p className="os-section-label text-green-300!">Build with a connected operation</p><h2>Bring your next project<br />into one clear view.</h2><p>Walk us through your procurement and project workflows. We’ll show you where Pashx Dashboard fits, and what to connect first.</p></div><CtaLink location="final_cta" label="Book a demo" className="shrink-0">Book a demo <ArrowRight size={17} /></CtaLink></section></Container>
     </div>
   );
 }

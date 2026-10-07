@@ -110,7 +110,7 @@ export default function BookDemoPage() {
   // ============ SUCCESS SCREEN ============
   if (submitted) {
     return (
-            <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
+            <div className="min-h-screen pt-32 pb-20 bg-linear-to-b from-slate-50 to-white">
       <SEOHead
         title="Book a Free Demo | Pashx Dashboard"
         description="Schedule a free personalized demo of Pashx Dashboard's AI-powered industrial OS. See how we can streamline your operations and reduce costs."
@@ -120,12 +120,12 @@ export default function BookDemoPage() {
 
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 border border-green-100 mb-6">
-              <CheckCircle2 className="w-8 h-8 text-[#15803D]" />
+              <CheckCircle2 className="w-8 h-8 text-brand-green" />
             </div>
 
-            <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2540] mb-4">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-brand-navy mb-4">
               Thanks, {formData.name.trim().split(/\s+/)[0]}!{" "}
-              <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                 Let's book your demo.
               </span>
             </h1>
@@ -150,7 +150,7 @@ export default function BookDemoPage() {
           <div className="text-center mt-8">
             <button
               onClick={() => navigate("/")}
-              className="text-sm text-slate-500 hover:text-[#15803D] transition"
+              className="text-sm text-slate-500 hover:text-brand-green transition"
             >
               ← Back to home
             </button>
@@ -163,7 +163,7 @@ export default function BookDemoPage() {
 
   // ============ FORM SCREEN ============
   return (
-    <div className="min-h-screen pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen pt-32 pb-20 bg-linear-to-b from-slate-50 to-white">
       {/* The SEOHead used to live only in the post-submission branch above, so
           the form screen — the state every crawler and unfurler actually
           receives — shipped with no title or description. Both branches must
@@ -179,13 +179,13 @@ export default function BookDemoPage() {
 
           {/* LEFT -- Pitch */}
           <div className="lg:col-span-2">
-            <p className="text-xs tracking-[0.25em] uppercase text-[#15803D] font-semibold mb-5">
+            <p className="text-xs tracking-[0.25em] uppercase text-brand-green font-semibold mb-5">
               Book a Demo
             </p>
 
-            <h1 className="text-3xl md:text-4xl font-extrabold text-[#0A2540] leading-[1.1] mb-5">
+            <h1 className="text-3xl md:text-4xl font-extrabold text-brand-navy leading-[1.1] mb-5">
               See Pashx Dashboard in{" "}
-              <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
                 action.
               </span>
             </h1>
@@ -202,8 +202,8 @@ export default function BookDemoPage() {
                 "No commitment, no sales pressure",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
-                  <div className="w-5 h-5 rounded-full bg-green-50 border border-green-200 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-3 h-3 text-[#15803D]" />
+                  <div className="w-5 h-5 rounded-full bg-green-50 border border-green-200 flex items-center justify-center shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-3 h-3 text-brand-green" />
                   </div>
                   <span className="text-sm text-slate-700">{item}</span>
                 </li>
@@ -219,7 +219,7 @@ export default function BookDemoPage() {
                 {["Guided demo", "Your use case", "No obligation"].map((badge) => (
                   <span
                     key={badge}
-                    className="px-3 py-1 rounded-full bg-green-50 text-[#15803D] text-xs border border-green-100 font-medium"
+                    className="px-3 py-1 rounded-full bg-green-50 text-brand-green text-xs border border-green-100 font-medium"
                   >
                     {badge}
                   </span>
@@ -335,7 +335,7 @@ export default function BookDemoPage() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell us about your current pain points or what you're hoping to learn..."
-                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-[#0A2540] placeholder:text-slate-400 focus:outline-none focus:border-[#15803D] focus:ring-2 focus:ring-green-100 transition resize-none"
+                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-brand-navy placeholder:text-slate-400 focus:outline-hidden focus:border-brand-green focus:ring-2 focus:ring-green-100 transition resize-none"
                   />
                 </div>
 
@@ -352,7 +352,7 @@ export default function BookDemoPage() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="mt-6 w-full flex items-center justify-center gap-2 bg-[#15803D] hover:bg-[#166534] disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-full font-semibold py-4 text-sm shadow-lg shadow-green-600/20 hover:-translate-y-[1px] transition-all duration-300"
+                className="mt-6 w-full flex items-center justify-center gap-2 bg-brand-green hover:bg-brand-green-hover disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-full font-semibold py-4 text-sm shadow-lg shadow-green-600/20 hover:-translate-y-px transition-all duration-300"
               >
                 {submitting ? (
                   <>
@@ -369,7 +369,7 @@ export default function BookDemoPage() {
 
               <p className="mt-4 text-[11px] text-slate-400 text-center">
                 Read our{" "}
-                <a href="/privacy" className="underline hover:text-[#15803D]">Privacy Policy</a>.
+                <a href="/privacy" className="underline hover:text-brand-green">Privacy Policy</a>.
                 We'll never share your info.
               </p>
             </form>
@@ -386,7 +386,7 @@ export default function BookDemoPage() {
 
 function Label({ htmlFor, children }) {
   return (
-    <label htmlFor={htmlFor} className="block text-xs font-semibold text-[#0A2540] mb-1.5">
+    <label htmlFor={htmlFor} className="block text-xs font-semibold text-brand-navy mb-1.5">
       {children}
     </label>
   );
@@ -396,7 +396,7 @@ function Input(props) {
   return (
     <input
       {...props}
-      className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-[#0A2540] placeholder:text-slate-400 focus:outline-none focus:border-[#15803D] focus:ring-2 focus:ring-green-100 transition"
+      className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-brand-navy placeholder:text-slate-400 focus:outline-hidden focus:border-brand-green focus:ring-2 focus:ring-green-100 transition"
     />
   );
 }
@@ -405,7 +405,7 @@ function Select({ children, ...props }) {
   return (
     <select
       {...props}
-      className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-[#0A2540] bg-white focus:outline-none focus:border-[#15803D] focus:ring-2 focus:ring-green-100 transition"
+      className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-brand-navy bg-white focus:outline-hidden focus:border-brand-green focus:ring-2 focus:ring-green-100 transition"
     >
       {children}
     </select>

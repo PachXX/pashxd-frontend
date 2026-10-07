@@ -30,30 +30,7 @@ import BlogPostPage from './pages/BlogPostPage';
 const pages = { Landing, PlatformPage, ProductPage, PricingPage, IndustriesPage, AboutPage, ResourcesPage, ContactPage, BookDemoPage, LoginPage, MarketplacePage, Terms, Privacy, AdminLeadsPage, BlogPostPage };
 import { SsrDataProvider } from "./context/SsrDataContext.jsx";
 
-/**
- * Build-time entry point for prerendering. Never shipped to the browser.
- *
- * The site is a client-rendered SPA, so a crawler that does not execute
- * JavaScript — and every social-card unfurler — saw an empty <div id="root">
- * and the placeholder <title> from index.html. All the per-page metadata that
- * SEOHead renders through react-helmet-async only existed after hydration.
- *
- * This renders each marketing route to static HTML at build time and captures
- * the head tags Helmet produced for it, so the shipped index.html for that
- * route already contains its real title, description, canonical, Open Graph
- * tags and JSON-LD. The client bundle then hydrates over the top exactly as
- * before — nothing about the runtime app changes.
- *
- * `AppRoutes` is imported rather than `App` because App owns the BrowserRouter,
- * which cannot run without a DOM; StaticRouter takes its place here.
- *
- * @param {string} url    The route to render (e.g. "/blog/my-post").
- * @param {object} [ssrData] Per-route data the prerenderer already fetched
- *                          (e.g. { blogPost }). Passed through SsrDataProvider
- *                          so data-driven pages render real content instead of
- *                          their loading skeleton. Optional — static routes
- *                          render fine without it.
- */
+/** Render static marketing pages and request-time blog pages with matching hydration data. */
 export function render(url, ssrData) {
   const helmetContext = {};
 

@@ -18,10 +18,10 @@ export default function PrivacyPage() {
         path="/privacy"
       />
       {/* Hero Section */}
-      <section className="pt-32 pb-12 sm:pt-36 sm:pb-16 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <section className="pt-32 pb-12 sm:pt-36 sm:pb-16 bg-linear-to-br from-green-50 via-white to-emerald-50">
         <Container>
           <div className="max-w-4xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0A2540] mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-brand-navy mb-4">
               Privacy Policy
             </h1>
             <p className="text-base sm:text-lg text-slate-600">
@@ -39,7 +39,7 @@ export default function PrivacyPage() {
             <div className="space-y-8">
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">1. Introduction</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">1. Introduction</h2>
                 <p className="text-slate-700 leading-relaxed">
                   PashxD ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Industrial OS & Construction Management ERP platform and B2B Marketplace.
                 </p>
@@ -49,9 +49,9 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">2. Information We Collect</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">2. Information We Collect</h2>
 
-                <h3 className="text-xl font-semibold text-[#0A2540] mb-3 mt-6">2.1 Information You Provide</h3>
+                <h3 className="text-xl font-semibold text-brand-navy mb-3 mt-6">2.1 Information You Provide</h3>
                 <ul className="list-disc pl-6 space-y-2 text-slate-700">
                   <li><strong>Account Information:</strong> Name, email address, company name, phone number, job title</li>
                   <li><strong>Business Information:</strong> Company registration details, tax identification, trade licenses</li>
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
                   <li><strong>Communications:</strong> Support requests, feedback, and correspondence with our team</li>
                 </ul>
 
-                <h3 className="text-xl font-semibold text-[#0A2540] mb-3 mt-6">2.2 Information Collected Automatically</h3>
+                <h3 className="text-xl font-semibold text-brand-navy mb-3 mt-6">2.2 Information Collected Automatically</h3>
                 <ul className="list-disc pl-6 space-y-2 text-slate-700">
                   <li><strong>Usage Data:</strong> Pages viewed, features used, time spent on platform, search queries</li>
                   <li><strong>Device Information:</strong> IP address, browser type, operating system, device identifiers</li>
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">3. How We Use Your Information</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">3. How We Use Your Information</h2>
                 <p className="text-slate-700 leading-relaxed mb-3">We use the information we collect to:</p>
                 <ul className="list-disc pl-6 space-y-2 text-slate-700">
                   <li>Provide, maintain, and improve our ERP platform and marketplace services</li>
@@ -84,14 +84,14 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">4. Information Sharing</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">4. Information Sharing</h2>
                 <p className="text-slate-700 leading-relaxed mb-3">
                   We share information with third parties when you explicitly consent, such as when connecting buyers with verified vendors on our marketplace. We work with trusted third-party service providers for cloud hosting, payment processing, analytics, and logistics.
                 </p>
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">5. Data Security</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">5. Data Security</h2>
                 <p className="text-slate-700 leading-relaxed mb-3">We implement industry-standard security measures including:</p>
                 <ul className="list-disc pl-6 space-y-2 text-slate-700">
                   <li>Encryption of data in transit (SSL/TLS) and at rest</li>
@@ -102,7 +102,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">6. Your Rights</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">6. Your Rights</h2>
                 <p className="text-slate-700 leading-relaxed mb-3">
                   If the GDPR, UK GDPR, or a similar data protection law applies to you, you have the right to:
                 </p>
@@ -122,7 +122,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">7. Data Retention</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">7. Data Retention</h2>
                 <p className="text-slate-700 leading-relaxed">
                   We retain personal data only for as long as necessary to provide our services and fulfill the purposes described
                   in this policy, including legal, accounting, and reporting obligations. As a general rule:
@@ -138,7 +138,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">8. International Data Transfers</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">8. International Data Transfers</h2>
                 <p className="text-slate-700 leading-relaxed">
                   PashxD operates globally across UAE, Saudi Arabia, India, Qatar, Oman, Germany, Poland, Netherlands, France, and Italy.
                   Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards
@@ -147,7 +147,7 @@ export default function PrivacyPage() {
               </div>
 
               <div>
-                <h2 className="text-2xl font-bold text-[#0A2540] mb-4">9. Contact Us</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-4">9. Contact Us</h2>
                 <p className="text-slate-700 leading-relaxed mb-3">
                   If you have questions about this Privacy Policy, or want to exercise any of the rights described in Section 6
                   (access, correction, deletion, portability, objection, etc.), contact us:
@@ -160,7 +160,7 @@ export default function PrivacyPage() {
               </div>
 
               <div className="mt-12 p-6 bg-green-50 border border-green-200 rounded-xl">
-                <h3 className="text-xl font-bold text-[#15803D] mb-2">Your Privacy Matters</h3>
+                <h3 className="text-xl font-bold text-brand-green mb-2">Your Privacy Matters</h3>
                 <p className="text-slate-700 leading-relaxed">
                   At PashxD, we believe transparency builds trust. If you have concerns about how your data is handled,
                   our team is here to help. We're committed to protecting your information and giving you control over your data.

@@ -20,13 +20,13 @@ export default function CTASection() {
   return (
     <section
       ref={ref}
-      className="bg-gradient-to-b from-white to-slate-50 py-20 md:py-32"
+      className="bg-linear-to-b from-white to-slate-50 py-20 md:py-32"
     >
       <Container className="max-w-5xl">
         <div className="reveal relative overflow-hidden rounded-3xl border border-white/10 bg-brand-navy p-8 text-center shadow-[0_25px_80px_rgba(0,0,0,0.25)] sm:p-14 md:p-20">
           {/* Glow */}
           <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-brand-green-mid/20 via-transparent to-brand-green-light/10" />
+            <div className="absolute inset-0 bg-linear-to-br from-brand-green-mid/20 via-transparent to-brand-green-light/10" />
             <div className="absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 bg-green-500/20 blur-[140px]" />
           </div>
 

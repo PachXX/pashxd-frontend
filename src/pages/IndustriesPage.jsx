@@ -131,13 +131,13 @@ export default function IndustriesPage() {
       {/* HERO */}
       <section className="py-20 md:py-28 bg-white">
         <Container className="text-center">
-          <p className="reveal text-xs md:text-sm tracking-[0.3em] uppercase text-[#15803D] font-semibold mb-4 md:mb-5">
+          <p className="reveal text-xs md:text-sm tracking-[0.3em] uppercase text-brand-green font-semibold mb-4 md:mb-5">
             Industries
           </p>
 
-          <h1 className="reveal text-3xl sm:text-4xl md:text-[3.5rem] font-extrabold text-[#0A2540] leading-[1.1] mb-5 md:mb-6 max-w-4xl mx-auto">
+          <h1 className="reveal text-3xl sm:text-4xl md:text-[3.5rem] font-extrabold text-brand-navy leading-[1.1] mb-5 md:mb-6 max-w-4xl mx-auto">
             Built for{" "}
-            <span className="bg-gradient-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
               Real-World Operations
             </span>
           </h1>
@@ -163,17 +163,17 @@ export default function IndustriesPage() {
 
                 {/* TOP LABEL */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center flex-shrink-0">
-                    <ind.icon className="w-5 h-5 text-[#15803D]" />
+                  <div className="w-10 h-10 rounded-lg bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
+                    <ind.icon className="w-5 h-5 text-brand-green" />
                   </div>
 
-                  <span className="text-xs tracking-[0.25em] uppercase text-[#15803D] font-semibold">
+                  <span className="text-xs tracking-[0.25em] uppercase text-brand-green font-semibold">
                     {ind.tagline}
                   </span>
                 </div>
 
                 {/* TITLE */}
-                <h2 className="text-3xl md:text-[40px] font-bold text-[#0A2540] leading-tight">
+                <h2 className="text-3xl md:text-[40px] font-bold text-brand-navy leading-tight">
                   {ind.title}
                 </h2>
 
@@ -186,7 +186,7 @@ export default function IndustriesPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3 pt-2">
                   {ind.useCases.map((u) => (
                     <div key={u} className="flex gap-2 items-start">
-                      <CheckCircle2 className="w-4 h-4 text-[#15803D] mt-0.5 flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-brand-green mt-0.5 shrink-0" />
                       <span className="text-slate-600 text-sm">{u}</span>
                     </div>
                   ))}
@@ -195,7 +195,7 @@ export default function IndustriesPage() {
                 {/* METRICS */}
                 <div className="grid grid-cols-3 gap-3 md:gap-4 pt-4 md:pt-6">
                   {ind.useCases.slice(0, 3).map((capability) => (
-                    <div key={capability} className="text-sm font-semibold text-[#15803D]">{capability}</div>
+                    <div key={capability} className="text-sm font-semibold text-brand-green">{capability}</div>
                   ))}
                 </div>
               </div>
@@ -218,7 +218,7 @@ export default function IndustriesPage() {
       <section className="py-20 md:py-24 bg-white">
         <Container className="max-w-5xl">
 
-          <div className="bg-gradient-to-br from-[#15803D] to-[#166534] rounded-3xl p-8 md:p-16 text-center shadow-[0_30px_80px_rgba(21,128,61,0.25)] relative overflow-hidden">
+          <div className="bg-linear-to-br from-[#15803D] to-brand-green-hover rounded-3xl p-8 md:p-16 text-center shadow-[0_30px_80px_rgba(21,128,61,0.25)] relative overflow-hidden">
 
             {/* Ambient glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-green-400/20 blur-[120px] rounded-full pointer-events-none" />
@@ -234,7 +234,7 @@ export default function IndustriesPage() {
 
               <Link
                 to="/book-demo"
-                className="inline-flex items-center gap-2 bg-white text-[#15803D] px-7 md:px-10 py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold hover:-translate-y-[2px] transition-all duration-300 shadow-lg"
+                className="inline-flex items-center gap-2 bg-white text-brand-green px-7 md:px-10 py-3.5 md:py-4 rounded-full text-sm md:text-base font-semibold hover:translate-y-[-2px] transition-all duration-300 shadow-lg"
               >
                 Talk to Us <ArrowRight className="w-4 h-4" />
               </Link>
