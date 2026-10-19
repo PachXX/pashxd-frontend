@@ -4,6 +4,7 @@ import SEOHead from "../components/SEOHead";
 import Container from "../components/layout/Container";
 import CtaLink from "../components/CtaLink";
 import HeroSection from "../components/landing/HeroSection.jsx";
+import ProductTour from "../components/landing/ProductTour.jsx";
 import TrustStrip from "../components/landing/TrustStrip.jsx";
 import HowItWorks from "../components/landing/HowItWorks.jsx";
 import IndustriesPreview from "../components/landing/IndustriesPreview.jsx";
@@ -21,6 +22,7 @@ const JSON_LD = {
   "@graph": [
     { "@type": "Organization", "@id": "https://pashx.com/#organization", name: "Pashx Dashboard", url: "https://pashx.com", logo: "https://pashx.com/favicon-512x512.png", description: "A connected workspace for procurement, project execution, and AI-assisted industrial operations.", sameAs: ["https://www.linkedin.com/company/pashx-ai", "https://www.instagram.com/pashx.ai"] },
     { "@type": "WebSite", "@id": "https://pashx.com/#website", name: "Pashx Dashboard", url: "https://pashx.com", publisher: { "@id": "https://pashx.com/#organization" } },
+    { "@type": "VideoObject", name: "PxD product tour: RFQ to invoice", description: "A one-minute walkthrough of PxD, showing RFQs, quote comparison, vendor records, document control, approvals and the end-to-end case workflow, using demo data.", thumbnailUrl: "https://pashx.com/pxd-tour-poster.jpg", contentUrl: "https://pashx.com/pxd-tour.mp4", uploadDate: "2026-10-19", duration: "PT56S", publisher: { "@id": "https://pashx.com/#organization" } },
     { "@type": "SoftwareApplication", name: "Pashx Dashboard", applicationCategory: "BusinessApplication", operatingSystem: "Web", url: "https://pashx.com", description: "Connect procurement, project execution, and AI-assisted coordination in one operational workspace.", publisher: { "@id": "https://pashx.com/#organization" } },
   ],
 };
@@ -44,6 +46,7 @@ export default function Landing() {
     <div ref={landingRef} className="px-landing w-full bg-white">
       <SEOHead title="Pashx Dashboard | The Operating System for Physical Operations" description="Connect procurement, project execution, and AI in one workspace. Pashx Dashboard brings orders, site updates, and operational decisions together." path="/" jsonLd={JSON_LD} />
       <HeroSection />
+      <ProductTour />
       <TrustStrip />
       <ProblemSection />
       <div id="platform" className="scroll-mt-24"><SolutionSection /></div>

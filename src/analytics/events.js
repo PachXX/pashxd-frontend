@@ -21,6 +21,7 @@ export const EVENT = {
   CALENDLY_OPEN: "calendly_open",
   ROI_CALCULATED: "roi_calculated",
   FAQ_OPEN: "faq_open",
+  VIDEO_PLAY: "video_play",
 };
 
 /**
@@ -79,4 +80,9 @@ export function trackRoiCalculated({ currency, annualNetValue, annualCost, coord
 /** An FAQ item was expanded — tells us which objection is live. */
 export function trackFaqOpen(question) {
   send(EVENT.FAQ_OPEN, { faq_question: question.slice(0, 100) });
+}
+
+/** The product-tour video was played. Fires once per page view, not per resume. */
+export function trackVideoPlay(name) {
+  send(EVENT.VIDEO_PLAY, { video_name: name });
 }
