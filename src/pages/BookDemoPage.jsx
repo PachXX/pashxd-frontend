@@ -28,14 +28,14 @@ const industries = [
   "Other",
 ];
 
-const CALENDLY_URL = "https://calendly.com/shahil-talenlio-letstalk/letstalk";
+const CALENDLY_URL = "https://calendly.com/shahil-pashx/30min";
 
-// Flip to true once the Calendly calendar is live again. On 2026-10-26 the
-// embed was showing "This calendar is currently unavailable" (an account-level
-// state on Calendly's side) while the form kept saving leads, so visitors
-// submitted successfully and then hit a dead scheduler. Cross-origin, the page
-// can't detect that from inside the iframe, so it's a manual switch.
-const CALENDLY_ENABLED = false;
+// Manual switch: the page can't detect from outside the iframe whether the
+// calendar is usable. On 2026-10-26 the previous Calendly account showed "This
+// calendar is currently unavailable" while the form kept saving leads, so
+// visitors submitted fine and then hit a dead scheduler. Set to false to fall
+// back to the email/phone confirmation screen if that ever happens again.
+const CALENDLY_ENABLED = true;
 
 export default function BookDemoPage() {
   const navigate = useNavigate();
