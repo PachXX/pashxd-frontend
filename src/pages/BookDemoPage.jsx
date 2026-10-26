@@ -1,5 +1,5 @@
 import SEOHead from "../components/SEOHead";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import Container from "../components/layout/Container";
@@ -52,6 +52,29 @@ export default function BookDemoPage() {
     industry: "",
     message: "",
   });
+
+  // Calendly tells the embedding page when a slot is booked; pass it on so the
+  // owner gets an email. Fire-and-forget: a failed alert must not affect the visitor.
+  useEffect(() => {
+    if (!submitted || !CALENDLY_ENABLED) return undefined;
+    const onMessage = (e) => {
+      if (e.origin !== "https://calendly.com" || e.data?.event !== "calendly.event_scheduled") return;
+      const eventUri = e.data.payload?.event?.uri;
+      if (!eventUri) return;
+      fetch(`${API}/api/demo-requests/booked`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_uri: eventUri,
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+        }),
+      }).catch(() => {});
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, [submitted, formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
