@@ -1,7 +1,7 @@
 import SEOHead from "../components/SEOHead";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import Container from "../components/layout/Container";
 import {
   trackDemoSubmit,
@@ -29,6 +29,13 @@ const industries = [
 ];
 
 const CALENDLY_URL = "https://calendly.com/shahil-talenlio-letstalk/letstalk";
+
+// Flip to true once the Calendly calendar is live again. On 2026-10-26 the
+// embed was showing "This calendar is currently unavailable" (an account-level
+// state on Calendly's side) while the form kept saving leads, so visitors
+// submitted successfully and then hit a dead scheduler. Cross-origin, the page
+// can't detect that from inside the iframe, so it's a manual switch.
+const CALENDLY_ENABLED = false;
 
 export default function BookDemoPage() {
   const navigate = useNavigate();
@@ -94,7 +101,7 @@ export default function BookDemoPage() {
      // a button". The Calendly embed renders on the next screen, so the
      // scheduler impression is counted here too.
      trackDemoSubmit("book_demo_page");
-     trackCalendlyOpen("book_demo_success");
+     if (CALENDLY_ENABLED) trackCalendlyOpen("book_demo_success");
 
      setSubmitted(true);
 
@@ -126,26 +133,55 @@ export default function BookDemoPage() {
             <h1 className="text-3xl md:text-4xl font-extrabold text-brand-navy mb-4">
               Thanks, {formData.name.trim().split(/\s+/)[0]}!{" "}
               <span className="bg-linear-to-r from-[#15803D] to-[#22C55E] bg-clip-text text-transparent">
-                Let's book your demo.
+                {CALENDLY_ENABLED ? "Let's book your demo." : "We've got your request."}
               </span>
             </h1>
 
             <p className="text-slate-500 text-base md:text-lg max-w-xl mx-auto">
-              We've received your details. Pick a time below that works for you -- our team will walk you through how Pashx Dashboard fits your workflow.
+              {CALENDLY_ENABLED
+                ? "We've received your details. Pick a time below that works for you -- our team will walk you through how Pashx Dashboard fits your workflow."
+                : `We've received your details and will get in touch at ${formData.email.trim()} to confirm a time for your demo. If you'd rather not wait, reach us directly:`}
             </p>
           </div>
 
+          {!CALENDLY_ENABLED && (
+            <div className="mx-auto grid max-w-xl grid-cols-1 gap-4 sm:grid-cols-2">
+              <a
+                href="mailto:shahil@pashx.com?subject=Demo%20request"
+                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-green-300 hover:shadow-md"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-50 text-green-700"><Mail size={18} /></span>
+                <span className="min-w-0 text-left">
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-slate-400">Email</span>
+                  <span className="block truncate text-sm font-semibold text-brand-navy">shahil@pashx.com</span>
+                </span>
+              </a>
+              <a
+                href="tel:+491577802062"
+                className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:border-green-300 hover:shadow-md"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-50 text-green-700"><Phone size={18} /></span>
+                <span className="min-w-0 text-left">
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-slate-400">Phone</span>
+                  <span className="block truncate text-sm font-semibold text-brand-navy">+49 157 7802062</span>
+                </span>
+              </a>
+            </div>
+          )}
+
           {/* Calendly Embed */}
-          <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-xl">
-            <iframe
-              src={CALENDLY_URL}
-              width="100%"
-              height="700"
-              frameBorder="0"
-              className="rounded-xl"
-              title="Schedule a demo"
-            />
-          </div>
+          {CALENDLY_ENABLED && (
+            <div className="bg-white border border-slate-200 rounded-2xl p-4 md:p-6 shadow-xl">
+              <iframe
+                src={CALENDLY_URL}
+                width="100%"
+                height="700"
+                frameBorder="0"
+                className="rounded-xl"
+                title="Schedule a demo"
+              />
+            </div>
+          )}
 
           <div className="text-center mt-8">
             <button
